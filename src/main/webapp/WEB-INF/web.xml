@@ -4,13 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <listener>
+    <listener-class>cn.edu.guet.mvc.ContextConfigListener</listener-class>
+  </listener>
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>cn.edu.guet.mvc.DispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>DispatcherServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+
 </web-app>
