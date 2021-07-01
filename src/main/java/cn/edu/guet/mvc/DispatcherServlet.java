@@ -1,5 +1,6 @@
 package cn.edu.guet.mvc;
 
+import cn.edu.guet.ioc.BeanFactory;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ClassUtils;
@@ -97,7 +98,7 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
 
-            Object obj = controllerMappingClass.newInstance();
+            Object obj = BeanFactory.getInstance().getBean(controllerMappingClass.getSimpleName());
             Object returnValue = method.invoke(obj, parameterValues);//调用方法处理请求即可
             if (returnValue != null && returnValue instanceof String) { //方法返回的是一个字符串类
                 String path = returnValue.toString();

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+	<bean id="TreeController" class="cn.edu.guet.controller.TreeController">
+		<property name="treeDao" ref="treeDao"></property>
+	</bean>
+	<bean id="treeDao" class="cn.edu.guet.dao.Impl.TreeDaoImpl"></bean>
+</beans>
