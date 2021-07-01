@@ -2,6 +2,7 @@ package cn.edu.guet.dao.Impl;
 
 import cn.edu.guet.bean.Tree;
 import cn.edu.guet.dao.ITreeDao;
+import cn.edu.guet.filter.ConnectionFilter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,14 +20,12 @@ public class TreeDaoImpl implements ITreeDao {
         具体的JDBC代码，连接数据库，获取数据
          */
         List<Tree> treeList = new ArrayList<Tree>();
-        String url = "jdbc:mysql://localhost:3306/dormitory?useUnicode=true&characterEncoding=gbk&autoReconnect=true&failOverReadOnly=false&serverTimezone=UTC";
-        Connection conn = null;
+
+        Connection conn= ConnectionFilter.getConn();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         String sql = "";
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, "chenyicai", "cyc1234");
             sql = "SELECT * FROM tree";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
@@ -41,8 +40,6 @@ public class TreeDaoImpl implements ITreeDao {
                 System.out.println(tree);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             try {

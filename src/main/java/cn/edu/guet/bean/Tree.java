@@ -7,6 +7,7 @@ public class Tree {
     private String treeUrl;
     private String isParent;
 
+
     public Tree() {
     }
 

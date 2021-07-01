@@ -4,8 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+      <filter-name>ConnectionFilter</filter-name>
+      <filter-class>cn.edu.guet.filter.ConnectionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ConnectionFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
   <listener>
-    <listener-class>cn.edu.guet.mvc.ContextConfigListener</listener-class>
+  <listener-class>cn.edu.guet.mvc.ContextConfigListener</listener-class>
   </listener>
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
