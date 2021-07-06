@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <filter>
       <filter-name>ConnectionFilter</filter-name>
-      <filter-class>cn.edu.guet.filter.ConnectionFilter</filter-class>
+      <filter-class>cn.edu.guet.filter.SqlsessionFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>ConnectionFilter</filter-name>
@@ -18,6 +18,7 @@
   <servlet>
     <servlet-name>DispatcherServlet</servlet-name>
     <servlet-class>cn.edu.guet.mvc.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>DispatcherServlet</servlet-name>

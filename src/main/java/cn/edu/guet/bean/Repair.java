@@ -1,27 +1,39 @@
 package cn.edu.guet.bean;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Repair {
     private String reId;
     private String reNames;
     private String reClass;
+    private String reText;
     private String reRoom;
     private String rePhone;
     private Timestamp reTime;
     private String reStatus;
+    private String reUser;
 
     public Repair() {
     }
 
-    public Repair(String reId, String reNames, String reClass, String reRoom, String rePhone, Timestamp reTime, String reStatus) {
+    public Repair(String reId, String reNames, String reClass, String reText, String reRoom, String rePhone, Timestamp reTime, String reStatus, String reUser) {
         this.reId = reId;
         this.reNames = reNames;
         this.reClass = reClass;
+        this.reText = reText;
         this.reRoom = reRoom;
         this.rePhone = rePhone;
         this.reTime = reTime;
         this.reStatus = reStatus;
+        this.reUser = reUser;
+    }
+
+    public String getReText() {
+        return reText;
+    }
+
+    public void setReText(String reText) {
+        this.reText = reText;
     }
 
     public String getReId() {
@@ -80,16 +92,26 @@ public class Repair {
         this.reStatus = reStatus;
     }
 
+    public String getReUser() {
+        return reUser;
+    }
+
+    public void setReUser(String reUser) {
+        this.reUser = reUser;
+    }
+
     @Override
     public String toString() {
         return "Repair{" +
                 "reId='" + reId + '\'' +
                 ", reNames='" + reNames + '\'' +
                 ", reClass='" + reClass + '\'' +
+                ", reText='" + reText + '\'' +
                 ", reRoom='" + reRoom + '\'' +
                 ", rePhone='" + rePhone + '\'' +
                 ", reTime=" + reTime +
                 ", reStatus='" + reStatus + '\'' +
+                ", reUser='" + reUser + '\'' +
                 '}';
     }
 }

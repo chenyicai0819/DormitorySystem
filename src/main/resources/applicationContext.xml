@@ -2,7 +2,10 @@
 
 <beans>
 	<bean id="TreeController" class="cn.edu.guet.controller.TreeController">
-		<property name="treeDao" ref="treeDao"></property>
 	</bean>
-	<bean id="treeDao" class="cn.edu.guet.dao.Impl.TreeDaoImpl"></bean>
+	<bean id="RepairController" class="cn.edu.guet.controller.RepairController">
+		<property name="repairService" ref="repairService"></property>
+	</bean>
+	<bean id="repairService" class="cn.edu.guet.bll.impl.RepairServiceImpl">
+	</bean>
 </beans>

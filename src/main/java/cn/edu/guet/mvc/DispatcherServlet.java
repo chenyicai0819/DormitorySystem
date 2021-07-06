@@ -20,11 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author liwei
- * @Date 2021-06-24 19:45
- * @Version 1.0
- */
+
 public class DispatcherServlet extends HttpServlet {
 
     Map<String, ControllerMapping> controllerMapping;
@@ -35,7 +31,6 @@ public class DispatcherServlet extends HttpServlet {
         /*
         对HashMap进行遍历
          */
-        System.out.println(controllerMapping);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,6 +45,7 @@ public class DispatcherServlet extends HttpServlet {
             ControllerMapping mapping = null;
             if (controllerMapping.containsKey(uri)) {
                 mapping = controllerMapping.get(uri);
+//                System.out.println(mapping.toString());
             }
             Class controllerMappingClass = mapping.getControllerClass();
             Method method = mapping.getHandleMethod();

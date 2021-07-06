@@ -7,6 +7,7 @@
     height: 500px;
 }
 #first,.second{
+    width: 150px;
     list-style: none;
 }
 #first>li,.second>li {
@@ -65,7 +66,7 @@
     background-color: cyan;
     position: absolute;
     top: 0px;
-    left: 10%;
+    left: 150px
 }
 .footer{
     width: 100%;

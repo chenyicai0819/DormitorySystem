@@ -34,7 +34,7 @@
                         //创建dom
                         if(tree.isParent=="true"){
                             fatherli=$("<li class=\"father\"></li>");
-                            fatherA=$("<a target=\"right\" href="+tree.treeUrl+">"+tree.treeName+"<img id=\"fimg1\" src=\"../images/jt.png\" alt=\"father1jt\"></a>");
+                            fatherA=$("<a target=\"right\" href="+tree.treeUrl+">"+tree.treeName+"</a>");
                             fatherli.append(fatherA);
                             firsul.append(fatherli);
                         }else{

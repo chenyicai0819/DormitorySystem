@@ -1,9 +1,9 @@
-package cn.edu.guet.dao;
+package cn.edu.guet.mapper;
 
 import cn.edu.guet.bean.Tree;
 
 import java.util.List;
 
-public interface ITreeDao {
+public interface TreeMapper {
     List<Tree> getAllTree();
 }
