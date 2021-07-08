@@ -7,17 +7,27 @@ public class Waterorder {
     private String wid;
     private int woNum;
     private String woRoom;
+    private int woMoney;
     private Timestamp woTime;
 
     public Waterorder() {
     }
 
-    public Waterorder(String woId, String wid, int woNum, String woRoom, Timestamp woTime) {
+    public Waterorder(String woId, String wid, int woNum, String woRoom, int woMoney, Timestamp woTime) {
         this.woId = woId;
         this.wid = wid;
         this.woNum = woNum;
         this.woRoom = woRoom;
+        this.woMoney = woMoney;
         this.woTime = woTime;
+    }
+
+    public int getWoMoney() {
+        return woMoney;
+    }
+
+    public void setWoMoney(int woMoney) {
+        this.woMoney = woMoney;
     }
 
     public String getWoId() {
@@ -67,6 +77,7 @@ public class Waterorder {
                 ", wid='" + wid + '\'' +
                 ", woNum=" + woNum +
                 ", woRoom='" + woRoom + '\'' +
+                ", woMoney=" + woMoney +
                 ", woTime=" + woTime +
                 '}';
     }

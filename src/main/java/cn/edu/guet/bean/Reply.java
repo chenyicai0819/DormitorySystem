@@ -3,16 +3,16 @@ package cn.edu.guet.bean;
 public class Reply {
     private String repId;
     private String fId;
-    private String anId;
+    private String dId;
     private String repContent;
 
     public Reply() {
     }
 
-    public Reply(String repId, String fId, String anId, String repContent) {
+    public Reply(String repId, String fId, String dId, String repContent) {
         this.repId = repId;
         this.fId = fId;
-        this.anId = anId;
+        this.dId = dId;
         this.repContent = repContent;
     }
 
@@ -32,12 +32,12 @@ public class Reply {
         this.fId = fId;
     }
 
-    public String getAnId() {
-        return anId;
+    public String getdId() {
+        return dId;
     }
 
-    public void setAnId(String anId) {
-        this.anId = anId;
+    public void setdId(String dId) {
+        this.dId = dId;
     }
 
     public String getRepContent() {
@@ -53,7 +53,7 @@ public class Reply {
         return "Reply{" +
                 "repId='" + repId + '\'' +
                 ", fId='" + fId + '\'' +
-                ", anId='" + anId + '\'' +
+                ", anId='" + dId + '\'' +
                 ", repContent='" + repContent + '\'' +
                 '}';
     }
