@@ -20,9 +20,9 @@
             <!-- 数据库连接池，由 Mybatis 管理，数据库名是 mybatis，MySQL 用户名 root，密码为空 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/dormitory?useUnicode=true&amp;characterEncoding=gbk&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;serverTimezone=UTC" />
-                <property name="username" value="chenyicai" />
-                <property name="password" value="cyc1234" />
+                <property name="url" value="jdbc:mysql://localhost:3306/myweb?useUnicode=true&amp;characterEncoding=gbk&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;serverTimezone=UTC" />
+                <property name="username" value="lzh" />
+                <property name="password" value="lzh1234" />
             </dataSource>
         </environment>
     </environments>

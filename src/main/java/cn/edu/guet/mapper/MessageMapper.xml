@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.MessageMapper">
+    <select id="getAllMessage" parameterType="string" resultType="Message">
+        SELECT * FROM Messages WHERE receiveId=#{value}
+    </select>
+    <insert id="sendMessage" parameterType="Message">
+        INSERT INTO Messages VALUES (#{messageId}, #{sendId}, #{receiveId}, #{title}, #{content}, #{isRead}, #{sendTime})
+    </insert>
+    <delete id="deleteMessage" parameterType="string">
+        DELETE Messages WHERE messageId=#{value}
+    </delete>
+</mapper>

@@ -1,84 +1,82 @@
 package cn.edu.guet.bean;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Waterorder {
-    private String woId;
-    private String wid;
-    private int woNum;
-    private String woRoom;
-    private int woMoney;
-    private Timestamp woTime;
+    private String waterOrderId;
+    private String studentId;
+    private String buildingId;
+    private String roomId;
+    private int number;
+    private int amount;
+    private Timestamp createTime;
 
     public Waterorder() {
     }
 
-    public Waterorder(String woId, String wid, int woNum, String woRoom, int woMoney, Timestamp woTime) {
-        this.woId = woId;
-        this.wid = wid;
-        this.woNum = woNum;
-        this.woRoom = woRoom;
-        this.woMoney = woMoney;
-        this.woTime = woTime;
+    public Waterorder(String waterOrderId, String studentId, String buildingId, String roomId, int number, int amount, Timestamp createTime) {
+        this.waterOrderId = waterOrderId;
+        this.studentId = studentId;
+        this.buildingId = buildingId;
+        this.roomId = roomId;
+        this.number = number;
+        this.amount = amount;
+        this.createTime = new Timestamp(System.currentTimeMillis());
     }
 
-    public int getWoMoney() {
-        return woMoney;
+    public String getWaterOrderId() {
+        return waterOrderId;
     }
 
-    public void setWoMoney(int woMoney) {
-        this.woMoney = woMoney;
+    public void setWaterOrderId(String waterOrderId) {
+        this.waterOrderId = waterOrderId;
     }
 
-    public String getWoId() {
-        return woId;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setWoId(String woId) {
-        this.woId = woId;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getWid() {
-        return wid;
+    public String getBuildingId() {
+        return buildingId;
     }
 
-    public void setWid(String wid) {
-        this.wid = wid;
+    public void setBuildingId(String buildingId) {
+        this.buildingId = buildingId;
     }
 
-    public int getWoNum() {
-        return woNum;
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setWoNum(int woNum) {
-        this.woNum = woNum;
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
-    public String getWoRoom() {
-        return woRoom;
+    public int getNumber() {
+        return number;
     }
 
-    public void setWoRoom(String woRoom) {
-        this.woRoom = woRoom;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public Timestamp getWoTime() {
-        return woTime;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setWoTime(Timestamp woTime) {
-        this.woTime = woTime;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "Waterorder{" +
-                "woId='" + woId + '\'' +
-                ", wid='" + wid + '\'' +
-                ", woNum=" + woNum +
-                ", woRoom='" + woRoom + '\'' +
-                ", woMoney=" + woMoney +
-                ", woTime=" + woTime +
-                '}';
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 }
