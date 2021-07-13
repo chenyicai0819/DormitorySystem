@@ -8,4 +8,5 @@ public interface MessageMapper {
     List<Message> getAllMessage(String receiveId);
     void sendMessage(Message message);
     void deleteMessage(String messageId);
+    void readMessage(String messageId);
 }

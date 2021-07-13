@@ -1,8 +1,7 @@
 package cn.edu.guet.bean;
 
 public class Water {
-    private String BuildingId;
-    private String RoomId;
+    private String buildingId;
     private int price;
     private int number;
 
@@ -10,19 +9,11 @@ public class Water {
     }
 
     public String getBuildingId() {
-        return BuildingId;
+        return buildingId;
     }
 
     public void setBuildingId(String buildingId) {
-        BuildingId = buildingId;
-    }
-
-    public String getRoomId() {
-        return RoomId;
-    }
-
-    public void setRoomId(String roomId) {
-        RoomId = roomId;
+        buildingId = buildingId;
     }
 
     public int getPrice() {

@@ -8,6 +8,9 @@
         INSERT INTO Messages VALUES (#{messageId}, #{sendId}, #{receiveId}, #{title}, #{content}, #{isRead}, #{sendTime})
     </insert>
     <delete id="deleteMessage" parameterType="string">
-        DELETE Messages WHERE messageId=#{value}
+        DELETE FROM Messages WHERE messageId=#{value}
     </delete>
+    <update id="readMessage" parameterType="string">
+        UPDATE Messages SET isRead='1' WHERE messageId=#{value}
+    </update>
 </mapper>

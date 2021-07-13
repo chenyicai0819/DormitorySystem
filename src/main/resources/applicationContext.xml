@@ -2,10 +2,10 @@
 
 <beans>
 	<bean id="TreeController" class="cn.edu.guet.controller.TreeController">
+
 	</bean>
-	<bean id="RepairController" class="cn.edu.guet.controller.RepairController">
-		<property name="repairService" ref="repairService"></property>
-	</bean>
-	<bean id="repairService" class="cn.edu.guet.bll.impl.RepairServiceImpl">
+
+	<bean id="MessageController" class="cn.edu.guet.controller.MessageController">
+
 	</bean>
 </beans>

@@ -20,7 +20,10 @@ import java.util.Map;
  * @Version 1.0
  */
 public class BeanFactory {
+
     private static BeanFactory instance = new BeanFactory();
+
+    public static Map<String, Object> map = new HashMap<String, Object>();
 
     private BeanFactory() {
 
@@ -32,8 +35,6 @@ public class BeanFactory {
     public Object getBean(String id){
         return map.get(id);
     }
-
-    public static Map<String, Object> map = new HashMap<String, Object>();
 
     public static void parseElement(Element ele) {
         try {

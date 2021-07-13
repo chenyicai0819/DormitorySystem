@@ -15,11 +15,12 @@ public class TreeController {
     private TreeMapper treeMapper;
     @RequestMapping("getAllTree.do")
     public List<Tree> getAllTree(){
-        treeMapper= SqlsessionFilter.getSqlsession().getMapper(TreeMapper.class);
-        List<Tree> treeList = treeMapper.getAllTree();
-        for(Tree tree:treeList){
-            System.out.println(tree.getTreeName());
-        }
-        return treeList;
+//        treeMapper= SqlsessionFilter.getSqlsession().getMapper(TreeMapper.class);
+//        List<Tree> treeList = treeMapper.getAllTree();
+//        for(Tree tree:treeList){
+//            System.out.println(tree.getTreeName());
+//        }
+        System.out.println(111);
+        return null;
     }
 }

@@ -1,3 +1,4 @@
+import cn.edu.guet.bean.Message;
 import cn.edu.guet.mapper.MessageMapper;
 import junit.framework.TestCase;
 import org.apache.ibatis.io.Resources;
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 
 public class MessageTest extends TestCase {
 
@@ -34,6 +36,15 @@ public class MessageTest extends TestCase {
     @Test
     public void testGetMessage() {
         MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
-        System.out.println(messageMapper.getAllMessage("10328").get(0).getTitle());
+//        System.out.println(messageMapper.getAllMessage("10328").get(0).getTitle());
+        Message message = new Message();
+        message.setMessageId("312412");
+        message.setSendId("10324");
+        message.setReceiveId("10328");
+        message.setTitle("test");
+        message.setContent("testtesttest");
+        message.setIsRead("0");
+        message.setSendTime(new Timestamp(System.currentTimeMillis()));
+        messageMapper.sendMessage(message);
     }
 }
