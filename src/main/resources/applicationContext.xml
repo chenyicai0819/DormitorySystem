@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans>
-	<bean id="TreeController" class="cn.edu.guet.controller.TreeController">
-	</bean>
-	<bean id="RepairController" class="cn.edu.guet.controller.RepairController">
-		<property name="repairService" ref="repairService"></property>
-	</bean>
-	<bean id="repairService" class="cn.edu.guet.bll.impl.RepairServiceImpl">
-	</bean>
+	<bean id="TreeController" class="cn.edu.guet.controller.TreeController"/>
+	<bean id="stuMessageController" class="cn.edu.guet.controller.stuMessageController"/>
 </beans>

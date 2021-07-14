@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
     <title>首页</title>
@@ -27,7 +28,7 @@
             });
             // index.jsp页面一加载，就会请求后台获取菜单
             $.ajax({
-                url:'../getAllTree.do',
+                url:'getAllTree.do',
                 success:function(data){//data服务器返回的数据
                     firsul=$("<ul id=\"first\"></ul>");
                     $.each(data,function(index,tree){

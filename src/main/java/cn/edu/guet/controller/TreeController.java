@@ -17,9 +17,6 @@ public class TreeController {
     public List<Tree> getAllTree(){
         treeMapper= SqlsessionFilter.getSqlsession().getMapper(TreeMapper.class);
         List<Tree> treeList = treeMapper.getAllTree();
-        for(Tree tree:treeList){
-            System.out.println(tree.getTreeName());
-        }
         return treeList;
     }
 }
