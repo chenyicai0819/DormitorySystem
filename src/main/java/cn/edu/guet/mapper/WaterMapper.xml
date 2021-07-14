@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.WaterMapper">
     <insert id="insertWaterState" parameterType="Water">
-        INSERT FROM water VALUES(#{buildingId}, #{price}, #{number})
+        INSERT INTO water VALUES(#{buildingId}, #{price}, #{number})
     </insert>
     <update id="updateWaterState" parameterType="Water">
         UPDATE water SET price=#{price},number=#{number} WHERE buildingId=#{buildingId}

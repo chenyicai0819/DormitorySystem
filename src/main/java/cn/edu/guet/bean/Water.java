@@ -2,7 +2,7 @@ package cn.edu.guet.bean;
 
 public class Water {
     private String buildingId;
-    private int price;
+    private double price;
     private int number;
 
     public Water() {
@@ -13,14 +13,14 @@ public class Water {
     }
 
     public void setBuildingId(String buildingId) {
-        buildingId = buildingId;
+        this.buildingId = buildingId;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

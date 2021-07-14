@@ -8,4 +8,8 @@
 	<bean id="MessageController" class="cn.edu.guet.controller.MessageController">
 
 	</bean>
+
+	<bean id="WaterController" class="cn.edu.guet.controller.WaterController">
+
+	</bean>
 </beans>

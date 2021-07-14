@@ -33,4 +33,7 @@ public class SqlsessionFilter implements Filter {
     public static SqlSession getSqlsession(){
         return threadLocal.get();
     }
+    public static void sqlCommit() {
+        threadLocal.get().commit();
+    }
 }
