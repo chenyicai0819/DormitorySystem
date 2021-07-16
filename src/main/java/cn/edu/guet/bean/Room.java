@@ -4,6 +4,15 @@ public class Room {
     private String rId;
     private String rBed;
     private String buid;
+    private String hpeople;
+
+    public String getHpeople() {
+        return hpeople;
+    }
+
+    public void setHpeople(String hpeople) {
+        this.hpeople = hpeople;
+    }
 
     public Room() {
     }

@@ -2,6 +2,7 @@ package cn.edu.guet.bean;
 
 public class Student {
     private int sId;
+    private String buid;
     private String rId;
     private String rBed;
     private String roleId;
@@ -28,6 +29,10 @@ public class Student {
         this.sPhone = sPhone;
     }
 
+    public String getBuid() { return buid; }
+
+    public void setBuid(String buid) { this.buid = buid;
+    }
     public int getsId() {
         return sId;
     }
