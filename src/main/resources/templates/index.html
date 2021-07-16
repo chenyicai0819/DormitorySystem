@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
+    <script>
+        $(function(){
+            $("#div1").on("click",".father",function () {
+                var flag = $(this).nextUntil(".father").is(":hidden");
+                if (flag) {
+                    $(this).nextUntil(".father").toggle();
+                } else {
+                    $(this).nextUntil(".father").hide();
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        页眉
+    </div>
+    <div class="main">
+        <div id="div1">
+            <ul class="first">
+                <li th:each="tree,treeStat: ${tree}" th:class="${tree.isParent=='true'?'father':'son'}" >
+                    <a target="right" th:href="${tree.treeUrl}" th:text="${tree.treeName}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <iframe src="" width="100%" height="100%" name="right" frameborder="0"></iframe>
+        </div>
+    </div>
+    <div class="footer">
+        页脚
+    </div>
+</div>
+</body>
+</html>
