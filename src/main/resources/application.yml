@@ -7,9 +7,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dormitory?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: chenyicai
-    password: cyc1234
-  mvc:
+    username: root
+    password: 123456
+    mvc:
     view:
       prefix: /WEB-INF/pages/
       suffix: .jsp

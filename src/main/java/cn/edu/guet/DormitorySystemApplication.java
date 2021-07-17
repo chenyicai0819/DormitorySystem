@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
+@MapperScan("cn.edu.guet.mapper")
 public class DormitorySystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(DormitorySystemApplication.class, args);

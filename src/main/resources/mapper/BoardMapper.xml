@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.BoardMapper">
+    <select id="viewBoard" resultType="cn.edu.guet.bean.Board">
+        select * from board
+    </select>
+    <insert id="saveBoard" parameterType="cn.edu.guet.bean.Board">
+        INSERT INTO board (boId,boName,boContent,boTime,boUser) VALUES(#{boId},#{boName},#{boContent},#{boTime},#{boUser})
+    </insert>
+</mapper>

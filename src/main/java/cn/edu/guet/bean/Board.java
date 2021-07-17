@@ -1,12 +1,12 @@
 package cn.edu.guet.bean;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Board {
     private String boId;
     private String boName;
     private String boContent;
-    private Timestamp boTime;
+    private Date boTime;
     private String boUser;
 
     public String getBoId() {
@@ -33,11 +33,11 @@ public class Board {
         this.boContent = boContent;
     }
 
-    public Timestamp getBoTime() {
+    public Date getBoTime() {
         return boTime;
     }
 
-    public void setBoTime(Timestamp boTime) {
+    public void setBoTime(Date boTime) {
         this.boTime = boTime;
     }
 
