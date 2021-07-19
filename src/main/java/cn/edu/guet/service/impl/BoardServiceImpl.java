@@ -13,13 +13,30 @@ public class BoardServiceImpl implements IBoardService {
 
     @Autowired
     private BoardMapper boardMapper;
+
     @Override
     public List<Board> viewBoard() {
         return boardMapper.viewBoard();
     }
 
     @Override
+    public Board selectBoard(String boId) {
+        return boardMapper.selectBoard(boId);
+    }
+
+
+    @Override
     public void saveBoard(Board board) {
         boardMapper.saveBoard(board);
+    }
+
+    @Override
+    public void deleteBoard(String boId) {
+        boardMapper.deleteBoard(boId);
+    }
+
+    @Override
+    public void saveModifyBoard(Board board) {
+        boardMapper.saveModifyBoard(board);
     }
 }

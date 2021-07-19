@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 
 @Controller
@@ -16,10 +15,10 @@ public class BoardController {
     @Autowired
     private IBoardService boardService;
 
-    @GetMapping("viewBoard")
-    public String viewBoard(HttpServletRequest request){
+    @GetMapping("editBoard")
+    public String editBoard(HttpServletRequest request){
         request.setAttribute("boards",boardService.viewBoard());
-        return "viewBoard";
+        return "editBoard";
     }
 
     @GetMapping("addBoard")
@@ -38,6 +37,33 @@ public class BoardController {
         board.setBoUser(request.getParameter("boUser"));
         boardService.saveBoard(board);
         request.setAttribute("boards",boardService.viewBoard());
-        return "viewBoard";
+        return "editBoard";
+    }
+
+    @GetMapping("deleteBoard")
+    public String deleteBoard(HttpServletRequest request){
+        boardService.deleteBoard(request.getParameter("boId"));
+        request.setAttribute("boards",boardService.viewBoard());
+        return "editBoard";
+    }
+
+    @GetMapping("modifyBoard")
+    public String modifyBoard(HttpServletRequest request){
+        request.setAttribute("board",boardService.selectBoard(request.getParameter("boId")));
+        return "modifyBoard";
+    }
+
+    @GetMapping("saveModifyBoard")
+    public String saveModifyBoard(HttpServletRequest request){
+        Board board=new Board();
+        board.setBoId(request.getParameter("boId"));
+        board.setBoName(request.getParameter("boName"));
+        board.setBoContent(request.getParameter("boContent"));
+        System.out.println(request.getParameter("boTime"));
+        board.setBoTime(Date.valueOf((request.getParameter("boTime"))));
+        board.setBoUser(request.getParameter("boUser"));
+        boardService.saveModifyBoard(board);
+        request.setAttribute("boards",boardService.viewBoard());
+        return "editBoard";
     }
 }

@@ -4,7 +4,16 @@
     <select id="viewBoard" resultType="cn.edu.guet.bean.Board">
         select * from board
     </select>
+    <select id="selectBoard" parameterType="string" resultType="cn.edu.guet.bean.Board">
+        SELECT * FROM board WHERE boId=#{boId}
+    </select>
     <insert id="saveBoard" parameterType="cn.edu.guet.bean.Board">
         INSERT INTO board (boId,boName,boContent,boTime,boUser) VALUES(#{boId},#{boName},#{boContent},#{boTime},#{boUser})
     </insert>
+    <delete id="deleteBoard" parameterType="string">
+        DELETE FROM board WHERE boId=#{boId}
+    </delete>
+    <update id="saveModifyBoard" parameterType="cn.edu.guet.bean.Board">
+        UPDATE board SET boName=#{boName},boContent=#{boContent},boTime=#{boTime},boUser=#{boUser} WHERE boId=#{boId}
+    </update>
 </mapper>

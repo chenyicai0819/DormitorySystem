@@ -24,8 +24,8 @@
         <td th:text="${board.boContent}"></td>
         <td th:width="80px" th:text="${board.boTime}"></td>
         <td th:width="80px" th:text="${board.boUser}"></td>
-        <td th:width="50px"><a th:href="@{modifyBoard(userId=${board.boId})}">&nbsp;修 改&nbsp;</a></td>
-        <td th:width="50px"><a th:href="@{deleteBoard(userId=${board.boId})}">&nbsp;删 除&nbsp;</a></td>
+        <td th:width="50px"><a th:href="@{modifyBoard(boId=${board.boId})}">&nbsp;修 改&nbsp;</a></td>
+        <td th:width="50px"><a th:href="@{deleteBoard(boId=${board.boId})}">&nbsp;删 除&nbsp;</a></td>
     </tr>
 
 </table>
