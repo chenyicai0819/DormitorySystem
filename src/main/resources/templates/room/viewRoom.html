@@ -36,8 +36,8 @@
             <th>宿舍</th>
         </tr>
         <tr th:each="room,roomStat:${rooms}">
-            <td th:width="200px" th:text="${room.rId}"></td>
-            <td th:width="80px" th:text="${room.buId}"></td>
+            <td th:width="200px" th:text="${room.buid}"></td>
+            <td th:width="80px"><a th:href="@{editRoom(buId=${room.buid},rId=${room.rId})}" th:text="${room.rId}"></a> </td>
         </tr>
 
     </table>
