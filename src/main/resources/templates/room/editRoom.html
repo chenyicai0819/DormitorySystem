@@ -26,8 +26,8 @@
       <td th:if="${i}==6" th:text="${room.r6}">空</td>
       <td th:if="${i}==7" th:text="${room.r7}">空</td>
       <td th:if="${i}==8" th:text="${room.r8}">空</td>
-      <td><a href=""> 入 住 </a> </td>
-      <td><a href=""> 退 宿 </a></td>
+      <td><a th:href="@{addRoom}"> 入 住 </a> </td>
+      <td><a th:href="@{deleteRoom}"> 退 宿 </a></td>
     </tr>
   </table>
 </div>
