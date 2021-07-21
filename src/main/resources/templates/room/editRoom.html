@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>编辑宿舍信息</title>
+  <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/room/editRoom.css" th:href="@{/css/room/editRoom.css}">
+</head>
+<body>
+
+<div class="wrapper">
+  <h3 class="title">调整宿舍信息</h3><br><br>
+  <table border="1">
+    <tr>
+      <th>床号</th>
+      <th>学生</th>
+      <th colspan="2">操作</th>
+    </tr>
+    <tr th:each="i:${#numbers.sequence(1,room.bedNo)}">
+      <td th:text="${i}"></td>
+      <td th:if="${i}==1" th:text="${room.r1}">空</td>
+      <td th:if="${i}==2" th:text="${room.r2}">空</td>
+      <td th:if="${i}==3" th:text="${room.r3}">空</td>
+      <td th:if="${i}==4" th:text="${room.r4}">空</td>
+      <td th:if="${i}==5" th:text="${room.r5}">空</td>
+      <td th:if="${i}==6" th:text="${room.r6}">空</td>
+      <td th:if="${i}==7" th:text="${room.r7}">空</td>
+      <td th:if="${i}==8" th:text="${room.r8}">空</td>
+      <td><a href=""> 入 住 </a> </td>
+      <td><a href=""> 退 宿 </a></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

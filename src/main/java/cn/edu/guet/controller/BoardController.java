@@ -15,15 +15,21 @@ public class BoardController {
     @Autowired
     private IBoardService boardService;
 
+    @GetMapping("viewBoard")
+    public String viewBoard(HttpServletRequest request){
+        request.setAttribute("boards",boardService.viewBoard());
+        return "board/viewBoard";
+    }
+
     @GetMapping("editBoard")
     public String editBoard(HttpServletRequest request){
         request.setAttribute("boards",boardService.viewBoard());
-        return "editBoard";
+        return "board/editBoard";
     }
 
     @GetMapping("addBoard")
     public String addBoard(){
-        return "addBoard";
+        return "board/addBoard";
     }
 
     @GetMapping("saveBoard")
@@ -37,20 +43,20 @@ public class BoardController {
         board.setBoUser(request.getParameter("boUser"));
         boardService.saveBoard(board);
         request.setAttribute("boards",boardService.viewBoard());
-        return "editBoard";
+        return "board/editBoard";
     }
 
     @GetMapping("deleteBoard")
     public String deleteBoard(HttpServletRequest request){
         boardService.deleteBoard(request.getParameter("boId"));
         request.setAttribute("boards",boardService.viewBoard());
-        return "editBoard";
+        return "board/editBoard";
     }
 
     @GetMapping("modifyBoard")
     public String modifyBoard(HttpServletRequest request){
         request.setAttribute("board",boardService.selectBoard(request.getParameter("boId")));
-        return "modifyBoard";
+        return "board/modifyBoard";
     }
 
     @GetMapping("saveModifyBoard")
@@ -64,6 +70,6 @@ public class BoardController {
         board.setBoUser(request.getParameter("boUser"));
         boardService.saveModifyBoard(board);
         request.setAttribute("boards",boardService.viewBoard());
-        return "editBoard";
+        return "board/editBoard";
     }
 }

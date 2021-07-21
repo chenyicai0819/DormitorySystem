@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看宿舍信息</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/room/viewRoom.css" th:href="@{/css/room/viewRoom.css}">
+</head>
+<body>
+
+<div class="wrapper">
+    <h3 class="title">查看宿舍信息</h3><br><br>
+    <form action="searchRoom">
+        <label>宿舍楼:</label>
+        <select name="buId">
+            <option th:each="build,buildStat:${builds}" th:text="${build.buid}"></option>
+        </select>
+        <label>楼层:</label>
+        <select name="buNo">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <input type="submit" value="查询">
+    </form>
+    <table border="1">
+        <tr>
+            <th colspan="3">宿舍信息</th>
+        </tr>
+        <tr>
+            <th>宿舍楼</th>
+            <th>宿舍</th>
+        </tr>
+        <tr th:each="room,roomStat:${rooms}">
+            <td th:width="200px" th:text="${room.rId}"></td>
+            <td th:width="80px" th:text="${room.buId}"></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

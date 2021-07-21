@@ -3,10 +3,11 @@
     padding: 0;
     margin: 0 auto;
 }
-a{
-    text-decoration: none;
-}
-table{
+.wrapper{
+    background-color: #0055AA;
     width: 500px;
+    height: 500px;
+}
+.title{
     text-align: center;
 }

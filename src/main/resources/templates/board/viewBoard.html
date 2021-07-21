@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>公告管理</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/viewBoard.css" th:href="@{/css/viewBoard.css}">
+
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th colspan="4">公告</th>
+    </tr>
+    <tr>
+        <th>标题</th>
+        <th>内容</th>
+        <th>时间</th>
+        <th>发布者</th>
+    </tr>
+    <tr th:each="board,boardStat:${boards}">
+        <td th:width="200px" th:text="${board.boName}"></td>
+        <td th:width="300px" th:text="${board.boContent}"></td>
+        <td th:width="80px" th:text="${board.boTime}"></td>
+        <td th:width="80px" th:text="${board.boUser}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

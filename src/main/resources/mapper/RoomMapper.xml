@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.RoomMapper">
+    <select id="viewBuild" resultType="cn.edu.guet.bean.Build">
+        SELECT * FROM build
+    </select>
+    <select id="viewRoom" parameterType="string" resultType="cn.edu.guet.bean.Room">
+        SELECT * FROM room WHERE buid=#{buId} AND rId LIKE #{buNo}
+    </select>
+    <select id="selectRoom" parameterType="string" resultType="cn.edu.guet.bean.Room">
+        SELECT * FROM room WHERE buid=#{buId} AND rId=#{rId}
+    </select>
+</mapper>
