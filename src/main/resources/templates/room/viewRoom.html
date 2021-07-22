@@ -32,12 +32,12 @@
             <th colspan="3">宿舍信息</th>
         </tr>
         <tr>
-            <th>宿舍楼</th>
-            <th>宿舍</th>
+            <th width="200px">宿舍楼</th>
+            <th width="150px">宿舍</th>
         </tr>
         <tr th:each="room,roomStat:${rooms}">
             <td th:width="200px" th:text="${room.buid}"></td>
-            <td th:width="80px"><a th:href="@{editRoom(buId=${room.buid},rId=${room.rId})}" th:text="${room.rId}"></a> </td>
+            <td><a th:href="@{editRoom(buId=${room.buid},rId=${room.rId})}" th:text="${room.rId}"></a> </td>
         </tr>
 
     </table>

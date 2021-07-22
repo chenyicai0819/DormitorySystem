@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${board.boName}"></title>
+  <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/board/seeBoard.css" th:href="@{/css/board/seeBoard.css}">
+</head>
+<body>
+<div class="wrapper">
+  <h2 class="title" th:text="${board.boName}"></h2>
+  <br>
+  <div class="content"><p th:text="'&nbsp;&nbsp;'+${board.boContent}"></p></div>
+  <div class="user"><p th:text="'发布机构：'+${board.boUser}"></p></div>
+  <div class="time"><p th:text="${board.boTime}"></p></div>
+</div>
+</body>
+</html>

@@ -10,4 +10,5 @@ public interface IBoardService {
     void saveBoard(Board board);
     void deleteBoard(String boId);
     void saveModifyBoard(Board board);
+    List<Board> searchBoard(Board board);
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.util.List;
 
 
 @Controller
@@ -65,11 +66,26 @@ public class BoardController {
         board.setBoId(request.getParameter("boId"));
         board.setBoName(request.getParameter("boName"));
         board.setBoContent(request.getParameter("boContent"));
-        System.out.println(request.getParameter("boTime"));
         board.setBoTime(Date.valueOf((request.getParameter("boTime"))));
         board.setBoUser(request.getParameter("boUser"));
         boardService.saveModifyBoard(board);
         request.setAttribute("boards",boardService.viewBoard());
         return "board/editBoard";
+    }
+
+    @GetMapping("seeBoard")
+    public String seeBoard(HttpServletRequest request){
+        String boId=request.getParameter("boId");
+        request.setAttribute("board",boardService.selectBoard(boId));
+        return "board/seeBoard";
+    }
+    @GetMapping("searchBoard")
+    public String searchBoard(HttpServletRequest request){
+        Board board=new Board();
+        board.setBoName(request.getParameter("boName"));
+        board.setBoUser(request.getParameter("boUser"));
+//        board.setBoTime(Date.valueOf(request.getParameter("boTime")));
+        request.setAttribute("boards",boardService.searchBoard(board));
+        return "/board/editBoard";
     }
 }

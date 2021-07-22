@@ -16,4 +16,18 @@
     <update id="saveModifyBoard" parameterType="cn.edu.guet.bean.Board">
         UPDATE board SET boName=#{boName},boContent=#{boContent},boTime=#{boTime},boUser=#{boUser} WHERE boId=#{boId}
     </update>
+    <select id="searchBoard" parameterType="cn.edu.guet.bean.Board" resultType="cn.edu.guet.bean.Board">
+        SELECT * FROM board
+        <where>
+            <if test="boName!=null and boName!=''">
+                AND boName LIKE CONCAT('%',#{boName},'%')
+            </if>
+            <if test="boUser!=null and boUser!=''">
+                AND boUser LIKE CONCAT('%',#{boUser},'%')
+            </if>
+            <if test="boTime!=null and boTime!=''">
+                AND boTime=#{boTime}
+            </if>
+        </where>
+    </select>
 </mapper>

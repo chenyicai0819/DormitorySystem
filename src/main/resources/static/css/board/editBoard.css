@@ -3,10 +3,12 @@
     padding: 0;
     margin: 0 auto;
 }
+table{
+    width: 700px;
+}
+td{
+    overflow: auto;
+}
 a{
     text-decoration: none;
-}
-table{
-    width: 500px;
-    text-align: center;
 }

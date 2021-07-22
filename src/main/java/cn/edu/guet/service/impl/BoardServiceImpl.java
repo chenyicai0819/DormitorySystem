@@ -39,4 +39,9 @@ public class BoardServiceImpl implements IBoardService {
     public void saveModifyBoard(Board board) {
         boardMapper.saveModifyBoard(board);
     }
+
+    @Override
+    public List<Board> searchBoard(Board board) {
+        return boardMapper.searchBoard(board);
+    }
 }
