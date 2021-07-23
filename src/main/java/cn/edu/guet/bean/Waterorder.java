@@ -1,33 +1,22 @@
 package cn.edu.guet.bean;
 
-import java.security.Timestamp;
+import java.util.Date;
 
-public class Waterorder {
+public class WaterOrder {
     private String woId;
-    private String wid;
+    private String buid;
     private int woNum;
     private String woRoom;
     private int woMoney;
-    private Timestamp woTime;
+    private String woUser;
+    private Date woTime;
 
-    public Waterorder() {
+    public Date getWoTime() {
+        return woTime;
     }
 
-    public Waterorder(String woId, String wid, int woNum, String woRoom, int woMoney, Timestamp woTime) {
-        this.woId = woId;
-        this.wid = wid;
-        this.woNum = woNum;
-        this.woRoom = woRoom;
-        this.woMoney = woMoney;
+    public void setWoTime(Date woTime) {
         this.woTime = woTime;
-    }
-
-    public int getWoMoney() {
-        return woMoney;
-    }
-
-    public void setWoMoney(int woMoney) {
-        this.woMoney = woMoney;
     }
 
     public String getWoId() {
@@ -38,12 +27,12 @@ public class Waterorder {
         this.woId = woId;
     }
 
-    public String getWid() {
-        return wid;
+    public String getBuid() {
+        return buid;
     }
 
-    public void setWid(String wid) {
-        this.wid = wid;
+    public void setBuid(String buid) {
+        this.buid = buid;
     }
 
     public int getWoNum() {
@@ -62,23 +51,19 @@ public class Waterorder {
         this.woRoom = woRoom;
     }
 
-    public Timestamp getWoTime() {
-        return woTime;
+    public int getWoMoney() {
+        return woMoney;
     }
 
-    public void setWoTime(Timestamp woTime) {
-        this.woTime = woTime;
+    public void setWoMoney(int woMoney) {
+        this.woMoney = woMoney;
     }
 
-    @Override
-    public String toString() {
-        return "Waterorder{" +
-                "woId='" + woId + '\'' +
-                ", wid='" + wid + '\'' +
-                ", woNum=" + woNum +
-                ", woRoom='" + woRoom + '\'' +
-                ", woMoney=" + woMoney +
-                ", woTime=" + woTime +
-                '}';
+    public String getWoUser() {
+        return woUser;
+    }
+
+    public void setWoUser(String woUser) {
+        this.woUser = woUser;
     }
 }

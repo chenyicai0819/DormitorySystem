@@ -3,32 +3,10 @@ package cn.edu.guet.bean;
 public class Dormitory {
     private int dId;
     private String roleId;
-    private String buid;
     private String dName;
-    private String dPwd;
+    private String buid;
     private String dPhone;
-    private String dBuild;
-
-    public Dormitory() {
-    }
-
-    public Dormitory(int dId, String roleId, String buid, String dName, String dPwd, String dPhone, String dBuild) {
-        this.dId = dId;
-        this.roleId = roleId;
-        this.buid = buid;
-        this.dName = dName;
-        this.dPwd = dPwd;
-        this.dPhone = dPhone;
-        this.dBuild = dBuild;
-    }
-
-    public String getBuid() {
-        return buid;
-    }
-
-    public void setBuid(String buid) {
-        this.buid = buid;
-    }
+    private String dPwd;
 
     public int getdId() {
         return dId;
@@ -54,12 +32,12 @@ public class Dormitory {
         this.dName = dName;
     }
 
-    public String getdPwd() {
-        return dPwd;
+    public String getBuid() {
+        return buid;
     }
 
-    public void setdPwd(String dPwd) {
-        this.dPwd = dPwd;
+    public void setBuid(String buid) {
+        this.buid = buid;
     }
 
     public String getdPhone() {
@@ -70,24 +48,11 @@ public class Dormitory {
         this.dPhone = dPhone;
     }
 
-    public String getdBuild() {
-        return dBuild;
+    public String getdPwd() {
+        return dPwd;
     }
 
-    public void setdBuild(String dBuild) {
-        this.dBuild = dBuild;
-    }
-
-    @Override
-    public String toString() {
-        return "Dormitory{" +
-                "dId=" + dId +
-                ", roleId='" + roleId + '\'' +
-                ", buid='" + buid + '\'' +
-                ", dName='" + dName + '\'' +
-                ", dPwd='" + dPwd + '\'' +
-                ", dPhone='" + dPhone + '\'' +
-                ", dBuild='" + dBuild + '\'' +
-                '}';
+    public void setdPwd(String dPwd) {
+        this.dPwd = dPwd;
     }
 }

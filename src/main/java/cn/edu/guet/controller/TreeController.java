@@ -1,22 +1,26 @@
 package cn.edu.guet.controller;
 
-import cn.edu.guet.bean.Tree;
-import cn.edu.guet.filter.SqlsessionFilter;
-import cn.edu.guet.mapper.TreeMapper;
-import cn.edu.guet.mvc.annotaion.Controller;
-import cn.edu.guet.mvc.annotaion.RequestMapping;
-import cn.edu.guet.util.SessionFactory;
 
-import java.util.List;
+
+import cn.edu.guet.service.ITreeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TreeController {
 
-    private TreeMapper treeMapper;
-    @RequestMapping("getAllTree.do")
-    public List<Tree> getAllTree(){
-        treeMapper= SqlsessionFilter.getSqlsession().getMapper(TreeMapper.class);
-        List<Tree> treeList = treeMapper.getAllTree();
-        return treeList;
+    @Qualifier("treeServiceImpl")
+    @Autowired
+    private ITreeService treeService;
+
+    @GetMapping("getAllTree.do")
+    public String viewIndex(HttpServletRequest request){
+        request.setAttribute("tree",treeService.getAllTree());
+        return "index";
     }
 }
