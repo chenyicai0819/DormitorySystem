@@ -13,10 +13,11 @@ import java.util.List;
 public interface WaterOrderMapper {
     void insertWaterOrder(WaterOrder waterOrder);
     List<WaterOrder> getWaterOrderByUser(String userId);
-    List<WaterOrder> getWaterOrderByBuilding(@Param("buildingId") String buildingId, @Param("startRow") int startRow, @Param("pageSize") int pageSize);
-    List<WaterOrder> getWaterOrderByRoom(@Param("buildingId") String buildingId, @Param("roomId") String roomId, @Param("startRow") int startRow, @Param("pageSize") int pageSize);
-    List<WaterOrder> getAllWaterOrder(@Param("startRow") int startRow, @Param("pageSize") int pageSize);
+    List<WaterOrder> getWaterOrderByBuilding(@Param("buildingId") String buildingId);
+    List<WaterOrder> getWaterOrderByRoom(@Param("buildingId") String buildingId, @Param("roomId") String roomId);
+    List<WaterOrder> getAllWaterOrder();
     int getAllWaterOrderCount();
     int getBuildingWaterOrderCount(String buildingId);
     int getRoomWaterOrderCount(@Param("buildingId") String buildingId, @Param("roomId") String roomId);
+    List<WaterOrder> getTest();
 }

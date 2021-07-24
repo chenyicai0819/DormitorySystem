@@ -2,6 +2,7 @@ package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.WaterOrder;
 import cn.edu.guet.service.IWaterOrderService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,23 +37,20 @@ public class WaterOrderController {
 
     @PostMapping("getAllWaterOrder")
     @ResponseBody
-    public List<WaterOrder> getAllWaterOrder(int curPage, int pageSize){
-        int startRow = (curPage - 1) * pageSize;
-        return waterOrderService.getAllWaterOrder(startRow, pageSize);
+    public PageInfo getAllWaterOrder(int pageNum, int pageSize){
+        return waterOrderService.getAllWaterOrder(pageNum, pageSize);
     }
 
     @PostMapping("getBuildingWaterOrder")
     @ResponseBody
-    public List<WaterOrder> getBuildingWaterOrder(String buildingId, int curPage, int pageSize){
-        int startRow = (curPage - 1) * pageSize;
-        return waterOrderService.getWaterOrderByBuilding(buildingId, startRow, pageSize);
+    public PageInfo getBuildingWaterOrder(String buildingId, int pageNum, int pageSize){
+        return waterOrderService.getWaterOrderByBuilding(buildingId, pageNum, pageSize);
     }
 
     @PostMapping("getRoomWaterOrder")
     @ResponseBody
-    public List<WaterOrder> getRoomWaterOrder(String buildingId, String roomId, int curPage, int pageSize){
-        int startRow = (curPage - 1) * pageSize;
-        return waterOrderService.getWaterOrderByRoom(buildingId, roomId, startRow, pageSize);
+    public PageInfo getRoomWaterOrder(String buildingId, String roomId, int pageNum, int pageSize){
+        return waterOrderService.getWaterOrderByRoom(buildingId, roomId, pageNum, pageSize);
     }
 
     @PostMapping("getAllWaterOrderCount")
@@ -73,4 +71,15 @@ public class WaterOrderController {
         return waterOrderService.getRoomWaterOrderCount(buildingId, roomId);
     }
 
+    @GetMapping("getWaterTest")
+    @ResponseBody
+    public PageInfo getWaterTest(){
+        return waterOrderService.test();
+    }
+
+
+    @GetMapping("test3")
+    public String test3(){
+        return "test";
+    }
 }

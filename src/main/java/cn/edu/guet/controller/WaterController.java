@@ -2,6 +2,7 @@ package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Water;
 import cn.edu.guet.service.IWaterService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +17,8 @@ public class WaterController {
 
     @PostMapping("getAllWaterState")
     @ResponseBody
-    public List<Water> getAllWaterState(){
-        return waterSeverce.getAllWaterState();
-    }
-
-    @PostMapping("getLimitWaterState")
-    @ResponseBody
-    public List<Water> getLimitWaterState(int curPage, int pageSize){
-        int startRow = (curPage - 1) * pageSize;
-        return waterSeverce.getLimitWaterState(startRow, pageSize);
-    }
-
-    @PostMapping("getWaterStateCount")
-    @ResponseBody
-    public int getWaterStateCount(){
-        return waterSeverce.getWaterStateCount();
+    public PageInfo getAllWaterState(int pageNum, int pageSize){
+        return waterSeverce.getAllWaterState(pageNum, pageSize);
     }
 
     @PostMapping("deleteWaterState")

@@ -9,13 +9,13 @@
         SELECT * FROM waterorder WHERE userId = #{value}
     </select>
     <select id="getWaterOrderByBuilding" resultType="cn.edu.guet.bean.WaterOrder">
-        SELECT * FROM waterorder WHERE buildingId = #{buildingId} LIMIT #{startRow}, #{pageSize}
+        SELECT * FROM waterorder WHERE buildingId = #{buildingId}
     </select>
     <select id="getWaterOrderByRoom" resultType="cn.edu.guet.bean.WaterOrder">
-        SELECT * FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId} LIMIT #{startRow}, #{pageSize}
+        SELECT * FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId}
     </select>
     <select id="getAllWaterOrder" resultType="cn.edu.guet.bean.WaterOrder">
-        SELECT * FROM waterorder LIMIT #{startRow}, #{pageSize}
+        SELECT * FROM waterorder
     </select>
     <select id="getAllWaterOrderCount" resultType="int">
         SELECT COUNT(*) FROM waterorder
@@ -25,6 +25,10 @@
     </select>
     <select id="getRoomWaterOrderCount" resultType="int">
         SELECT COUNT(*) FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId}
+    </select>
+
+    <select id="getTest" resultType="cn.edu.guet.bean.WaterOrder">
+        SELECT * FROM waterorder
     </select>
 
 </mapper>

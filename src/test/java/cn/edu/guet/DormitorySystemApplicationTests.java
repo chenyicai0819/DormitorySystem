@@ -4,8 +4,11 @@ import cn.edu.guet.bean.Water;
 import cn.edu.guet.bean.WaterOrder;
 import cn.edu.guet.mapper.MessageMapper;
 import cn.edu.guet.mapper.WaterMapper;
+import cn.edu.guet.mapper.WaterOrderMapper;
 import cn.edu.guet.service.IWaterOrderService;
 import cn.edu.guet.service.IWaterService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +31,9 @@ public class DormitorySystemApplicationTests {
     @Autowired
     private IWaterOrderService waterOrderService;
 
+    @Autowired
+    private WaterOrderMapper waterOrderMapper;
+
     @Test
     public void testSendMessage(){
         System.out.println(new Timestamp(System.currentTimeMillis()));
@@ -35,12 +41,7 @@ public class DormitorySystemApplicationTests {
 
     @Test
     public void testGetWaterState(){
-        System.out.println("num:" + waterMapper.getWaterState("#27").getNumber());
-//        List<Water> waters = waterMapper.getAllWaterState();
-        List<Water> waters = waterSeverce.getAllWaterState();
-        for(Water water : waters){
-            System.out.println(water.getBuildingId());
-        }
+        System.out.println(waterSeverce.getAllWaterState(1, 3));
     }
 
     @Test
@@ -76,6 +77,16 @@ public class DormitorySystemApplicationTests {
 //        for(WaterOrder waterOrder : waterOrders){
 //            System.out.println(waterOrder.toString());
 //        }
+       /* System.out.println("tttttttt"+ PageHelper.startPage(3, 7));
+        List<WaterOrder> waterOrders = waterOrderService.getAllWaterOrder(3,7);
+        for(WaterOrder waterOrder :waterOrders){
+            System.out.println(waterOrder.toString());
+        }*/
+        PageHelper.startPage(1,5);
+        List<WaterOrder> waterOrders = waterOrderMapper.getTest();
+        PageInfo pageInfo = new PageInfo(waterOrders);
+        System.out.println(pageInfo.toString());
+
     }
 
 }

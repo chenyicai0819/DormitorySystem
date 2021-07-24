@@ -7,21 +7,11 @@
         <script th:inline="javascript">
             $(function() {
                 var confirmFlag = false;
-                var curPage = 1;
+                var pageNum = 1;
                 var pageSize = 5;
                 var lastPage;
-                // viewAllWaterState();    // 显示水的状态信息
-                viewLimitWaterState(curPage, pageSize);
 
-                // 获取所有数据的长度
-                $.ajax({
-                    url : "getWaterStateCount",
-                    method : "post",
-                    async:false,
-                    success : function(date){
-                        lastPage = Math.ceil(date / pageSize);
-                    }
-                })
+                viewAllWaterState(pageNum, pageSize, setSelect);    // 显示水的状态信息
 
                 // 更新&确定监听器
                 $("#table").on("click", ".button1", function(){
@@ -57,38 +47,34 @@
                     }
                 })
 
-                // 页码监听器
-                $("#form1").on("click", ".pageButton", function(){
-                    var beforePage = curPage;
+                $("#body").on("click", ".pageButton", function(){
+                    var beforePage = pageNum;
                     var value = $(this).attr("value");
                     if(value == "首页"){
-                        curPage = 1;
+                        pageNum = 1;
                     }else if(value == "尾页"){
-                        curPage = lastPage;
+                        pageNum = lastPage;
                     }else if(value == "上一页"){
-                        if(curPage != 1){
-                            curPage--;
+                        if(pageNum != 1){
+                            pageNum--;
                         }else{
                             alert("这是首页!")
                         }
                     }else if(value == "下一页"){
-                        if(curPage != lastPage){
-                            curPage++;
+                        if(pageNum != lastPage){
+                            pageNum++;
                         }else{
                             alert("这是最后一页了!")
                         }
                     }else if(value = "跳转"){
-                        var textPage = $("#page").val();
-                        if(textPage >= 1 && textPage <= lastPage){
-                            curPage = textPage;
-                        }
+                        pageNum = $("#page").val();
                     }
-                    console.log("curPage:" + curPage);
-                    console.log("类型"+ value);
-                    if(beforePage != curPage){
-                        viewLimitWaterState(curPage, pageSize);
+                    if(beforePage != pageNum){
+                        $("#option"+pageNum).prop("selected",true)  // 设置select标签跟随页码
+                        viewAllWaterState(pageNum, pageSize);
                     }
                 })
+
 
                 // 确认所有提交监听器
                 $("#confirmAll").click(function(){
@@ -146,32 +132,25 @@
                         })
                     }
                 })
+
+                // 显示所有楼栋水状态信息
+                function viewAllWaterState(pageNum, pageSize, setSelect) {
+                    $("#table>tbody").html("");  // 清空表格
+                    $.ajax({
+                        url:"getAllWaterState?pageNum=" + pageNum + "&pageSize=" + pageSize,
+                        async: false,
+                        method: 'post',
+                        success:function(data) {
+                            if(setSelect != null){
+                                setSelect(data);
+                            }
+                            view(data);
+                            lastPage = data.navigateLastPage;
+                        }
+                    })
+                }
             })
 
-
-            // 显示所有楼栋水状态信息
-            function viewAllWaterState() {
-                $("#table>tbody").html("");  // 清空表格
-                $.ajax({
-                    url:"getAllWaterState",
-                    method: 'post',
-                    success:function(data) {
-                       view(data);
-                    }
-                })
-            }
-
-            // 按页数显示楼栋水状态信息
-            function viewLimitWaterState(curPage, pageSize){
-                $("#table>tbody").html("");  // 清空表格
-                $.ajax({
-                    url:"getLimitWaterState?curPage=" + curPage + "&pageSize=" + pageSize,
-                    method: 'post',
-                    success:function(data) {
-                        view(data);
-                    }
-                })
-            }
 
             // 提交单条数据更新
             function updataWaterState(buildingId, number){
@@ -179,16 +158,16 @@
                     url : "updataWaterState?buildingId=" + buildingId + "&number=" + number,
                     type : "post",
                     success : function(){
-                        console.log("更新成功");
+                        alert("更新成功");
                     }
                 })
             }
 
             function view(data){
-                $.each(data, function(index, water) {
+                $.each(data.list, function(index, water) {
                     var tr = $("<tr>"
                         + "<td> <input type='hidden' class='buildingId' name='buildingId' value='" + water.buildingId + "'></td>"
-                        + "<td>" + water.buildingId + "</td>"
+                        + "<td>#" + water.buildingId + "</td>"
                         + "<td> <input type='text' class='number' name='number' value='" + water.number + "'readonly=\"true\"></td>"
                         + "<td> <input type='button' class='button1' value='更新' id='" + water.buildingId + "'></td>"
                         + "<td> <input type='button' class='button2' value='删除' id='" + water.buildingId + "'></td>"
@@ -196,9 +175,17 @@
                     $("#table>tbody").append(tr);
                 })
             }
+
+            function setSelect(data){
+                $("#page").html("");  // 清空
+                $.each(data.navigatepageNums, function(index, navigatepageNum) {
+                    var option = $("<option id='option" + navigatepageNum + "'>" + navigatepageNum + "</option>");
+                    $("#page").append(option);
+                })
+            }
         </script>
     </head>
-    <body>
+    <body id="body">
         <form id="form1">
             <table id="table">
                 <thead>
@@ -212,14 +199,24 @@
 
                 </tbody>
             </table>
-            <input type="button" class="pageButton" value="首页">
+            <!--<input type="button" class="pageButton" value="首页">
             <input type="button" class="pageButton" value="上一页">
             <input type="button" class="pageButton" value="下一页">
             <input type="button" class="pageButton" value="尾页">
             <input type="text" id="page" style="width: 30px" value="1">
             <input type="button" class="pageButton" value="跳转"><br>
+            -->
+
+
+            <input type="button" class="pageButton" value="首页">
+            <input type="button" class="pageButton" value="上一页">
+            <input type="button" class="pageButton" value="下一页">
+            <input type="button" class="pageButton" value="尾页">
+            <select id="page">
+            </select>
+            <input type="button" class="pageButton" value="跳转">
             <input id="confirmAll" type="button" value="全部确定">
-            <input id="submit" type="button" value="提交">
+<!--            <input id="submit" type="button" value="提交">-->
         </form>
     </body>
 </html>

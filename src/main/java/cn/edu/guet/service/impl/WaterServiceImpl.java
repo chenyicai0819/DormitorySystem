@@ -3,6 +3,8 @@ package cn.edu.guet.service.impl;
 import cn.edu.guet.bean.Water;
 import cn.edu.guet.mapper.WaterMapper;
 import cn.edu.guet.service.IWaterService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,10 @@ public class WaterServiceImpl implements IWaterService {
     }
 
     @Override
-    public List<Water> getAllWaterState() {
-        return waterMapper.getAllWaterState();
-    }
-
-    @Override
-    public List<Water> getLimitWaterState(int startRow, int pageSize) {
-        return waterMapper.getLimitWaterState(startRow, pageSize);
+    public PageInfo getAllWaterState(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Water> waters = waterMapper.getAllWaterState();
+        return new PageInfo(waters);
     }
 
     @Override
@@ -49,8 +48,4 @@ public class WaterServiceImpl implements IWaterService {
         waterMapper.addWaterState(water);
     }
 
-    @Override
-    public int getWaterStateCount() {
-        return waterMapper.getWaterStateCount();
-    }
 }

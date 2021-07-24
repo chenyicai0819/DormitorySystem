@@ -4,6 +4,8 @@ import cn.edu.guet.bean.WaterOrder;
 import cn.edu.guet.mapper.WaterOrderMapper;
 import cn.edu.guet.service.IWaterOrderService;
 import cn.edu.guet.service.IWaterService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,19 +31,26 @@ public class WaterOrderServiceImpl implements IWaterOrderService {
     }
 
     @Override
-    public List<WaterOrder> getWaterOrderByBuilding(String buildingId, int startRow, int pageSize) {
-        return waterOrderMapper.getWaterOrderByBuilding(buildingId, startRow, pageSize);
+    public PageInfo getWaterOrderByBuilding(String buildingId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<WaterOrder> waterOrders = waterOrderMapper.getWaterOrderByBuilding(buildingId);
+        return new PageInfo(waterOrders);
     }
 
     @Override
-    public List<WaterOrder> getWaterOrderByRoom(String buildingId, String roomId, int startRow, int pageSize) {
-        return waterOrderMapper.getWaterOrderByRoom(buildingId, roomId, startRow, pageSize);
+    public PageInfo getWaterOrderByRoom(String buildingId, String roomId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<WaterOrder> waterOrders = waterOrderMapper.getWaterOrderByRoom(buildingId, roomId);
+        return new PageInfo(waterOrders);
     }
 
     @Override
-    public List<WaterOrder> getAllWaterOrder(int startRow, int pageSize) {
-        return waterOrderMapper.getAllWaterOrder(startRow, pageSize);
+    public PageInfo getAllWaterOrder(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<WaterOrder> waterOrders = waterOrderMapper.getAllWaterOrder();
+        return new PageInfo(waterOrders);
     }
+
 
     @Override
     public int getAllWaterOrderCount() {
@@ -56,6 +65,13 @@ public class WaterOrderServiceImpl implements IWaterOrderService {
     @Override
     public int getRoomWaterOrderCount(String buildingId, String roomId) {
         return waterOrderMapper.getRoomWaterOrderCount(buildingId, roomId);
+    }
+
+    @Override
+    public PageInfo test() {
+        PageHelper.startPage(1,5);
+        List<WaterOrder> waterOrders = waterOrderMapper.getTest();
+        return new PageInfo(waterOrders);
     }
 
 

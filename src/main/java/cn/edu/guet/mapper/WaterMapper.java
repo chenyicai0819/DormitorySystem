@@ -12,8 +12,6 @@ import java.util.List;
 public interface WaterMapper {
     Water getWaterState(String buildingId);
     List<Water> getAllWaterState();
-    List<Water> getLimitWaterState(@Param("startRow")int startRow, @Param("pageSize")int pageSize);
-    int getWaterStateCount();
     void insertWaterState(Water water);
     void updataWaterState(Water water);
 //    void updataWaterState(List<Water> waters);

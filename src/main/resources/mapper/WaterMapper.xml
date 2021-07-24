@@ -7,12 +7,6 @@
     <select id="getAllWaterState" resultType="cn.edu.guet.bean.Water">
         SELECT * FROM water
     </select>
-    <select id="getLimitWaterState" resultType="cn.edu.guet.bean.Water">
-        SELECT * FROM water LIMIT #{startRow}, #{pageSize}
-    </select>
-    <select id="getWaterStateCount" resultType="int">
-        SELECT COUNT(*) FROM water
-    </select>
 
     <insert id="insertWaterState" parameterType="cn.edu.guet.bean.Water">
         INSERT INTO water VALUES(#{buildingId}, #{price}, #{number})
