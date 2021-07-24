@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:inline="javascript">
+        $(function(){
+            var curPage = 1;
+            var pageSize = 10;
+            var lastPage;
+            var buildingId;
+            var roomId;
+
+            viewAllWaterOrder(curPage, pageSize);
+            var curView = "viewAllWaterOrder";
+
+            $.ajax({
+                url : "getAllWaterOrderCount",
+                method : "post",
+                async:false,
+                success : function(date){
+                    lastPage = Math.ceil(date / pageSize);
+                }
+            })
+
+            $("#body").on("click", ".pageButton", function(){
+                var beforePage = curPage;
+                var value = $(this).attr("value");
+                if(value == "首页"){
+                    curPage = 1;
+                }else if(value == "尾页"){
+                    curPage = lastPage;
+                }else if(value == "上一页"){
+                    if(curPage != 1){
+                        curPage--;
+                    }else{
+                        alert("这是首页!")
+                    }
+                }else if(value == "下一页"){
+                    if(curPage != lastPage){
+                        curPage++;
+                    }else{
+                        alert("这是最后一页了!")
+                    }
+                }else if(value = "跳转"){
+                    var textPage = $("#page").val();
+                    if(textPage >= 1 && textPage <= lastPage){
+                        curPage = textPage;
+                    }else{
+                        alert("超出页码范围!")
+                    }
+                }
+                if(beforePage != curPage){
+                    if(curView == "viewAllWaterOrder"){
+                        $.ajax({
+                            url : "getAllWaterOrderCount",
+                            method : "post",
+                            async:false,
+                            success : function(date){
+                                lastPage = Math.ceil(date / pageSize);
+                            }
+                        })
+                        viewAllWaterOrder(curPage, pageSize)
+                    }else if(curView == "viewBuildingWaterOrder"){
+                        $.ajax({
+                            url : "getBuildingWaterOrderCount?buildingId=" + buildingId,
+                            method : "post",
+                            async:false,
+                            success : function(date){
+                                lastPage = Math.ceil(date / pageSize);
+                            }
+                        })
+                        viewBuildingWaterOrder(buildingId, curPage, pageSize);
+
+                    }else if(curView == "viewRoomWaterOrder"){
+                        $.ajax({
+                            url : "getRoomWaterOrderCount?buildingId" + buildingId + "&roomId=" + roomId,
+                            method : "post",
+                            async:false,
+                            success : function(date){
+                                lastPage = Math.ceil(date / pageSize);
+                            }
+                        })
+                        viewRoomWaterOrder(buildingId, roomId, curPage, pageSize);
+                    }
+                    console.log(lastPage);
+                }
+            })
+
+            $("#search").click(function(){
+                buildingId = $("#building").val()
+                var floor = $("#floor").val();
+                var room = $("#room").val();
+                roomId = floor + room;
+                if(buildingId != "null"){
+                    if(floor != "null" && room != "null"){
+                        viewRoomWaterOrder(buildingId, roomId, curPage, pageSize);
+                        curView = "viewRoomWaterOrder"
+                    }else if(floor == "null" && room == "null"){
+                        viewBuildingWaterOrder(buildingId, curPage, pageSize);
+                        curView = "viewBuildingWaterOrder";
+                    }else {
+                        alert("请确认查找信息")
+                    }
+                }else {
+                    alert("请确认查找信息")
+                }
+                console.log($("#building").val() + $("#floor").val() + $("#room").val())
+            })
+
+            $("#viewAll").click(function(){
+                var curView = viewAllWaterOrder(curPage, pageSize);
+                curView;
+                $(".firstOption").prop("selected",true)
+            })
+
+        })
+
+        function viewAllWaterOrder(curPage, pageSize){
+            $("#table>tbody").html("");  // 清空表格
+            $.ajax({
+                url:"getAllWaterOrder?curPage=" + curPage + "&pageSize=" + pageSize,
+                method: 'post',
+                success:function(data) {
+                    view(data);
+                }
+            })
+        }
+        function viewBuildingWaterOrder(buildingId, curPage, pageSize){
+            $("#table>tbody").html("");  // 清空表格
+            $.ajax({
+                url:"getBuildingWaterOrder?buildingId=" + buildingId + "&curPage=" + curPage + "&pageSize=" + pageSize,
+                method: 'post',
+                success:function(data) {
+                    view(data);
+                }
+            })
+        }
+        function viewRoomWaterOrder(buildingId, roomId, curPage, pageSize){
+            $("#table>tbody").html("");  // 清空表格
+            $.ajax({
+                url:"getRoomWaterOrder?buildingId=" + buildingId + "&roomId=" + roomId + "&curPage=" + curPage + "&pageSize=" + pageSize,
+                method: 'post',
+                success:function(data) {
+                    view(data);
+                }
+            })
+        }
+
+        function view(data){
+            $.each(data, function(index, waterOrder) {
+                var tr = $("<tr>"
+                    + "<td>" + waterOrder.buildingId + "</td>"
+                    + "<td>" + waterOrder.roomId + "</td>"
+                    + "<td>" + waterOrder.username + "</td>"
+                    + "<td> " + waterOrder.number + "</td>"
+                    + "<td>" + waterOrder.amount + "</td>"
+                    + "<td>" + waterOrder.orderTime + "</td>"
+                    + "</tr>");
+                $("#table>tbody").append(tr);
+            })
+        }
+
+    </script>
+</head>
+    <body id="body">
+        <form id="form">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>楼栋</th>
+                        <th>宿舍号</th>
+                        <th>姓名</th>
+                        <th>数量</th>
+                        <th>金额</th>
+                        <th>时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </form>
+        <input type="button" class="pageButton" value="首页">
+        <input type="button" class="pageButton" value="上一页">
+        <input type="button" class="pageButton" value="下一页">
+        <input type="button" class="pageButton" value="尾页">
+        <input type="text" id="page" style="width: 30px" value="1">
+        <input type="button" class="pageButton" value="跳转">
+        <input type="button" id="viewAll" value="查看所有"><br>
+        <form id="form2">
+            <select id="building" >
+                <option class="firstOption" selected="selected" value="null">==楼栋==</option>
+                <option value="25">#25</option>
+                <option value="26">#26</option>
+                <option value="27">#27</option>
+                <option value="28">#28</option>
+                <option value="29">#29</option>
+            </select>
+            <select id="floor" >
+                <option class="firstOption" selected="selected" value="null">==楼层==</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="5">6</option>
+            </select>
+            <select id="room" >
+                <option class="firstOption" selected="selected" value="null">==房间==</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+            </select>
+            <input type="button" id="search" value="查询"><br>
+        </form>
+    </body>
+</html>

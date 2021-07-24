@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function() {
+            $.ajax({
+                url:'getMessage?receiveId=10328',
+                async:true,    <!-- 同步 默认异步(true) -->
+                success:function(data) {
+                    $.each(data, function(index, message) {
+                        console.log(message.title);
+                    })
+                }
+            })
+        })
+        function refresh() {
+            $.ajax({
+                url:'getMessage?receiveId=10328',
+                async:true,    <!-- 同步 默认异步(true) -->
+                success:function(data) {
+                    $.each(data, function(index, message) {
+                        console.log(message.title);
+                    })
+                }
+            })
+        }
+    </script>
+</head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>发送人id</th>
+                    <th>标题</th>
+                    <th>内容</th>
+                    <th>是否已读</th>
+                    <th>发送时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="message, messageStat : ${messages}">
+                    <td th:text="${message.sendId}"></td>
+                    <td th:text="${message.title}"></td>
+                    <td th:text="${message.content}"></td>
+                    <td th:if="${message.isRead} eq '0'">未读</td>
+                    <td th:if="${message.isRead} eq '1'">已读</td>
+                    <td th:text="${message.sendTime}"></td>
+                    <td><a th:href="@{deleteMessage1(messageId=${message.messageId}, receiveId=${receiveId})}">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <form th:action="@{changePage(receiveId=${receiveId})}" method="post">
+            <input type="submit" name="changepage" value="首页">
+            <input type="submit" name="changepage" value="上一页">
+            <input type="submit" name="changepage" value="下一页">
+            <input type="submit" name="changepage" value="尾页">
+            <input type="text" name="page" style="width: 30px" th:value="${curPage}">
+            <input type="submit" name="changepage" value="确定">
+        </form>
+        <form th:action="@{sendMessage}" method="post">
+            <input type="hidden" name="sendId" id="sendId" th:value="${receiveId}">
+            接收人id：<input type="text" name="receiveId" id="receiveId">
+            标题：<input type="text" name="title" id="title">
+            内容：<input type="text" name="content" id="content">
+            <button type="submit" style="cursor: pointer">发送</button>
+        </form>
+    </body>
+</html>

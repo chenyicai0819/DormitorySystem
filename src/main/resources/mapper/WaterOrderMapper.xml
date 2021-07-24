@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.WaterOrderMapper">
+    <insert id="insertWaterOrder" parameterType="cn.edu.guet.bean.WaterOrder">
+        INSERT INTO waterorder VALUES(null, #{username}, #{buildingId}, #{roomId}, #{number}, #{amount}, #{orderTime})
+    </insert>
+
+    <select id="getWaterOrderByUser" parameterType="string" resultType="cn.edu.guet.bean.WaterOrder">
+        SELECT * FROM waterorder WHERE userId = #{value}
+    </select>
+    <select id="getWaterOrderByBuilding" resultType="cn.edu.guet.bean.WaterOrder">
+        SELECT * FROM waterorder WHERE buildingId = #{buildingId} LIMIT #{startRow}, #{pageSize}
+    </select>
+    <select id="getWaterOrderByRoom" resultType="cn.edu.guet.bean.WaterOrder">
+        SELECT * FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId} LIMIT #{startRow}, #{pageSize}
+    </select>
+    <select id="getAllWaterOrder" resultType="cn.edu.guet.bean.WaterOrder">
+        SELECT * FROM waterorder LIMIT #{startRow}, #{pageSize}
+    </select>
+    <select id="getAllWaterOrderCount" resultType="int">
+        SELECT COUNT(*) FROM waterorder
+    </select>
+    <select id="getBuildingWaterOrderCount" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM waterorder WHERE buildingId = #{value}
+    </select>
+    <select id="getRoomWaterOrderCount" resultType="int">
+        SELECT COUNT(*) FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId}
+    </select>
+
+</mapper>

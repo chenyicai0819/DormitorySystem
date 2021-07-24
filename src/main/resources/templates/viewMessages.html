@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:inline="javascript">
+        var receiveId = [[${receiveId}]];
+        var sendId = [[${sendId}]];
+        var flag = true;
+
+        $(function() {
+            view(flag);
+            $("#table").on("click", "tr>td>input", function(){
+                var id = $(this).attr("id");
+                var value = $(this).attr("value");
+                console.log(value);
+                $.ajax({
+                    url:"deleteMessage?messageId=" + id,
+                    method:'post',
+                    success:function (){
+                        $("#table>tbody").html("");
+                        view(flag);
+                    }
+                })
+            })
+            $("#change").click(function (){
+                flag = view(flag);
+            })
+        })
+
+        function viewReceiveMessages() {
+            $.ajax({
+                url:"getReceiveMessages?receiveId=" + receiveId,
+                success:function(data) {
+                    $.each(data, function(index, message) {
+                        var tr = $("<tr class='test2'>"
+                            + "<td>" + message.sendId + "</td>"
+                            + "<td>" + message.title + "</td>"
+                            + "<td>" + message.content + "</td>"
+                            + "<td>" + message.isRead + "</td>"
+                            + "<td>" + message.sendTime + "</td>"
+                            + "<td> <input type='submit' value='删除' id='" + message.messageId + "'></td>"
+                        + "</tr>");
+                        $("#table>tbody").append(tr);
+                    })
+                }
+            })
+        }
+        function viewSendMessages() {
+            $.ajax({
+                url:"getSendMessages?sendId=" + sendId,
+                success:function(data) {
+                    $.each(data, function(index, message) {
+                        var tr = $("<tr class='test2'>"
+                            + "<td>" + message.sendId + "</td>"
+                            + "<td>" + message.title + "</td>"
+                            + "<td>" + message.content + "</td>"
+                            + "<td>" + message.isRead + "</td>"
+                            + "<td>" + message.sendTime + "</td>"
+                            + "<td> <input type='submit' value='删除' id='" + message.messageId + "'></td>"
+                            + "</tr>");
+                        $("#table>tbody").append(tr);
+                    })
+                }
+            })
+        }
+        function view(flag){
+            if(flag){
+                $("#table>tbody").html("");
+                viewReceiveMessages();
+                flag = false;
+            }else{
+                $("#table>tbody").html("");
+                viewSendMessages();
+                flag = true;
+            }
+            return flag;
+        }
+    </script>
+</head>
+    <body>
+        <button id="change">查看发送的信息</button>
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>发送人id</th>
+                    <th>标题</th>
+                    <th>内容</th>
+                    <th>是否已读</th>
+                    <th>发送时间</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </body>
+</html>
