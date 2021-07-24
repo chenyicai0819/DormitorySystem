@@ -11,7 +11,7 @@
     width: 600px;
     background-color: aqua;
     position: relative;
-    height: 700px;
+    height: 600px;
 }
 label{
     position: absolute;
@@ -21,7 +21,10 @@ input{
     width: 400px;
     position: absolute;
     right: 30px;
-    height: 35px;
+    height: 15px;
+}
+.submit{
+    height: 25px;
 }
 textarea{
     position: absolute;

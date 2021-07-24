@@ -4,10 +4,54 @@
     margin: 0 auto;
 }
 .wrapper{
-    background-color: #0055AA;
     width: 500px;
     height: 500px;
+    position: relative;
 }
 .title{
     text-align: center;
+}
+a{
+    text-decoration: none;
+}
+.message{
+    z-index: 1024;
+}
+.addStu{
+    display: none;
+    width: 300px;
+    position: absolute;
+    background-color: azure;
+    top: 100px;
+    left: 100px;
+    z-index: 1025;
+}
+.close{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.submit{
+    position: absolute;
+    top: 120px;
+    left: 165px;
+}
+.changeStu{
+    display: none;
+    width: 300px;
+    position: absolute;
+    background-color: azure;
+    top: 100px;
+    left: 100px;
+    z-index: 1025;
+}
+.close1{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.submit1{
+    position: absolute;
+    top: 120px;
+    left: 165px;
 }

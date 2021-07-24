@@ -12,3 +12,21 @@ td{
 a{
     text-decoration: none;
 }
+.board{
+    z-index: 1024;
+}
+.window{
+    position: relative;
+    width: 600px;
+    top: -50px;
+    display: none;
+    z-index: 1025;
+}
+.operate{
+
+}
+.close{
+    position: absolute;
+    color: black;
+    right: 0;
+}

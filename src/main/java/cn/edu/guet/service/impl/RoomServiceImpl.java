@@ -2,6 +2,7 @@ package cn.edu.guet.service.impl;
 
 import cn.edu.guet.bean.Build;
 import cn.edu.guet.bean.Room;
+import cn.edu.guet.bean.Student;
 import cn.edu.guet.mapper.RoomMapper;
 import cn.edu.guet.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,19 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public List<Room> viewRoom(String buId,String buNo) {
+    public List<String> viewRoom(String buId,String buNo) {
         return roomMapper.viewRoom(buId,buNo);
     }
 
     @Override
-    public Room selectRoom(String buId, String rId) {
-        return roomMapper.selectRoom(buId,rId);
+    public List<Student> selectStudent(String rId) {
+        return roomMapper.selectStudent(rId);
     }
+
+    @Override
+    public void changeRoom(String rId, String rBed,String sId,String buId) {
+        roomMapper.changeRoom(rId,rBed,sId,buId);
+    }
+
+
 }

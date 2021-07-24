@@ -7,7 +7,15 @@
     background-color: #0055AA;
     width: 500px;
     height: 500px;
+    position: relative;
+}
+form{
+    position: absolute;
+    left: 100px;
 }
 .title{
     text-align: center;
+}
+a{
+    text-decoration: none;
 }

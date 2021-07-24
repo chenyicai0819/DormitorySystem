@@ -27,17 +27,32 @@ public class RoomController {
     @GetMapping("searchRoom")
     public String searchRoom(HttpServletRequest request){
         String buId=request.getParameter("buId");
-        String buNo=request.getParameter("buNo")+"%";
+        String buNo=request.getParameter("buNo");
+        request.setAttribute("buId",buId);
+        request.setAttribute("buNo",buNo);
         request.setAttribute("builds",roomService.viewBuild());
-        request.setAttribute("rooms",roomService.viewRoom(buId,buNo));
+        request.setAttribute("rIds",roomService.viewRoom(buId,buNo));
         return "room/viewRoom";
     }
 
     @GetMapping("editRoom")
     public String editRoom(HttpServletRequest request){
-        String buId=request.getParameter("buId");
         String rId=request.getParameter("rId");
-        request.setAttribute("room",roomService.selectRoom(buId,rId));
+        request.setAttribute("builds",roomService.viewBuild());
+        request.setAttribute("rId",rId);
+        request.setAttribute("students",roomService.selectStudent(rId));
+        return "room/editRoom";
+    }
+
+    @GetMapping("roomAddStudent")
+    public String roomAddStudent(HttpServletRequest request){
+        String rId=request.getParameter("rId");
+        String rBed=request.getParameter("rBed");
+        String sId=request.getParameter("sId");
+        String buId=request.getParameter("buId");
+        roomService.changeRoom(rId,rBed,sId,buId);
+        request.setAttribute("builds",roomService.viewBuild());
+        request.setAttribute("students",roomService.selectStudent(rId));
         return "room/editRoom";
     }
 }

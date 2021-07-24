@@ -4,31 +4,40 @@
     <title>公告管理</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/board/editBoard.css" th:href="@{/css/board/editBoard.css}">
-
+    <script>
+        $(function () {
+            
+        })
+    </script>
 </head>
 <body>
-<table border="1">
-    <tr>
-        <th colspan="3">公告</th>
-        <th><a th:href="@{searchBoard}">查询公告</a></th>
-        <th colspan="2"><a href="addBoard">发布公告</a></th>
-    </tr>
-    <tr>
-        <th>标题</th>
-        <th>内容</th>
-        <th>时间</th>
-        <th>发布者</th>
-        <th colspan="2">操作</th>
-    </tr>
-    <tr th:each="board,boardStat:${boards}">
-        <td th:text="${board.boName}"></td>
-        <td th:text="${board.boContent}"></td>
-        <td th:width="80px" th:text="${board.boTime}"></td>
-        <td th:width="80px" th:text="${board.boUser}"></td>
-        <td th:width="50px"><a th:href="@{modifyBoard(boId=${board.boId})}">&nbsp;修 改&nbsp;</a></td>
-        <td th:width="50px"><a th:href="@{deleteBoard(boId=${board.boId})}">&nbsp;删 除&nbsp;</a></td>
-    </tr>
-
-</table>
+<div class="board">
+    <table border="1" cellspacing="0">
+        <tr>
+            <th width="500" colspan="3">公告</th>
+            <th width="100"><a th:href="@{searchBoard}">查询公告</a></th>
+            <th width="100" colspan="2"><a href="addBoard">发布公告</a></th>
+        </tr>
+        <tr>
+            <th>标题</th>
+            <th>内容</th>
+            <th width="80">时间</th>
+            <th>发布者</th>
+            <th colspan="2">操作</th>
+        </tr>
+        <tr th:each="board,boardStat:${boards}">
+            <td th:text="${board.boName}"></td>
+            <td th:text="${board.boContent}"></td>
+            <td th:text="${board.boTime}"></td>
+            <td th:text="${board.boUser}"></td>
+            <td><a th:href="@{modifyBoard(boId=${board.boId})}">&nbsp;修 改&nbsp;</a></td>
+            <td><a th:href="@{deleteBoard(boId=${board.boId})}">&nbsp;删 除&nbsp;</a></td>
+        </tr>
+    </table>
+</div>
+<div class="window">
+    <a class="close" href="javascript:void(0)">X</a>
+    <iframe class="operate" src="addBoard" width="600" height="600"></iframe>
+</div>
 </body>
 </html>

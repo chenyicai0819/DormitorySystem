@@ -13,20 +13,21 @@
     <form action="searchRoom">
         <label>宿舍楼:</label>
         <select name="buId">
-            <option th:each="build,buildStat:${builds}" th:text="${build.buid}"></option>
-        </select>
+            <option th:each="build,buildStat:${builds}" th:selected="${buId eq build.buid}" th:text="${build.buid}"></option>
+        </select><spqn>&nbsp;&nbsp;</spqn>
         <label>楼层:</label>
         <select name="buNo">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
+            <option value="1" th:selected="${buNo eq '1'}" >1</option>
+            <option value="2" th:selected="${buNo eq '2'}">2</option>
+            <option value="3" th:selected="${buNo eq '3'}">3</option>
+            <option value="4" th:selected="${buNo eq '4'}">4</option>
+            <option value="5" th:selected="${buNo eq '5'}">5</option>
+            <option value="6" th:selected="${buNo eq '6'}">6</option>
+            <option value="7" th:selected="${buNo eq '7'}">7</option>
         </select>
         <input type="submit" value="查询">
     </form>
+    <br><br>
     <table border="1">
         <tr>
             <th colspan="3">宿舍信息</th>
@@ -35,9 +36,9 @@
             <th width="200px">宿舍楼</th>
             <th width="150px">宿舍</th>
         </tr>
-        <tr th:each="room,roomStat:${rooms}">
-            <td th:width="200px" th:text="${room.buid}"></td>
-            <td><a th:href="@{editRoom(buId=${room.buid},rId=${room.rId})}" th:text="${room.rId}"></a> </td>
+        <tr th:each="rId,rIdStat:${rIds}">
+            <td th:width="200px" th:text="${buId}"></td>
+            <td><a th:href="@{editRoom(rId=${rId})}" th:text="${rId}"></a> </td>
         </tr>
 
     </table>

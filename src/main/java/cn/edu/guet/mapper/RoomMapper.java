@@ -2,6 +2,7 @@ package cn.edu.guet.mapper;
 
 import cn.edu.guet.bean.Build;
 import cn.edu.guet.bean.Room;
+import cn.edu.guet.bean.Student;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
     List<Build> viewBuild();
-    List<Room> viewRoom(String buId,String buNo);
-    Room selectRoom(String buId,String rId);
+    List<String> viewRoom(String buId,String buNo);
+    List<Student> selectStudent(String rId);
+    void changeRoom(String rId,String rBed,String sId,String buId);
 }

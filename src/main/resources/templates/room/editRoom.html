@@ -5,31 +5,79 @@
   <title>编辑宿舍信息</title>
   <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
   <link rel="stylesheet" type="text/css" href="css/room/editRoom.css" th:href="@{/css/room/editRoom.css}">
+  <script>
+    $(function () {
+      $(".add").click(function () {
+        $("#buId").attr("value",$(this).attr("value"));
+        $(".addStu").show();
+        $(".message").css({opacity:0.3});
+      })
+      $(".close").click(function () {
+        $(".addStu").hide();
+        $(".message").css({opacity: 1});
+      })
+      $(".change").click(function () {
+        $("#sId").attr("value",$(this).attr("value"));
+        $(".changeStu").show();
+        $(".message").css({opacity:0.3});
+      })
+      $(".close1").click(function () {
+        $(".changeStu").hide();
+        $(".message").css({opacity: 1});
+      })
+    })
+  </script>
 </head>
 <body>
 
 <div class="wrapper">
-  <h3 class="title">调整宿舍信息</h3><br><br>
-  <table border="1">
-    <tr>
-      <th>床号</th>
-      <th>学生</th>
-      <th colspan="2">操作</th>
-    </tr>
-    <tr th:each="i:${#numbers.sequence(1,room.bedNo)}">
-      <td th:text="${i}"></td>
-      <td th:if="${i}==1" th:text="${room.r1}">空</td>
-      <td th:if="${i}==2" th:text="${room.r2}">空</td>
-      <td th:if="${i}==3" th:text="${room.r3}">空</td>
-      <td th:if="${i}==4" th:text="${room.r4}">空</td>
-      <td th:if="${i}==5" th:text="${room.r5}">空</td>
-      <td th:if="${i}==6" th:text="${room.r6}">空</td>
-      <td th:if="${i}==7" th:text="${room.r7}">空</td>
-      <td th:if="${i}==8" th:text="${room.r8}">空</td>
-      <td><a th:href="@{addRoom}"> 入 住 </a> </td>
-      <td><a th:href="@{deleteRoom}"> 退 宿 </a></td>
-    </tr>
-  </table>
+  <div class="message">
+    <h3 class="title">调整宿舍信息</h3><br><br>
+    <table border="1" cellspacing="0" width="500px">
+      <tr>
+        <th th:text="${rId}" colspan="4"></th>
+      </tr>
+      <tr>
+        <th width="125">床号</th>
+        <th width="125">学生</th>
+        <th width="250" colspan="2">操作</th>
+      </tr>
+      <tr th:each="student,studentStat:${students}">
+        <td th:text="'&nbsp;'+${student.rBed}"></td>
+        <td th:text="'&nbsp;'+${student.sName}"></td>
+        <td th:width="125"><a class="change" th:value="${student.sId}" href="javascript:void(0)">&nbsp;调整宿舍</a></td>
+        <td><a class="add" th:value="${student.buid}" href="javascript:void(0);">&nbsp;添加宿舍成员</a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="addStu">
+    <p>&nbsp;添加宿舍成员</p>
+    <a class="close" href="javascript:void(0)">X</a>
+    <br>
+    <form action="roomAddStudent">
+      <input type="text" name="rId" hidden th:value="${rId}">
+      <input type="text" id="buId" name="buId" hidden>
+      <label>&nbsp;床号: </label><input type="text" name="rBed"><br>
+      <label>&nbsp;学号: </label><input type="text" name="sId"><br>
+      <label>&nbsp;姓名: </label><input type="text" name="sName"><br><br>
+      <span>&nbsp;</span><input class="submit" type="submit" value="&nbsp;确定&nbsp;">
+    </form>
+  </div>
+  <div class="changeStu">
+    <p>&nbsp;调整住宿信息</p>
+    <a class="close1" href="javascript:void(0)">X</a>
+    <br>
+    <form action="roomAddStudent">
+      <input id="sId" type="text" hidden name="sId">
+      <label>&nbsp;宿舍: </label><input type="text" name="rId"><br>
+      <label>&nbsp;床号: </label><input type="text" name="rBed"><br>
+      <label>&nbsp;楼栋: </label>
+      <select name="buId">
+        <option th:each="build,buildStat:${builds}" th:text="${build.buid}"></option>
+      </select><br><br>
+      <span>&nbsp;</span><input class="submit1" type="submit" value="&nbsp;确定&nbsp;">
+    </form>
+  </div>
 </div>
 </body>
 </html>

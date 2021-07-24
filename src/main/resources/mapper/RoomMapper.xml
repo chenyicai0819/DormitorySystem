@@ -4,10 +4,13 @@
     <select id="viewBuild" resultType="cn.edu.guet.bean.Build">
         SELECT * FROM build
     </select>
-    <select id="viewRoom" parameterType="string" resultType="cn.edu.guet.bean.Room">
-        SELECT * FROM room WHERE buid=#{buId} AND rId LIKE #{buNo}
+    <select id="viewRoom" parameterType="string" resultType="String">
+        SELECT DISTINCT(rId) FROM room WHERE buid=#{buId} AND rId LIKE CONCAT(#{buNo},'%')
     </select>
-    <select id="selectRoom" parameterType="string" resultType="cn.edu.guet.bean.Room">
-        SELECT * FROM room WHERE buid=#{buId} AND rId=#{rId}
+    <select id="selectStudent" parameterType="string" resultType="cn.edu.guet.bean.Student">
+        SELECT * FROM student WHERE rId=#{rId}
     </select>
+    <update id="changeRoom" parameterType="string">
+        UPDATE student SET rId=#{rId},rBed=#{rBed},buid=#{buId} WHERE sId=#{sId}
+    </update>
 </mapper>

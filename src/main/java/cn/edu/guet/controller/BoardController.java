@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
-import java.util.List;
 
 
 @Controller
