@@ -10,19 +10,23 @@
       $(".add").click(function () {
         $("#buId").attr("value",$(this).attr("value"));
         $(".addStu").show();
+        $(".mask").show();
         $(".message").css({opacity:0.3});
       })
       $(".close").click(function () {
         $(".addStu").hide();
+        $(".mask").hide();
         $(".message").css({opacity: 1});
       })
       $(".change").click(function () {
         $("#sId").attr("value",$(this).attr("value"));
         $(".changeStu").show();
+        $(".mask").show();
         $(".message").css({opacity:0.3});
       })
       $(".close1").click(function () {
         $(".changeStu").hide();
+        $(".mask").hide();
         $(".message").css({opacity: 1});
       })
     })
@@ -32,7 +36,7 @@
 
 <div class="wrapper">
   <div class="message">
-    <h3 class="title">调整宿舍信息</h3><br><br>
+    <h3 class="title">调整宿舍成员信息</h3><br><br>
     <table border="1" cellspacing="0" width="500px">
       <tr>
         <th th:text="${rId}" colspan="4"></th>
@@ -78,6 +82,7 @@
       <span>&nbsp;</span><input class="submit1" type="submit" value="&nbsp;确定&nbsp;">
     </form>
   </div>
+  <div class="mask"></div>
 </div>
 </body>
 </html>
