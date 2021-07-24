@@ -11,9 +11,10 @@ td{
 }
 a{
     text-decoration: none;
+    color: black;
 }
 .board{
-    z-index: 1024;
+    z-index: 1000;
 }
 .window{
     position: relative;
@@ -22,8 +23,14 @@ a{
     display: none;
     z-index: 1025;
 }
-.operate{
-
+.wrapper{
+    width: 1200px;
+    height: 600px;
+    z-index: 1020;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 300px;
 }
 .close{
     position: absolute;

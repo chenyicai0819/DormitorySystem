@@ -6,7 +6,23 @@
     <link rel="stylesheet" type="text/css" href="css/board/editBoard.css" th:href="@{/css/board/editBoard.css}">
     <script>
         $(function () {
-            
+            $(".addBoard").click(function () {
+                $(".operate").attr("src","addBoard")
+                $(".window").show();
+                $(".wrapper").show();
+                $(".board").css({opacity:0.3});
+            })
+            $(".close").click(function () {
+                $(".window").hide();
+                $(".wrapper").hide();
+                $(".board").css({opacity:1});
+            })
+            $(".modify").click(function () {
+                $(".operate").attr("src","modifyBoard?boId="+$(".modify").attr("value"));
+                $(".window").show();
+                $(".wrapper").show();
+                $(".board").css({opacity:0.3});
+            })
         })
     </script>
 </head>
@@ -16,7 +32,7 @@
         <tr>
             <th width="500" colspan="3">公告</th>
             <th width="100"><a th:href="@{searchBoard}">查询公告</a></th>
-            <th width="100" colspan="2"><a href="addBoard">发布公告</a></th>
+            <th width="100" colspan="2"><a class="addBoard" href="javascript:void(0)">发布公告</a></th>
         </tr>
         <tr>
             <th>标题</th>
@@ -30,14 +46,15 @@
             <td th:text="${board.boContent}"></td>
             <td th:text="${board.boTime}"></td>
             <td th:text="${board.boUser}"></td>
-            <td><a th:href="@{modifyBoard(boId=${board.boId})}">&nbsp;修 改&nbsp;</a></td>
+            <td><a class="modify" th:value="${board.boId}" href="javascript:void(0)">&nbsp;修 改&nbsp;</a></td>
             <td><a th:href="@{deleteBoard(boId=${board.boId})}">&nbsp;删 除&nbsp;</a></td>
         </tr>
     </table>
 </div>
+<div class="wrapper"></div>
 <div class="window">
     <a class="close" href="javascript:void(0)">X</a>
-    <iframe class="operate" src="addBoard" width="600" height="600"></iframe>
+    <iframe class="operate" width="600" height="600"></iframe>
 </div>
 </body>
 </html>
