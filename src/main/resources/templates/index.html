@@ -2,8 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>欢迎登录宿舍系统</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:src="@{/js/datetime.js}"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" th:href="@{/css/index.css}">
     <script>
         $(function(){
@@ -15,6 +16,35 @@
                     $(this).nextUntil(".father").hide();
                 }
             });
+            $("#headimg>img").click(function(){
+                console.log("aaaa");
+                $.ajax({
+                    success: function (data) {
+                    }
+                })
+                let toggle = document.querySelector('.lq-popup-container')
+                toggle.classList.toggle('toggle');
+            });
+            $("#enter").click(function (){
+                let toggle = document.querySelector('.lq-popup-container')
+                toggle.classList.toggle('toggle');
+                $("#JTNR").html("");
+            })
+            var file = document.querySelector('#file');
+            var preview = document.querySelector('#newImageShow');
+            file.onchange = function(){
+                console.log("aaa");
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+                reader.onload = function(){
+                    preview.src=reader.result;
+                }
+            }
+            $("#logout").click(function (){
+                window.localStorage.clear();
+                window.location.href="login.do";
+            })
+
         })
     </script>
 </head>
@@ -22,7 +52,15 @@
 
 <div class="wrapper">
     <div class="header">
-        页眉
+        <img src="image/logo.png" th:src="@{/image/logo.png}" id="logo">
+        <div id="divforName">
+            <p id="titleP">桂林电子科技大学宿舍管理系统</p>
+            <p th:text="'欢迎登录！ '+${#session.getAttribute('username')}" id="usernameP"></p>
+            <input type="button" value="退出登录" id="logout">
+        </div>
+        <div id="dateTime"></div>
+        <div id="headimg"><img src="http://localhost:8080/getimage?id=1800710318"></div>
+
     </div>
     <div class="main">
         <div id="div1">
@@ -37,7 +75,23 @@
         </div>
     </div>
     <div class="footer">
-        页脚
+        <img src="image/footerImg.png" th:src="@{/image/footerImg.png}">
+    </div>
+
+    <div class="lq-popup-container">
+        <div class="lq-popup">
+            <span style="border: #000000 1px solid"> 查看头像</span>
+            <div id="twoImage">
+                <div id="oldImage"><img src="http://localhost:8080/getimage?id=1800710318"></div>
+                <div id="newImage"><img src="" id="newImageShow" alt="上传您的新头像"></div>
+            </div>
+            <form action="#" th:action="@{/addimage}" enctype="multipart/form-data" method="post">
+                <input type="text" name="id" id="id" value="1800710318">
+                <input type="file" name="file" id="file">
+                <input type="submit" value="确认" class="inputButton" id="enter">
+            </form>
+
+        </div>
     </div>
 </div>
 </body>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.RepairMapper">
+    <insert id="repairUp" parameterType="cn.edu.guet.bean.Repair">
+        INSERT INTO repair VALUES(#{reId},#{reNames},#{reText},#{reClass},#{reRoom},#{rePhone},#{reTime},#{reStatus},#{reUser})
+    </insert>
+
+    <select id="repairSele" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM repair
+    </select>
+
+    <select id="repairForUs" resultType="cn.edu.guet.bean.Repair" parameterType="java.util.HashMap">
+        SELECT * FROM repair WHERE reUser=#{reUser} ORDER BY reTime DESC limit #{start},5;
+    </select>
+
+    <select id="seeAllRepair" resultType="cn.edu.guet.bean.Repair" parameterType="java.util.HashMap">
+        SELECT * FROM repair WHERE reStatus=#{reStatus} ORDER BY reTime DESC
+    </select>
+    <select id="repairStatSele" resultType="java.lang.Integer" parameterType="string">
+        SELECT count(*) from repair WHERE reStatus=#{value}
+    </select>
+    <update id="upRepair" parameterType="string">
+        UPDATE repair SET reStatus='正在处理' WHERE reId=#{value}
+    </update>
+    <update id="overRepair" parameterType="string">
+        UPDATE repair SET reStatus='处理完成' WHERE reId=#{value}
+    </update>
+</mapper>
