@@ -1,40 +1,31 @@
 package cn.edu.guet.bean;
 
 public class Water {
-    private String buid;
-    private double wprice;
-    private int wnum;
+    private String buildingId;
+    private double price;
+    private int number;
 
-    public String getBuid() {
-        return buid;
+    public String getBuildingId() {
+        return buildingId;
     }
 
-    public void setBuid(String buid) {
-        this.buid = buid;
+    public void setBuildingId(String buildingId) {
+        this.buildingId = buildingId;
     }
 
-    public double getWprice() {
-        return wprice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setWprice(double wprice) {
-        this.wprice = wprice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public int getWnum() {
-        return wnum;
+    public int getNumber() {
+        return number;
     }
 
-    public void setWnum(int wnum) {
-        this.wnum = wnum;
-    }
-
-    @Override
-    public String toString() {
-        return "Water{" +
-                "buid='" + buid + '\'' +
-                ", wprice=" + wprice +
-                ", wnum=" + wnum +
-                '}';
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
