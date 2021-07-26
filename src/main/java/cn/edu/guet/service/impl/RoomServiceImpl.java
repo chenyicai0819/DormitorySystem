@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author lihehuang
@@ -39,6 +40,16 @@ public class RoomServiceImpl implements IRoomService {
     @Override
     public void changeRoom(String rId, String rBed,String sId,String buId) {
         roomMapper.changeRoom(rId,rBed,sId,buId);
+    }
+
+    @Override
+    public List<Map<String, Object>> viewRooms(List<String> rIds) {
+        return roomMapper.viewRooms(rIds);
+    }
+
+    @Override
+    public List<Map<String, Object>> viewEmptyRooms(List<String> rIds) {
+        return roomMapper.viewEmptyRooms(rIds);
     }
 
 

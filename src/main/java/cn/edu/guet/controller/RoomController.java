@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author lihehuang
@@ -31,10 +33,30 @@ public class RoomController {
         request.setAttribute("buId",buId);
         request.setAttribute("buNo",buNo);
         request.setAttribute("builds",roomService.viewBuild());
-        request.setAttribute("rIds",roomService.viewRoom(buId,buNo));
+        List<String> rIds=roomService.viewRoom(buId,buNo);
+        if (rIds.size()==0){
+            request.setAttribute("Map",null);
+            return "room/viewRoom";
+        }
+        request.setAttribute("Map",roomService.viewRooms(rIds));
         return "room/viewRoom";
     }
 
+    @GetMapping("searchEmptyRoom")
+    public String searchEmptyRoom(HttpServletRequest request){
+        String buId=request.getParameter("buId");
+        String buNo=request.getParameter("buNo");
+        request.setAttribute("buId",buId);
+        request.setAttribute("buNo",buNo);
+        request.setAttribute("builds",roomService.viewBuild());
+        List<String> rIds=roomService.viewRoom(buId,buNo);
+        if (rIds.size()==0){
+            request.setAttribute("Map",null);
+            return "room/viewRoom";
+        }
+        request.setAttribute("Map",roomService.viewEmptyRooms(rIds));
+        return "room/viewRoom";
+    }
     @GetMapping("editRoom")
     public String editRoom(HttpServletRequest request){
         String rId=request.getParameter("rId");
@@ -54,5 +76,11 @@ public class RoomController {
         request.setAttribute("builds",roomService.viewBuild());
         request.setAttribute("students",roomService.selectStudent(rId));
         return "room/editRoom";
+    }
+
+    @GetMapping("viewRooms")
+    public String viewRooms(HttpServletRequest request){
+
+        return "";
     }
 }

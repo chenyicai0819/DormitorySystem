@@ -5,6 +5,7 @@ import cn.edu.guet.bean.Room;
 import cn.edu.guet.bean.Student;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author lihehuang
@@ -17,4 +18,6 @@ public interface IRoomService {
     List<String> viewRoom(String buId,String buNo);
     List<Student> selectStudent(String rId);
     void changeRoom(String rId,String rBed,String sId,String buId);
+    List<Map<String,Object>> viewRooms(List<String> rIds);
+    List<Map<String,Object>> viewEmptyRooms(List<String> rIds);
 }

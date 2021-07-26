@@ -10,7 +10,7 @@
 
 <div class="wrapper">
     <h3 class="title">查看宿舍信息</h3><br><br>
-    <form action="searchRoom">
+    <form>
         <label>宿舍楼:</label>
         <select name="buId">
             <option th:each="build,buildStat:${builds}" th:selected="${buId eq build.buid}" th:text="${build.buid}"></option>
@@ -25,7 +25,8 @@
             <option value="6" th:selected="${buNo eq '6'}">6</option>
             <option value="7" th:selected="${buNo eq '7'}">7</option>
         </select>
-        <input type="submit" value="查询">
+        <input formaction="searchRoom" type="submit" value="查询">
+        <input formaction="searchEmptyRoom" type="submit" value="查询未住满宿舍">
     </form>
     <br><br>
     <table border="1">
@@ -34,11 +35,11 @@
         </tr>
         <tr>
             <th width="200px">宿舍楼</th>
-            <th width="150px">宿舍</th>
+            <th width="150px">人数</th>
         </tr>
-        <tr th:each="rId,rIdStat:${rIds}">
-            <td th:width="200px" th:text="${buId}"></td>
-            <td><a th:href="@{editRoom(rId=${rId})}" th:text="${rId}"></a> </td>
+        <tr th:each="Map,MapStat:${Map}">
+            <td ><a th:href="@{editRoom(rId=${Map.get('rId')})}"  th:width="200px" th:text="${Map.get('rId')}"></a> </td>
+            <td th:text="${Map.get('num')}"></td>
         </tr>
 
     </table>

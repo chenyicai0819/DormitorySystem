@@ -13,4 +13,35 @@
     <update id="changeRoom" parameterType="string">
         UPDATE student SET rId=#{rId},rBed=#{rBed},buid=#{buId} WHERE sId=#{sId}
     </update>
+
+    <resultMap id="resRoom" type="hashmap">
+        <result property="rId" column="rId" jdbcType="VARCHAR" />
+        <result property="num" column="num" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="viewRooms" parameterType="list" resultMap="resRoom">
+        select distinct r.rId rId,ifnull(tb.num,0) num
+        from (select rId from room where rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>) r left join
+        (select
+        rId,count(*) num
+        from room
+        where isMan='1' and rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>
+        group by rId) as tb
+        on r.rId=tb.rId
+    </select>
+    <select id="viewEmptyRooms" parameterType="list" resultMap="resRoom">
+        select
+        rId,count(*) num
+        from room
+        where isMan='0' and rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>
+        group by rId
+    </select>
 </mapper>
