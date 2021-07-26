@@ -1,0 +1,35 @@
+.lq-page{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 100px;
+    margin-top: 30px;
+    position: absolute;
+    bottom: -50px;
+
+}
+.lq-page span{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding:0 12px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    margin:0 4px;
+
+}
+.lq-page .page-ell{
+    cursor:auto;
+    background-color: #f2f2f2;
+    box-shadow: none;
+    margin:0;
+}
+.lq-page span.disable{
+    cursor: not-allowed;
+    color:#333;
+}
+.lq-page .page.on{
+    background-color: #00a8ff;
+    color: #fff;
+}
