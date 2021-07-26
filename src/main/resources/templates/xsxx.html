@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/stum.css" th:href="@{/css/stum.css}">
+    <script th:inline="javascript">
+        var allBuid=[[${dorm}]];
+        var message = '';
+        function closeR(){
+            $("#rBack").hide();
+            $("#updateRecode").hide();
+        }
+        function lookPwd(index){
+            if(index == 1) {
+                $("#sPwd").attr("type", "text");
+                $("#lookP").html('隐藏');
+                $("#lookP").attr("onclick","lookPwd(2)");
+            }
+            if(index == 2) {
+                $("#sPwd").attr("type", "password");
+                $("#lookP").html('查看');
+                $("#lookP").attr("onclick","lookPwd(1)");
+            }
+        }
+        $(function () {
+            $("#update").click(function () {
+                $(".stumm").attr("disabled", false);
+                $("body").append('<a id="lookP" href="#" onclick="lookPwd(1)">查看</a>')
+                $("#update").attr("style", "display:none");
+                $("#confirm").attr("style", "width:150px;height: 28px;display:block");
+                $("#cancal").attr("style", "width:150px;height: 28px;display:block");
+                $("#selDorm").attr("style", "width:150px;height: 28px;margin-left:-90px;display:block");
+                $(".stumm").change(function () {
+                    message=message+("您将"+ $(this).parent().text().substring(0,2)+"修改为"+$(this).val())+";";
+                })
+            })
+            $("#cancal").click(function () {
+                $("body").load("MyManage.do");
+            })
+            $("#confirm").click(function () {
+                if([[${stu[0].buid}]] != $("#buid").val() && [[${stu[0].rId}]] != $("#room").val() && [[${stu[0].rBed}]] != $("#bed").val()){
+                    message = message+"您将宿舍楼栋修改为"+$("#buid").val()+";"+
+                        "您将房间号修改为"+$("#room").val()+";"+"您将床位号修改为" + $("#bed").val() + ";";
+                }
+                else if([[${stu[0].rBed}]] != $("#bed").val()&& [[${stu[0].rId}]] != $("#room").val()){
+                    message = message+"您将房间号修改为"+$("#room").val()+";"+ "您将床位号修改为" + $("#bed").val() + ";";
+                }
+                else if([[${stu[0].rBed}]] != $("#bed").val()){
+                    message = message+"您将床位号修改为"+$("#bed").val()+";";
+                }
+                if(message != '') {
+                    $("body").load("commitApply.do?applyId=" + $("#sId").val() + "&message=" + message + "&reply=" + "审批中");
+                    alert("已发送申请，等待审批");
+                }
+                else{
+                    alert("信息未修改")
+                }
+                $("body").load("MyManage.do");
+            })
+            $("#recode").click(function () {
+                $(".first").css("background-color","rgba(0,0,0,0.6)");
+                $("#rBack").show();
+                $("#updateRecode").show();
+                $("#table3").empty();
+                $.ajax({
+                    url: 'ApplyRecode.do',
+                    async:false,
+                    success:function (data) {
+                        $.each(data, function (index, apply) {
+                            $("#table3").append("<tr>").append("<td>"+apply.message+"</td>")
+                                .append("<td style='color: red'>"+apply.reply+"</td>").append("<tr>")
+                        });
+                    }
+                })
+            })
+            $("#selDorm").click(function () {
+                $("#selDorm").attr("style", "display:none");
+                $(".dorm").attr("disabled", false);
+                $(".dorm").empty();
+                $("#buid").append("<option disabled selected>请选择楼栋</option>");
+                $("#room").append("<option disabled selected>请选择房间</option>");
+                $("#bed").append("<option disabled selected>请选择床位</option>");
+                for (var i = 0; i < allBuid.length; i++) {
+                    $("#buid").append("<option>" + allBuid[i].buid + "</option>");
+                }
+            })
+            $("#buid").change(function () {
+                $("#room").empty();
+                $("#room").append("<option disabled selected>请选择房间</option>");
+                 $.ajax({
+                     url: 'getDormRoom.do?buid=' + $("#buid").find("option:selected").text(),
+                     async:false,
+                     success:function (data) {
+                         $.each(data, function (index, room) {
+                             $("#room").append("<option>"+room.rId+"</option>");
+                         });
+                     }
+                 })
+            })
+            $("#room").change(function () {
+                $("#bed").empty();
+                $("#bed").append("<option disabled selected>请选择床位</option>");
+                $.ajax({
+                    url: 'getDormBed.do?buid=' + $("#buid").find("option:selected").text()
+                        + '&rId=' + $("#room").find("option:selected").text(),
+                    async:false,
+                    success:function (data) {
+                        $.each(data, function (index, rbed) {
+                            $("#bed").append("<option>"+rbed.rBed+"</option>");
+                        });
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>我的信息</h1>
+<table th:each="stu,stuStat:${stu}">
+    <tr>
+        <td>学号：<input class="stuid" id="sId" type="text" th:value="${stu.sId}" disabled="true"  style="width:160px;height: 20px"></td>
+        <td>姓名：<input class="stumm" id="sName" type="text" th:value="${stu.sName}" disabled="true" style="width:160px;height: 24px"></td>
+    </tr>
+    <tr>
+        <td>性别：<select class="stumm" id="sSex" disabled="true" style="width:164px;height:24px">
+            <option th:selected="${stu.sSex} eq '男'">男</option>
+            <option th:selected="${stu.sSex} eq '女'">女</option>
+        </select></td>
+        <td>职位:
+            <input class="stumm" th:if="${stu.roleId} eq 'ro103'" th:value="学生" type="text" disabled="true" style="margin-left: 9px;width:160px;height: 25px">
+        </td>
+    </tr>
+    <tr>
+        <td>密码：<input class="stumm" id="sPwd" type="password" th:value="${stu.sPwd}" disabled="true" style="width:164px;height:24px"></td>
+        <td>学院：<input class="stumm" id="sCollege" th:value="${stu.sCollege}" type="text" disabled="true" style="width:160px;height: 25px"></td>
+    </tr>
+    <tr>
+        <td>年级：<select class="stumm" id="sGrade" disabled="true" style="width:164px;height:24px">
+            <option th:selected="${stu.sGrade} eq '大一'">大一</option>
+            <option th:selected="${stu.sGrade} eq '大二'">大二</option>
+            <option th:selected="${stu.sGrade} eq '大三'">大三</option>
+            <option th:selected="${stu.sGrade} eq '大四'">大四</option>
+        </select></td>
+        <td>电话：<input class="stumm" id="sPhone" type="text" th:value="${stu.sPhone}" disabled="true" style="width:160px;height: 24px"></td>
+    </tr>
+    <tr>
+        <td>宿舍：<select class="dorm" id="buid" disabled="true" style="width:100px;height:24px;border: none">
+            <option th:text="${stu.buid}"></option>
+        </select>栋
+            <select class="dorm" id="room" disabled="true" style="width:100px;height:24px;border: none">
+                <option th:text="${stu.rId}"></option>
+            </select>房间
+            <select class="dorm" id="bed" disabled="true" style="width:100px;height:24px;border: none">
+                <option th:text="${stu.rBed}"></option>
+            </select>号床
+        </td>
+        <td><input type="button" id="selDorm" value="选择宿舍" style="display: none"></td>
+    </tr>
+</table>
+<input type="button" id="update" value="修改信息" style="width:150px;height: 28px">
+<input type="button" id="confirm" value="确定上传" style="display: none">
+<input type="button" id="cancal" value="取消修改" style="display: none">
+<input type="button" id="recode" value="申请记录" style="width:150px;height: 28px">
+<div id="rBack">
+    <div id="updateRecode">
+        <p><a id="Close" href="#"  onclick="closeR()">关闭</a></p>
+        <table id="table3"></table>
+    </div>
+</div>
+</body>
+</html>
