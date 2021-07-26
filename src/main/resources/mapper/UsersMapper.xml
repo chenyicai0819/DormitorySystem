@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.UsersMapper">
+    <!--<select id="getMessageByReceiveId" resultMap="receiveMessageMap" parameterType="string">
+        SELECT u.*,m.* FROM users u, messages m WHERE u.userid=m.receiveId AND userid=#{value}
+    </select>
+    <resultMap id="receiveMessageMap" type="cn.edu.guet.bean.User">
+        <id property="userid" column="userid"></id>
+        <result property="username" column="username"></result>
+        &lt;!&ndash; 集合 ofType(元素类型):Student column可以不要 &ndash;&gt;
+        <collection property="messageList" ofType="cn.edu.guet.bean.Message" column="userid">
+            <id property="messageId" column="messageId"></id>
+            <result property="sendId" column="sendId"></result>
+            <result property="receiveId" column="receiveId"></result>
+            <result property="title" column="title"></result>
+            <result property="content" column="content"></result>
+            <result property="isRead" column="isRead"></result>
+            <result property="sendTime" column="sendTime"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getMessageBySendId" resultMap="sendMessageMap" parameterType="string">
+        SELECT u.*,m.* FROM users u, messages m WHERE u.userid=m.sendid AND userid=#{value}
+    </select>
+    <resultMap id="sendMessageMap" type="cn.edu.guet.bean.User">
+        <id property="userid" column="userid"></id>
+        <result property="username" column="username"></result>
+        &lt;!&ndash; 集合 ofType(元素类型):Student column可以不要 &ndash;&gt;
+        <collection property="messageList" ofType="cn.edu.guet.bean.Message" column="userid">
+            <id property="messageId" column="messageId"></id>
+            <result property="sendId" column="sendId"></result>
+            <result property="receiveId" column="receiveId"></result>
+            <result property="title" column="title"></result>
+            <result property="content" column="content"></result>
+            <result property="isRead" column="isRead"></result>
+            <result property="sendTime" column="sendTime"></result>
+        </collection>getMessageBySendId
+    </resultMap>-->
+
+</mapper>

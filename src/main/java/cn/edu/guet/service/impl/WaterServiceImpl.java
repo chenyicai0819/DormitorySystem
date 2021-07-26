@@ -16,10 +16,6 @@ public class WaterServiceImpl implements IWaterService {
     @Autowired
     private WaterMapper waterMapper;
 
-    @Override
-    public Water getWaterState(String buildingId) {
-        return waterMapper.getWaterState(buildingId);
-    }
 
     @Override
     public PageInfo getAllWaterState(int pageNum, int pageSize) {

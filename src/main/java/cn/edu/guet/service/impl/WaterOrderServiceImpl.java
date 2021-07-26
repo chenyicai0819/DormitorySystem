@@ -53,21 +53,6 @@ public class WaterOrderServiceImpl implements IWaterOrderService {
 
 
     @Override
-    public int getAllWaterOrderCount() {
-        return waterOrderMapper.getAllWaterOrderCount();
-    }
-
-    @Override
-    public int getBuildingWaterOrderCount(String buildingId) {
-        return waterOrderMapper.getBuildingWaterOrderCount(buildingId);
-    }
-
-    @Override
-    public int getRoomWaterOrderCount(String buildingId, String roomId) {
-        return waterOrderMapper.getRoomWaterOrderCount(buildingId, roomId);
-    }
-
-    @Override
     public PageInfo test() {
         PageHelper.startPage(1,5);
         List<WaterOrder> waterOrders = waterOrderMapper.getTest();

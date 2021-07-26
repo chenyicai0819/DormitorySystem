@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet"  th:href="@{css/page.css}">
     <script th:inline="javascript">
         $(function(){
             var pageNum = 1;
@@ -12,10 +13,15 @@
             var buildingId;
             var roomId;
 
+            /*var bui = ["26", "27", "28"];
+            setBuildingSelect(bui);*/
+
+            // 初始化页面
             viewAllWaterOrder(pageNum, pageSize, setSelect);
             var curView = "viewAllWaterOrder";
 
-            $("#body").on("click", ".pageButton", function(){
+            // 旧页码跳转
+            /*$("#body").on("click", ".pageButton", function(){
                 var beforePage = pageNum;
                 var value = $(this).attr("value");
                 if(value == "首页"){
@@ -47,8 +53,16 @@
                         viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, null);
                     }
                 }
+            })*/
+
+            // 查看全部
+            $("#viewAll").click(function(){
+                viewAllWaterOrder(pageNum, pageSize, setSelect);
+                curView = "viewAllWaterOrder";
+                $(".firstOption").prop("selected",true);
             })
 
+            // 搜索
             $("#search").click(function(){
                 buildingId = $("#building").val()
                 var floor = $("#floor").val();
@@ -71,10 +85,57 @@
                 }
             })
 
-            $("#viewAll").click(function(){
-                viewAllWaterOrder(pageNum, pageSize, setSelect);
-                curView = "viewAllWaterOrder";
-                $(".firstOption").prop("selected",true)
+            // 重置搜索
+            $("#reset").click(function(){
+                $(".firstOption").prop("selected",true);
+            })
+
+            // 点击页码
+            $(".lq-page").on('click','.page',function(){
+                $(".page.on").attr("class", "page");
+                $(this).attr("class", "page on");
+                pageNum = parseInt($(this).html());
+                checkAndView(curView);
+            })
+
+            // 点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                pageNum = 1;
+                $(".page.on").attr("class", "page");
+                $(".page-before").next().attr("class", "page on");
+                checkAndView(curView);
+            })
+
+            // 点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                pageNum = lastPage;
+                $(".page.on").attr("class", "page");
+                $(".page-after").prev().attr("class", "page on");
+                checkAndView(curView);
+            })
+
+            // 点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum+1 <= lastPage){
+                    pageNum++;
+                    checkAndView(curView);
+                    $(".page.on").attr("class", "page");
+                    pageOn.next().attr("class", "page on");
+                }
+            })
+
+            // 点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum-1 >= 1){
+                    pageNum--;
+                    checkAndView(curView);
+                    $(".page.on").attr("class", "page");
+                    pageOn.prev().attr("class", "page on");
+                }
             })
 
             function viewAllWaterOrder(pageNum, pageSize, setSelect){
@@ -124,9 +185,21 @@
                     }
                 })
             }
+
+            // 确认当前显示的信息 并显示
+            function checkAndView(curView){
+                if(curView == "viewAllWaterOrder"){
+                    viewAllWaterOrder(pageNum, pageSize, null)
+                }else if(curView == "viewBuildingWaterOrder"){
+                    viewBuildingWaterOrder(buildingId, pageNum, pageSize, null);
+                }else if(curView == "viewRoomWaterOrder"){
+                    viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, null);
+                }
+            }
+
         })
 
-
+        // 渲染数据
         function view(data){
             $.each(data.list, function(index, waterOrder) {
                 var tr = $("<tr>"
@@ -141,12 +214,26 @@
             })
         }
 
+        // 设置页码
         function setSelect(data){
-            $("#page").html("");  // 清空
-            $.each(data.navigatepageNums, function(index, navigatepageNum) {
-                var option = $("<option id='option" + navigatepageNum + "'>" + navigatepageNum + "</option>");
-                $("#page").append(option);
-            })
+            // $("#page").html("");  // 清空
+            $(".lq-page").html("");  // 清空
+            var pages = data.navigatepageNums;
+            if(pages.length >= 2){
+                $(".lq-page").append('<span class="page-start">首页</span>');
+                $(".lq-page").append('<span class="page-before">上一页</span>');
+                $.each(pages, function(index, page) {
+                    if(index == 0){
+                        var span = $("<span class=\"page on\">"+ page +"</span>");
+                    }else {
+                        var span = $("<span class=\"page\">"+ page +"</span>")
+                    }
+                    // var option = $("<option id='option" + page + "'>" + page + "</option>");
+                    $(".lq-page").append(span);
+                    // $("#page").append(option);
+                })
+                $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+            }
         }
 
         function setBuildingSelect(data){
@@ -157,52 +244,27 @@
             })
         }
 
-        function setFloorSelect(data){
+        /*function setFloorSelect(data){
             $("#floor").html("");  // 清空
             $.each(data, function(index, str) {
                 var roomStr = str.split("");
                 var option = $("<option value='" + roomStr[0] + "'>" + navigatepageNum + "</option>");
                 $("#floor").append(option);
             })
-        }
+        }*/
 
-        function setRoomSelect(data){
+        /*function setRoomSelect(data){
             $("#room").html("");  // 清空
             $.each(data, function(index, str) {
                 var roomStr = str.split("");
                 var option = $("<option value='" + roomStr[1] + roomStr[2] + "'>" + navigatepageNum + "</option>");
                 $("#room").append(option);
             })
-        }
+        }*/
 
     </script>
 </head>
     <body id="body">
-        <form id="form">
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th>楼栋</th>
-                        <th>宿舍号</th>
-                        <th>姓名</th>
-                        <th>数量</th>
-                        <th>金额</th>
-                        <th>时间</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </form>
-        <input type="button" class="pageButton" value="首页">
-        <input type="button" class="pageButton" value="上一页">
-        <input type="button" class="pageButton" value="下一页">
-        <input type="button" class="pageButton" value="尾页">
-        <select id="page">
-        </select>
-        <input type="button" class="pageButton" value="跳转">
-        <input type="button" id="viewAll" value="查看所有"><br>
         <form id="form2">
             <select id="building" >
                 <option class="firstOption" selected="selected" value="null">==楼栋==</option>
@@ -234,7 +296,35 @@
                 <option value="09">09</option>
                 <option value="10">10</option>
             </select>
-            <input type="button" id="search" value="查询"><br>
+            <input type="button" id="search" value="查询">
+            <input type="button" id="reset" value="重置"><br>
         </form>
+        <form id="form">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>楼栋</th>
+                        <th>宿舍号</th>
+                        <th>姓名</th>
+                        <th>数量</th>
+                        <th>金额</th>
+                        <th>时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </form>
+<!--         旧页面跳转-->
+        <!--<input type="button" class="pageButton" value="首页">
+        <input type="button" class="pageButton" value="上一页">
+        <input type="button" class="pageButton" value="下一页">
+        <input type="button" class="pageButton" value="尾页">
+        <select id="page">
+        </select>
+        <input type="button" class="pageButton" value="跳转">
+        <input type="button" id="viewAll" value="查看所有"><br>-->
+        <div class="lq-page"></div>
     </body>
 </html>

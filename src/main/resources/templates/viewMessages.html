@@ -4,97 +4,304 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet"  th:href="@{css/page.css}">
     <script th:inline="javascript">
-        var receiveId = [[${receiveId}]];
-        var sendId = [[${sendId}]];
-        var flag = true;
+        $(function(){
+            var pageNum = 1;
+            var pageSize = 5;
+            var lastPage;
+            var receiveId = "10324";
+            var sendId = "10324";
 
-        $(function() {
-            view(flag);
-            $("#table").on("click", "tr>td>input", function(){
-                var id = $(this).attr("id");
-                var value = $(this).attr("value");
-                console.log(value);
-                $.ajax({
-                    url:"deleteMessage?messageId=" + id,
-                    method:'post',
-                    success:function (){
-                        $("#table>tbody").html("");
-                        view(flag);
+            // 初始化页面
+            viewReceiveMessages(receiveId, pageNum, pageSize, setSelect);
+            var curView = "viewReceiveMessages";
+
+            // 查看发送的消息
+            $("#viewSend").click(function(){
+                pageNum = 1;
+                curView = "viewSendMessages";
+                checkAndView(curView);
+
+            })
+            // 查看接收的消息
+            $("#viewReceive").click(function(){
+                // viewReceiveMessages(receiveId, pageNum, pageSize, setSelect);
+                pageNum = 1;
+                curView = "viewReceiveMessages";
+                checkAndView(curView);
+
+            })
+
+            // 搜索
+            /*$("#search").click(function(){
+                buildingId = $("#building").val()
+                var floor = $("#floor").val();
+                var room = $("#room").val();
+                roomId = floor + room;
+                if(buildingId != "null"){
+                    if(floor != "null" && room != "null"){
+                        pageNum = 1;
+                        viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, setSelect);
+                        curView = "viewRoomWaterOrder"
+                    }else if(floor == "null" && room == "null"){
+                        pageNum = 1;
+                        viewBuildingWaterOrder(buildingId, pageNum, pageSize, setSelect);
+                        curView = "viewBuildingWaterOrder";
+                    }else {
+                        alert("请确认查找信息")
+                    }
+                }else {
+                    alert("请确认查找信息")
+                }
+            })*/
+
+            // 重置搜索
+            $("#reset").click(function(){
+                $(".firstOption").prop("selected",true);
+            })
+
+            // 点击页码
+            $(".lq-page").on('click','.page',function(){
+                $(".page.on").attr("class", "page");
+                $(this).attr("class", "page on");
+                pageNum = parseInt($(this).html());
+                checkAndView(curView);
+            })
+
+            // 点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                pageNum = 1;
+                $(".page.on").attr("class", "page");
+                $(".page-before").next().attr("class", "page on");
+                checkAndView(curView);
+            })
+
+            // 点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                pageNum = lastPage;
+                $(".page.on").attr("class", "page");
+                $(".page-after").prev().attr("class", "page on");
+                checkAndView(curView);
+            })
+
+            // 点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum+1 <= lastPage){
+                    pageNum++;
+                    checkAndView(curView);
+                    $(".page.on").attr("class", "page");
+                    pageOn.next().attr("class", "page on");
+                }
+            })
+
+            // 点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum-1 >= 1){
+                    pageNum--;
+                    checkAndView(curView);
+                    $(".page.on").attr("class", "page");
+                    pageOn.prev().attr("class", "page on");
+                }
+            })
+
+            // 删除消息
+            $("#body").on('click', '#delete', function(){
+                $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
+                    // arr.push();	//将我们遍历出来的值push到数组中
+                    deleteMessage($(this).val());
+                    checkAndView(curView);
+                    //最后可以提交arr就可以实现将我们选中的checkbox的value值提交
+                })
+            })
+
+            // 标记为已读
+            $("#body").on('click', '#read', function(){
+                $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
+                    if($(this).parent().siblings(".isRead").html() == '0'){
+                        readMessage($(this).attr("value"));
+                        checkAndView(curView);
                     }
                 })
             })
-            $("#change").click(function (){
-                flag = view(flag);
+
+            // 全部标记为已读
+            $("#body").on('click', '#readAll', function(){
+                $(".isRead").each(function(){	//遍历
+                    if($(this).html() == '0'){
+                        readMessage($(this).attr("value"));
+                        checkAndView(curView);
+                    }
+                })
             })
+
+            function viewReceiveMessages(receiveId, pageNum, pageSize, setSelect){
+                $.ajax({
+                    url:"getReceiveMessages?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        if(setSelect != null){
+                            setSelect(data);
+                        }
+                        viewReceive(data);
+                        lastPage = data.navigateLastPage;
+                    }
+                })
+            }
+
+            function viewSendMessages(sendId, pageNum, pageSize, setSelect){
+                $.ajax({
+                    url:"getSendMessages?sendId=" + sendId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        if(setSelect != null){
+                            setSelect(data);
+                        }
+                        viewSend(data);
+                        lastPage = data.navigateLastPage;
+                    }
+                })
+            }
+            // 确认当前显示的信息 并显示
+            function checkAndView(curView){
+                if(curView == "viewReceiveMessages"){
+                    viewReceiveMessages(receiveId, pageNum, pageSize, null)
+                }else if(curView == "viewSendMessages"){
+                    viewSendMessages(sendId, pageNum, pageSize, null);
+                }else if(curView == "viewRoomWaterOrder"){
+                    viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, null);
+                }
+            }
         })
 
-        function viewReceiveMessages() {
+        // 删除消息
+        function deleteMessage(messageId){
             $.ajax({
-                url:"getReceiveMessages?receiveId=" + receiveId,
-                success:function(data) {
-                    $.each(data, function(index, message) {
-                        var tr = $("<tr class='test2'>"
-                            + "<td>" + message.sendId + "</td>"
-                            + "<td>" + message.title + "</td>"
-                            + "<td>" + message.content + "</td>"
-                            + "<td>" + message.isRead + "</td>"
-                            + "<td>" + message.sendTime + "</td>"
-                            + "<td> <input type='submit' value='删除' id='" + message.messageId + "'></td>"
-                        + "</tr>");
-                        $("#table>tbody").append(tr);
-                    })
+                url : 'deleteMessage?messageId=' + messageId,
+                async : false,
+                method : 'post',
+                success : function() {
+
                 }
             })
         }
-        function viewSendMessages() {
+
+        // 标记消息
+        function readMessage(messageId){
             $.ajax({
-                url:"getSendMessages?sendId=" + sendId,
-                success:function(data) {
-                    $.each(data, function(index, message) {
-                        var tr = $("<tr class='test2'>"
-                            + "<td>" + message.sendId + "</td>"
-                            + "<td>" + message.title + "</td>"
-                            + "<td>" + message.content + "</td>"
-                            + "<td>" + message.isRead + "</td>"
-                            + "<td>" + message.sendTime + "</td>"
-                            + "<td> <input type='submit' value='删除' id='" + message.messageId + "'></td>"
-                            + "</tr>");
-                        $("#table>tbody").append(tr);
-                    })
+                url : 'readMessage?messageId=' + messageId,
+                async : false,
+                method : 'post',
+                success : function() {
+
                 }
             })
         }
-        function view(flag){
-            if(flag){
-                $("#table>tbody").html("");
-                viewReceiveMessages();
-                flag = false;
-            }else{
-                $("#table>tbody").html("");
-                viewSendMessages();
-                flag = true;
+
+        // 渲染数据
+        function viewReceive(data){
+            $("#table>tbody").html("");  // 清空表格
+            $("#table>thead").html("");  // 清空表格
+            var tr = $("<tr>\n"
+                + "<th><input type=\"checkbox\" id='setCheckBox'/></th>"
+                + "<th>发送人</th>\n"
+                + "<th>主题</th>\n"
+                + "<th>内容</th>\n"
+                + "<th>是否已读</th>\n"
+                + "<th>时间</th>\n"
+                + "</tr>")
+            $("#table>thead").append(tr);
+            $.each(data.list, function(index, message) {
+                var tr = $("<tr>"
+                    + "<td><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></td>"
+                    + "<td>" + message.sendId + "</td>"
+                    + "<td>" + message.title + "</td>"
+                    + "<td>" + message.content + "</td>"
+                    + "<td class='isRead' value="+ message.messageId + ">" + message.isRead + "</td>"
+                    + "<td>" + message.sendTime + "</td>"
+                    + "</tr>");
+                $("#table>tbody").append(tr);
+            })
+        }
+
+        // 渲染数据
+        function viewSend(data){
+            $("#table>tbody").html("");  // 清空表格
+            $("#table>thead").html("");  // 清空表格
+            var tr = $("<tr>\n"
+                + "<th><input type=\"checkbox\" id='setCheckBox'/></th>"
+                + "<th>接收人</th>\n"
+                + "<th>主题</th>\n"
+                + "<th>内容</th>\n"
+                + "<th>是否已读</th>\n"
+                + "<th>时间</th>\n"
+                + "</tr>")
+            $("#table>thead").append(tr);
+            $.each(data.list, function(index, message) {
+                var tr = $("<tr>"
+                    + "<th><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></th>"
+                    + "<td>" + message.receiveId + "</td>"
+                    + "<td>" + message.title + "</td>"
+                    + "<td>" + message.content + "</td>"
+                    + "<td class='isRead' value="+ message.messageId + ">" + message.isRead + "</td>"
+                    + "<td>" + message.sendTime + "</td>"
+                    + "</tr>");
+                $("#table>tbody").append(tr);
+            })
+        }
+
+        // 设置页码
+        function setSelect(data){
+            $(".lq-page").html("");  // 清空
+            var pages = data.navigatepageNums;
+            if(pages.length >= 2){
+                $(".lq-page").append('<span class="page-start">首页</span>');
+                $(".lq-page").append('<span class="page-before">上一页</span>');
+                $.each(pages, function(index, page) {
+                    if(index == 0){
+                        var span = $("<span class=\"page on\">"+ page +"</span>");
+                    }else {
+                        var span = $("<span class=\"page\">"+ page +"</span>")
+                    }
+                    $(".lq-page").append(span);
+                })
+                $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
             }
-            return flag;
         }
+
     </script>
 </head>
-    <body>
-        <button id="change">查看发送的信息</button>
+<body id="body">
+    <form id="form2">
+        <input type="button" id="delete" value="删除">
+        <input type="button" id="read" value="标记为已读">
+        <input type="button" id="readAll" value="全部标记为已读">
+        <input type="button" id="viewReceive" value="查看接收">
+        <input type="button" id="viewSend" value="查看发送"><br>
+    </form>
+    <form id="form">
         <table id="table">
             <thead>
-                <tr>
-                    <th>发送人id</th>
-                    <th>标题</th>
-                    <th>内容</th>
-                    <th>是否已读</th>
-                    <th>发送时间</th>
-                </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
-
+    </form>
+    <!--         旧页面跳转-->
+    <!--<input type="button" class="pageButton" value="首页">
+    <input type="button" class="pageButton" value="上一页">
+    <input type="button" class="pageButton" value="下一页">
+    <input type="button" class="pageButton" value="尾页">
+    <select id="page">
+    </select>
+    <input type="button" class="pageButton" value="跳转">
+    <input type="button" id="viewAll" value="查看所有"><br>-->
+    <div class="lq-page"></div>
     </body>
 </html>

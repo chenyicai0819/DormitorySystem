@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Title</title>
         <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+        <link rel="stylesheet"  th:href="@{css/page.css}">
         <script th:inline="javascript">
             $(function() {
                 var confirmFlag = false;
@@ -47,7 +48,56 @@
                     }
                 })
 
-                $("#body").on("click", ".pageButton", function(){
+                // 点击页码
+                $(".lq-page").on('click','.page',function(){
+                    $(".page.on").attr("class", "page");
+                    $(this).attr("class", "page on");
+                    pageNum = parseInt($(this).html());
+                    viewAllWaterState(pageNum, pageSize);
+                })
+
+                // 点击首页
+                $(".lq-page").on('click','.page-start',function(){
+                    pageNum = 1;
+                    $(".page.on").attr("class", "page");
+                    $(".page-before").next().attr("class", "page on");
+                    viewAllWaterState(pageNum, pageSize);
+                })
+
+                // 点击尾页
+                $(".lq-page").on('click','.page-end',function(){
+                    pageNum = lastPage;
+                    $(".page.on").attr("class", "page");
+                    $(".page-after").prev().attr("class", "page on");
+                    viewAllWaterState(pageNum, pageSize);
+                })
+
+                // 点击下一页
+                $(".lq-page").on('click','.page-after',function(){
+                    var pageOn = $(this).siblings('.on');
+                    pageNum = parseInt(pageOn.html());
+                    if(pageNum+1 <= lastPage){
+                        pageNum++;
+                        viewAllWaterState(pageNum, pageSize);
+                        $(".page.on").attr("class", "page");
+                        pageOn.next().attr("class", "page on");
+                    }
+                })
+
+                // 点击上一页
+                $(".lq-page").on('click','.page-before',function(){
+                    var pageOn = $(this).siblings('.on');
+                    pageNum = parseInt(pageOn.html());
+                    if(pageNum-1 >= 1){
+                        pageNum--;
+                        viewAllWaterState(pageNum, pageSize);
+                        $(".page.on").attr("class", "page");
+                        pageOn.prev().attr("class", "page on");
+                    }
+                })
+
+                // 旧页面跳转
+/*                $("#body").on("click", ".pageButton", function(){
                     var beforePage = pageNum;
                     var value = $(this).attr("value");
                     if(value == "首页"){
@@ -73,8 +123,7 @@
                         $("#option"+pageNum).prop("selected",true)  // 设置select标签跟随页码
                         viewAllWaterState(pageNum, pageSize);
                     }
-                })
-
+                })*/
 
                 // 确认所有提交监听器
                 $("#confirmAll").click(function(){
@@ -91,7 +140,7 @@
                 })
 
                 // 提交监听器
-                $("#submit").click(function(){
+                /*$("#submit").click(function(){
                     $.each($(".button1"), function(index, button){
                         if(button.getAttribute("value") == "确定" ){
                             confirmFlag = true;
@@ -131,7 +180,7 @@
                             }
                         })
                     }
-                })
+                })*/
 
                 // 显示所有楼栋水状态信息
                 function viewAllWaterState(pageNum, pageSize, setSelect) {
@@ -149,6 +198,7 @@
                         }
                     })
                 }
+
             })
 
 
@@ -177,16 +227,30 @@
             }
 
             function setSelect(data){
-                $("#page").html("");  // 清空
-                $.each(data.navigatepageNums, function(index, navigatepageNum) {
-                    var option = $("<option id='option" + navigatepageNum + "'>" + navigatepageNum + "</option>");
-                    $("#page").append(option);
-                })
+                // $("#page").html("");  // 清空
+                $(".lq-page").html("");  // 清空
+                var pages = data.navigatepageNums;
+                if(pages.length >= 2){
+                    $(".lq-page").append('<span class="page-start">首页</span>');
+                    $(".lq-page").append('<span class="page-before">上一页</span>');
+                    $.each(pages, function(index, page) {
+                        if(index == 0){
+                            var span = $("<span class=\"page on\">"+ page +"</span>");
+                        }else {
+                            var span = $("<span class=\"page\">"+ page +"</span>")
+                        }
+                        // var option = $("<option id='option" + page + "'>" + page + "</option>");
+                        $(".lq-page").append(span);
+                        // $("#page").append(option);
+                    })
+                    $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+                }
             }
         </script>
     </head>
     <body id="body">
         <form id="form1">
+            <input id="confirmAll" type="button" value="全部确定">
             <table id="table">
                 <thead>
                     <tr>
@@ -199,15 +263,8 @@
 
                 </tbody>
             </table>
-            <!--<input type="button" class="pageButton" value="首页">
-            <input type="button" class="pageButton" value="上一页">
-            <input type="button" class="pageButton" value="下一页">
-            <input type="button" class="pageButton" value="尾页">
-            <input type="text" id="page" style="width: 30px" value="1">
-            <input type="button" class="pageButton" value="跳转"><br>
-            -->
-
-
+            <!--
+            旧
             <input type="button" class="pageButton" value="首页">
             <input type="button" class="pageButton" value="上一页">
             <input type="button" class="pageButton" value="下一页">
@@ -216,7 +273,9 @@
             </select>
             <input type="button" class="pageButton" value="跳转">
             <input id="confirmAll" type="button" value="全部确定">
-<!--            <input id="submit" type="button" value="提交">-->
+            <input id="submit" type="button" value="提交">
+            -->
         </form>
+        <div class="lq-page"></div>
     </body>
 </html>

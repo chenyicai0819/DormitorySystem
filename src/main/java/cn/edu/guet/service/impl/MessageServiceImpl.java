@@ -3,6 +3,8 @@ package cn.edu.guet.service.impl;
 import cn.edu.guet.bean.Message;
 import cn.edu.guet.mapper.MessageMapper;
 import cn.edu.guet.service.IMessageService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +17,19 @@ public class MessageServiceImpl implements IMessageService {
     @Autowired
     private MessageMapper messageMapper;
 
+
     @Override
-    public List<Message> getMessage(String receiveId, int curPage, int pageSize) {
-        return messageMapper.getMessage(receiveId, curPage, pageSize);
+    public PageInfo getSendMessages(String sendId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Message> messages = messageMapper.getSendMessages(sendId);
+        return new PageInfo(messages);
     }
 
     @Override
-    public List<Message> getSendMessages(String receiveId) {
-        return messageMapper.getSendMessages(receiveId);
-    }
-
-    @Override
-    public List<Message> getReceiveMessages(String receiveId) {
-        return messageMapper.getReceiveMessages(receiveId);
+    public PageInfo getReceiveMessages(String receiveId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Message> messages = messageMapper.getReceiveMessages(receiveId);
+        return new PageInfo(messages);
     }
 
 
@@ -43,12 +45,8 @@ public class MessageServiceImpl implements IMessageService {
     }
 
     @Override
-    public void readMessage(String messageId) {
+    public void readMessage(int messageId) {
         messageMapper.readMessage(messageId);
     }
 
-    @Override
-    public int getCount(String receiveId) {
-        return messageMapper.getCount(receiveId);
-    }
 }

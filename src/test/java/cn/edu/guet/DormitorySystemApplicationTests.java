@@ -1,14 +1,18 @@
 package cn.edu.guet;
 
+import cn.edu.guet.bean.Message;
 import cn.edu.guet.bean.Water;
 import cn.edu.guet.bean.WaterOrder;
 import cn.edu.guet.mapper.MessageMapper;
+import cn.edu.guet.mapper.UsersMapper;
 import cn.edu.guet.mapper.WaterMapper;
 import cn.edu.guet.mapper.WaterOrderMapper;
+import cn.edu.guet.service.IMessageService;
 import cn.edu.guet.service.IWaterOrderService;
 import cn.edu.guet.service.IWaterService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import cn.edu.guet.bean.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +27,9 @@ public class DormitorySystemApplicationTests {
     private MessageMapper messageMapper;
 
     @Autowired
+    private IMessageService messageService;
+
+    @Autowired
     private WaterMapper waterMapper;
 
     @Autowired
@@ -33,6 +40,9 @@ public class DormitorySystemApplicationTests {
 
     @Autowired
     private WaterOrderMapper waterOrderMapper;
+
+    @Autowired
+    private UsersMapper usersMapper;
 
     @Test
     public void testSendMessage(){
@@ -87,6 +97,11 @@ public class DormitorySystemApplicationTests {
         PageInfo pageInfo = new PageInfo(waterOrders);
         System.out.println(pageInfo.toString());
 
+    }
+
+    @Test
+    public void testGetUser(){
+        System.out.println(messageService.getSendMessages("10324", 1, 3).toString());
     }
 
 }

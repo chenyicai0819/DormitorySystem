@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.MessageMapper">
-    <select id="getMessage" resultType="cn.edu.guet.bean.Message">
-        SELECT * FROM messages WHERE receiveId=#{receiveId} LIMIT #{curPage}, #{pageSize}
-    </select>
+
     <select id="getSendMessages" parameterType="string" resultType="cn.edu.guet.bean.Message">
         SELECT * FROM Messages WHERE sendId = #{value}
     </select>
+
     <select id="getReceiveMessages" parameterType="string" resultType="cn.edu.guet.bean.Message">
         SELECT * FROM Messages WHERE receiveId = #{value}
-    </select>
-    <select id="getCount" parameterType="string" resultType="int">
-        SELECT COUNT(*) FROM messages WHERE receiveId = #{value}
     </select>
 
     <insert id="sendMessage" parameterType="cn.edu.guet.bean.Message">
@@ -22,7 +18,7 @@
         DELETE FROM Messages WHERE messageId = #{value}
     </delete>
 
-    <update id="readMessage" parameterType="string">
+    <update id="readMessage" parameterType="int">
         UPDATE Messages SET isRead='1' WHERE messageId = #{value}
     </update>
 

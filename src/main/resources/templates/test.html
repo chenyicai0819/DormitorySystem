@@ -9,9 +9,89 @@
         $(function(){
             var pageSize = 5;
             var lastPage;
+            var pageNum = 1;
+            var buildingId;
+            var roomId;
 
             viewAllWaterOrder(1, pageSize);
             var curView = "viewAllWaterOrder";
+            addPage(1, lastPage);
+            addEvent(lastPage);
+
+            $("#search").click(function(){
+                buildingId = $("#building").val()
+                var floor = $("#floor").val();
+                var room = $("#room").val();
+                roomId = floor + room;
+                if(buildingId != "null"){
+                    if(floor != "null" && room != "null"){
+                        pageNum = 1;
+                        viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize);
+                        curView = "viewRoomWaterOrder"
+                        addPage(1, lastPage);
+                        addEvent(lastPage);
+
+                    }else if(floor == "null" && room == "null"){
+                        pageNum = 1;
+                        viewBuildingWaterOrder(buildingId, pageNum, pageSize);
+                        curView = "viewBuildingWaterOrder";
+                        addPage(1, lastPage);
+                        addEvent(lastPage);
+
+                    }else {
+                        alert("请确认查找信息")
+                    }
+                }else {
+                    alert("请确认查找信息")
+                }
+            })
+
+            $("#viewAll").click(function(){
+                viewAllWaterOrder(1, pageSize);
+                curView = "viewAllWaterOrder";
+                addPage(1, lastPage);
+                addEvent(lastPage);
+                $(".firstOption").prop("selected",true)
+            })
+
+            function viewAllWaterOrder(pageNum, pageSize){
+                $("#table>tbody").html("");  // 清空表格
+                $.ajax({
+                    url:"getAllWaterOrder?pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        view(data);
+                        lastPage = data.navigateLastPage;
+                    }
+                })
+            }
+
+            function viewBuildingWaterOrder(buildingId, pageNum, pageSize){
+                $("#table>tbody").html("");  // 清空表格
+                $.ajax({
+                    url:"getBuildingWaterOrder?buildingId=" + buildingId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        view(data);
+                        lastPage = data.navigateLastPage;
+                    }
+                })
+            }
+
+            function viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize){
+                $("#table>tbody").html("");  // 清空表格
+                $.ajax({
+                    url:"getRoomWaterOrder?buildingId=" + buildingId + "&roomId=" + roomId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        view(data);
+                        lastPage = data.navigateLastPage;
+                    }
+                })
+            }
 
             function addPage(current,maxPage){
                 //清空容器
@@ -67,15 +147,20 @@
                     console.log($(this).html());//string
                     var num=parseInt($(this).html());
                     getData(num);
+                    checkCurentView(curView);
                 })
 
                 //2.点击首页
                 $(".lq-page").on('click','.page-start',function(){
                     getData(1);
+                    pageNum = num;
+                    checkCurentView(curView);
                 })
                 //3.点击尾页
                 $(".lq-page").on('click','.page-end',function(){
                     getData(maxPage)
+                    pageNum = num;
+                    checkCurentView(curView);
                 })
 
                 //4.点击下一页
@@ -83,7 +168,9 @@
                     var num=parseInt($(this).siblings('.on').html());
                     num++;
                     console.log(num);
-                    viewAllWaterOrder(num, pageSize);
+                    pageNum = num;
+                    // viewAllWaterOrder(num, pageSize);
+                    checkCurentView(curView);
                     if(num<=maxPage){
                         getData(num)
                     }
@@ -93,83 +180,40 @@
                     var num=parseInt($(this).siblings('.on').html());
                     num--;
                     console.log(num);
-                    viewAllWaterOrder(num, pageSize);
+                    pageNum = num;
+                    // viewAllWaterOrder(num, pageSize);
+                    checkCurentView(curView);
                     if(num >= 1){
                         getData(num)
                     }
                 })
             }
 
-            addPage(1, lastPage);
-            addEvent(lastPage);
+
             function getData(num){
                 addPage(num,lastPage);
                 addEvent(lastPage);
             }
 
-
-            $("#search").click(function(){
-                buildingId = $("#building").val()
-                var floor = $("#floor").val();
-                var room = $("#room").val();
-                roomId = floor + room;
-                if(buildingId != "null"){
-                    if(floor != "null" && room != "null"){
-                        pageNum = 1;
-                        viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize);
-                        curView = "viewRoomWaterOrder"
-                    }else if(floor == "null" && room == "null"){
-                        pageNum = 1;
-                        viewBuildingWaterOrder(buildingId, pageNum, pageSize);
-                        curView = "viewBuildingWaterOrder";
-                    }else {
-                        alert("请确认查找信息")
-                    }
-                }else {
-                    alert("请确认查找信息")
+            function checkCurentView(curView){
+                if(curView == "viewAllWaterOrder"){
+                    viewAllWaterOrder(pageNum, pageSize);
+                    addPage(1, lastPage);
+                    addEvent(lastPage);
+                }else if(curView == "viewBuildingWaterOrder"){
+                    viewBuildingWaterOrder(buildingId, pageNum, pageSize);
+                    addPage(1, lastPage);
+                    addEvent(lastPage);
+                }else if(curView == "viewRoomWaterOrder"){
+                    viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize);
+                    addPage(1, lastPage);
+                    addEvent(lastPage);
                 }
-            })
-
-            function viewAllWaterOrder(pageNum, pageSize){
-                $("#table>tbody").html("");  // 清空表格
-                $.ajax({
-                    url:"getAllWaterOrder?pageNum=" + pageNum + "&pageSize=" + pageSize,
-                    async: false,
-                    method: 'post',
-                    success:function(data) {
-                        view(data);
-                        lastPage = data.navigateLastPage;
-                    }
-                })
-            }
-
-            function viewBuildingWaterOrder(buildingId, pageNum, pageSize){
-                $("#table>tbody").html("");  // 清空表格
-                $.ajax({
-                    url:"getBuildingWaterOrder?buildingId=" + buildingId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
-                    async: false,
-                    method: 'post',
-                    success:function(data) {
-                        view(data);
-                        lastPage = data.navigateLastPage;
-                    }
-                })
-            }
-
-            function viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize){
-                $("#table>tbody").html("");  // 清空表格
-                $.ajax({
-                    url:"getRoomWaterOrder?buildingId=" + buildingId + "&roomId=" + roomId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
-                    async: false,
-                    method: 'post',
-                    success:function(data) {
-                        view(data);
-                        lastPage = data.navigateLastPage;
-                    }
-                })
             }
 
         })
+
+
 
         function view(data){
             $.each(data.list, function(index, waterOrder) {
@@ -219,6 +263,7 @@
             <option value="10">10</option>
         </select>
         <input type="button" id="search" value="查询"><br>
+        <input type="button" id="viewAll" value="查看所有"><br>
 
         <form id="form">
             <table id="table">
