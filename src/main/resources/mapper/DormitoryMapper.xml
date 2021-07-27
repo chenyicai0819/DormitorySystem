@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.DormitoryMapper">
+    <select id="getDormitory" parameterType="hashmap" resultType="cn.edu.guet.bean.Dormitory">
+        select * from dormitory limit #{currentPage},#{allPage}
+    </select>
+
+    <delete id="deleteDormitory" parameterType="string">
+        delete FROM dormitory where dId=#{values}
+    </delete>
+
+    <update id="updateDormitory" parameterType="cn.edu.guet.bean.Dormitory">
+        update dormitory set dId=#{dId},roleId=#{roleId},buid=#{buid},dName=#{dName},dPwd=#{dPwd},dPhone=#{dPhone}
+        where dId=#{dId}
+    </update>
+
+    <insert id="addDormitory" parameterType="cn.edu.guet.bean.Dormitory">
+        INSERT INTO dormitory values(#{dId},#{roleId},#{buid},#{dName},#{dPwd},#{dPhone})
+    </insert>
+
+    <select id="searchDormitory"  parameterType="string"  resultType="cn.edu.guet.bean.Dormitory" >
+        select * from dormitory where dId=#{dId}
+    </select>
+    <select id="getDormitoryCount" resultType="int">
+        select count(*) from dormitory
+    </select>
+</mapper>

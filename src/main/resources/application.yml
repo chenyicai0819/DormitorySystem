@@ -1,14 +1,14 @@
 #端口设置
 server:
-  port: 8080
+  port: 8082
 
 #连接数据库
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dormitory?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: chenyicai
-    password: cyc1234
+    url: jdbc:mysql://localhost:3306/text2?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
   mvc:
     view:
       prefix: /WEB-INF/pages/
@@ -26,4 +26,18 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.guet.bean
 
+thymeleaf:
+  encoding: UTF-8
+  prefix: classpath:/templates/
+  suffix: .html
+  cache: false
+
+  #mybatis:
+  #  mapper-locations: classpath:/mapper/*.xml  #项目中使用注解进行开发
+
+  pagehelper:
+    helper-dialect: mysql # 指定数据库类型
+    reasonable: true
+    params: count=countSql
+    support-methods-arguments: true
 
