@@ -1,0 +1,11 @@
+.cir.Rr{
+    background: url("../image/mail.png") -48px -16px no-repeat;
+    /*background-color: red;*/
+    height: 16px;
+    width: 18px;
+}
+.cir.Ru{
+    background: url("../image/mail.png") -48px 0px no-repeat;
+    height: 16px;
+    width: 18px;
+}

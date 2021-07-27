@@ -41,9 +41,13 @@ public class WaterController {
         waterSeverce.updataWaterState(water);
     }
 
-    @PostMapping("addWaterState")
-    @ResponseBody
-    public void addWaterState(Water water){
-//        waterSeverce.updataWaterState(water);
+    @GetMapping("viewWaterStates")
+    public String viewWaterStates(){
+        return "viewWaterStates";
+    }
+
+    @GetMapping("testMain")
+    public String testMain(){
+        return "test";
     }
 }

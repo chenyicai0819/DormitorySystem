@@ -34,7 +34,7 @@
                 })
 
                 // 删除监听器
-                $("#table").on("click", ".button2", function(){
+                /*$("#table").on("click", ".button2", function(){
                     if (confirm("即将删除数据")){
                         var id = $(this).attr("id");
                         $.ajax({
@@ -46,7 +46,7 @@
                             }
                         })
                     }
-                })
+                })*/
 
                 // 点击页码
                 $(".lq-page").on('click','.page',function(){
@@ -250,6 +250,12 @@
     </head>
     <body id="body">
         <form id="form1">
+
+            <div id="waterStateMain">
+                <table id="waterStateTable"></table>
+            </div>
+
+
             <input id="confirmAll" type="button" value="全部确定">
             <table id="table">
                 <thead>

@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet"  th:href="@{css/page.css}">
+    <link rel="stylesheet"  th:href="@{css/viewMessages.css}">
     <script th:inline="javascript">
         $(function(){
             var pageNum = 1;
@@ -122,7 +123,7 @@
             // 标记为已读
             $("#body").on('click', '#read', function(){
                 $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
-                    if($(this).parent().siblings(".isRead").html() == '0'){
+                    if($(this).parent().siblings(".ckeckRead").attr("type") == '0'){
                         readMessage($(this).attr("value"));
                         checkAndView(curView);
                     }
@@ -131,10 +132,21 @@
 
             // 全部标记为已读
             $("#body").on('click', '#readAll', function(){
-                $(".isRead").each(function(){	//遍历
-                    if($(this).html() == '0'){
+                $(".ckeckRead").each(function(){	//遍历
+                    if($(this).attr("type") == '0'){
                         readMessage($(this).attr("value"));
                         checkAndView(curView);
+                    }
+                })
+            })
+
+            $("#body").on('click', '#setCheckBox', function(){
+                var flag = $("#setCheckBox").prop("checked");
+                $("input[name='messageCheckbox']").each(function(i){	//遍历
+                    if(flag){
+                        $(this).prop("checked", true);
+                    }else{
+                        $(this).prop("checked", false);
                     }
                 })
             })
@@ -208,24 +220,31 @@
         function viewReceive(data){
             $("#table>tbody").html("");  // 清空表格
             $("#table>thead").html("");  // 清空表格
-            var tr = $("<tr>\n"
-                + "<th><input type=\"checkbox\" id='setCheckBox'/></th>"
-                + "<th>发送人</th>\n"
-                + "<th>主题</th>\n"
-                + "<th>内容</th>\n"
-                + "<th>是否已读</th>\n"
-                + "<th>时间</th>\n"
-                + "</tr>")
+            var tr = $(
+                "<tr>\n" +
+                "<th><input type=\"checkbox\" id='setCheckBox'/></th>" +
+                "<th></th>\n" +
+                "<th>发送人</th>\n" +
+                "<th>主题</th>\n" +
+                "<th>内容</th>\n" +
+                "<th>时间</th>\n" +
+                "</tr>"
+            )
             $("#table>thead").append(tr);
             $.each(data.list, function(index, message) {
-                var tr = $("<tr>"
-                    + "<td><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></td>"
-                    + "<td>" + message.sendId + "</td>"
-                    + "<td>" + message.title + "</td>"
-                    + "<td>" + message.content + "</td>"
-                    + "<td class='isRead' value="+ message.messageId + ">" + message.isRead + "</td>"
-                    + "<td>" + message.sendTime + "</td>"
-                    + "</tr>");
+                var tr = $("<tr><td><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></td></tr>");
+                if(message.isRead == "0"){
+                    var td = "<td class='ckeckRead' value="+ message.messageId + " type='0'><div class='cir Ru'></div></td>";
+                }else{
+                    var td = "<td class='ckeckRead' value="+ message.messageId + " type='1'><div class='cir Rr'></div></td>";
+                }
+                tr.append(td);
+                tr.append(
+                    "<td><span class='receiveId'>" + message.sendId + "</span></td>" +
+                    "<td><span class='title'>" + message.title + "</span></td>" +
+                    "<td><p class='content'>" + message.content + "</p></td>" +
+                    "<td><span class='sendTime'>" + message.sendTime + "</span></td>"
+                )
                 $("#table>tbody").append(tr);
             })
         }
@@ -234,24 +253,31 @@
         function viewSend(data){
             $("#table>tbody").html("");  // 清空表格
             $("#table>thead").html("");  // 清空表格
-            var tr = $("<tr>\n"
-                + "<th><input type=\"checkbox\" id='setCheckBox'/></th>"
-                + "<th>接收人</th>\n"
-                + "<th>主题</th>\n"
-                + "<th>内容</th>\n"
-                + "<th>是否已读</th>\n"
-                + "<th>时间</th>\n"
-                + "</tr>")
+            var tr = $(
+                "<tr>\n" +
+                "<th><input type=\"checkbox\" id='setCheckBox'/></th>" +
+                "<th></th>\n" +
+                "<th>接收人</th>\n" +
+                "<th>主题</th>\n" +
+                "<th>内容</th>\n" +
+                "<th>时间</th>\n" +
+                "</tr>"
+            )
             $("#table>thead").append(tr);
             $.each(data.list, function(index, message) {
-                var tr = $("<tr>"
-                    + "<th><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></th>"
-                    + "<td>" + message.receiveId + "</td>"
-                    + "<td>" + message.title + "</td>"
-                    + "<td>" + message.content + "</td>"
-                    + "<td class='isRead' value="+ message.messageId + ">" + message.isRead + "</td>"
-                    + "<td>" + message.sendTime + "</td>"
-                    + "</tr>");
+                var tr = $("<tr><td><input type='checkbox' name='messageCheckbox' value="+ message.messageId + "></td></tr>");
+                if(message.isRead == "0"){
+                    var td = "<td class='ckeckRead' value="+ message.messageId + " type='0'><div class='cir Ru'></div></td>";
+                }else{
+                    var td = "<td class='ckeckRead' value="+ message.messageId + " type='1'><div class='cir Rr'></div></td>";
+                }
+                tr.append(td);
+                tr.append(
+                    "<td><span class='receiveId'>" + message.receiveId + "</span></td>" +
+                    "<td><span class='title'>" + message.title + "</span></td>" +
+                    "<td><p class='content'>" + message.content + "</p></td>" +
+                    "<td><span class='sendTime'>" + message.sendTime + "</span></td>"
+                )
                 $("#table>tbody").append(tr);
             })
         }
@@ -293,15 +319,6 @@
             </tbody>
         </table>
     </form>
-    <!--         旧页面跳转-->
-    <!--<input type="button" class="pageButton" value="首页">
-    <input type="button" class="pageButton" value="上一页">
-    <input type="button" class="pageButton" value="下一页">
-    <input type="button" class="pageButton" value="尾页">
-    <select id="page">
-    </select>
-    <input type="button" class="pageButton" value="跳转">
-    <input type="button" id="viewAll" value="查看所有"><br>-->
     <div class="lq-page"></div>
     </body>
 </html>
