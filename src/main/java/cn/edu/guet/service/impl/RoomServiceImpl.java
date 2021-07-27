@@ -43,6 +43,16 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
+    public void changeRoomStat_in(String rId, String rBed) {
+        roomMapper.changeRoomStat_in(rId,rBed);
+    }
+
+    @Override
+    public void changeRoomStat_out(String rId, String rBed) {
+        roomMapper.changeRoomStat_out(rId,rBed);
+    }
+
+    @Override
     public List<Map<String, Object>> viewRooms(List<String> rIds) {
         return roomMapper.viewRooms(rIds);
     }

@@ -20,6 +20,7 @@
       })
       $(".change").click(function () {
         $("#sId").attr("value",$(this).attr("value"));
+        $("#oldrBed").attr("value",$(this).attr("title"));
         $(".changeStu").show();
         $(".mask").show();
         $(".message").css({opacity:0.3});
@@ -49,7 +50,7 @@
       <tr th:each="student,studentStat:${students}">
         <td th:text="'&nbsp;'+${student.rBed}"></td>
         <td th:text="'&nbsp;'+${student.sName}"></td>
-        <td th:width="125"><a class="change" th:value="${student.sId}" href="javascript:void(0)">&nbsp;调整宿舍</a></td>
+        <td th:width="125"><a class="change" th:value="${student.sId}" th:title="${student.rBed}" href="javascript:void(0)">&nbsp;调整宿舍</a></td>
         <td><a class="add" th:value="${student.buid}" href="javascript:void(0);">&nbsp;添加宿舍成员</a></td>
       </tr>
     </table>
@@ -71,8 +72,10 @@
     <p>&nbsp;调整住宿信息</p>
     <a class="close1" href="javascript:void(0)">X</a>
     <br>
-    <form action="roomAddStudent">
+    <form action="roomChangeStudent">
       <input id="sId" type="text" hidden name="sId">
+      <input type="text" hidden name="oldrId" th:value="${rId}">
+      <input id="oldrBed" type="text" hidden name="oldrBed">
       <label>&nbsp;宿舍: </label><input type="text" name="rId"><br>
       <label>&nbsp;床号: </label><input type="text" name="rBed"><br>
       <label>&nbsp;楼栋: </label>

@@ -5,6 +5,7 @@
     <title>查看宿舍信息</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/room/viewRoom.css" th:href="@{/css/room/viewRoom.css}">
+
 </head>
 <body>
 
@@ -35,7 +36,7 @@
         </tr>
         <tr>
             <th width="200px">宿舍楼</th>
-            <th width="150px">人数</th>
+            <th th:text="${title}" width="150px"></th>
         </tr>
         <tr th:each="Map,MapStat:${Map}">
             <td ><a th:href="@{editRoom(rId=${Map.get('rId')})}"  th:width="200px" th:text="${Map.get('rId')}"></a> </td>

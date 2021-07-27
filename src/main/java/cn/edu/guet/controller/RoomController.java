@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author lihehuang
@@ -32,6 +31,7 @@ public class RoomController {
         String buNo=request.getParameter("buNo");
         request.setAttribute("buId",buId);
         request.setAttribute("buNo",buNo);
+        request.setAttribute("title","入住人数");
         request.setAttribute("builds",roomService.viewBuild());
         List<String> rIds=roomService.viewRoom(buId,buNo);
         if (rIds.size()==0){
@@ -48,6 +48,7 @@ public class RoomController {
         String buNo=request.getParameter("buNo");
         request.setAttribute("buId",buId);
         request.setAttribute("buNo",buNo);
+        request.setAttribute("title","空床数");
         request.setAttribute("builds",roomService.viewBuild());
         List<String> rIds=roomService.viewRoom(buId,buNo);
         if (rIds.size()==0){
@@ -73,6 +74,23 @@ public class RoomController {
         String sId=request.getParameter("sId");
         String buId=request.getParameter("buId");
         roomService.changeRoom(rId,rBed,sId,buId);
+        roomService.changeRoomStat_in(rId,rBed);
+        request.setAttribute("builds",roomService.viewBuild());
+        request.setAttribute("students",roomService.selectStudent(rId));
+        return "room/editRoom";
+    }
+
+    @GetMapping("roomChangeStudent")
+    public String roomChangeStudent(HttpServletRequest request){
+        String oldrId=request.getParameter("oldrId");
+        String oldrBed=request.getParameter("oldrBed");
+        String rId=request.getParameter("rId");
+        String rBed=request.getParameter("rBed");
+        String sId=request.getParameter("sId");
+        String buId=request.getParameter("buId");
+        roomService.changeRoom(rId,rBed,sId,buId);
+        roomService.changeRoomStat_out(oldrId,oldrBed);
+        roomService.changeRoomStat_in(rId,rBed);
         request.setAttribute("builds",roomService.viewBuild());
         request.setAttribute("students",roomService.selectStudent(rId));
         return "room/editRoom";

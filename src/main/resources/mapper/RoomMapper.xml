@@ -13,6 +13,12 @@
     <update id="changeRoom" parameterType="string">
         UPDATE student SET rId=#{rId},rBed=#{rBed},buid=#{buId} WHERE sId=#{sId}
     </update>
+    <update id="changeRoomStat_in" parameterType="string">
+        update room set isMan='1' where rId=#{rId} and rBed=#{rBed}
+    </update>
+    <update id="changeRoomStat_out" parameterType="string">
+        update room set isMan='0' where rId=#{rId} and rBed=#{rBed}
+    </update>
 
     <resultMap id="resRoom" type="hashmap">
         <result property="rId" column="rId" jdbcType="VARCHAR" />

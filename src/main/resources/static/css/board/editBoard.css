@@ -37,3 +37,11 @@ a{
     color: black;
     right: 0;
 }
+.addBoard,.modify,.delete{
+    color: whitesmoke;
+    display: block;
+    background-color: aqua;
+}
+.modify1,.delete1{
+    background-color: aqua;
+}

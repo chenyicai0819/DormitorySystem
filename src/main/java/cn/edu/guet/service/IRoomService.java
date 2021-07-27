@@ -18,6 +18,8 @@ public interface IRoomService {
     List<String> viewRoom(String buId,String buNo);
     List<Student> selectStudent(String rId);
     void changeRoom(String rId,String rBed,String sId,String buId);
+    void changeRoomStat_in(String rId,String rBed);
+    void changeRoomStat_out(String rId,String rBed);
     List<Map<String,Object>> viewRooms(List<String> rIds);
     List<Map<String,Object>> viewEmptyRooms(List<String> rIds);
 }
