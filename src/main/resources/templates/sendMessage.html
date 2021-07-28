@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <body>
+        <form action="sendMessage" method="post">
+            <input type="hidden" name="sendId" value="">
+            接收人id：<input type="text" name="receiveId">
+            标题：<input type="text" name="title">
+            内容：<input type="text" name="content">
+            <input type="submit">
+        </form>
+    </body>
+</html>

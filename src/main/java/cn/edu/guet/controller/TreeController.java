@@ -17,7 +17,6 @@ public class TreeController {
     @Autowired
     private ITreeService treeService;
 
-
     @GetMapping("getAllTree.do")
     public String viewIndex(HttpServletRequest request, Model model, HttpServletResponse response){
         request.setAttribute("tree",treeService.getAllTree());
