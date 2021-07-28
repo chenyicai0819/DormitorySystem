@@ -24,4 +24,5 @@ public interface RoomMapper {
     void changeRoomStat_out(String rId,String rBed);
     List<Map<String,Object>> viewRooms(List<String> rIds);
     List<Map<String,Object>> viewEmptyRooms(List<String> rIds);
+    Student selectStudentById(String sId);
 }

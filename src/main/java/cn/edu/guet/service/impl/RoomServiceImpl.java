@@ -62,5 +62,10 @@ public class RoomServiceImpl implements IRoomService {
         return roomMapper.viewEmptyRooms(rIds);
     }
 
+    @Override
+    public Student selectStudentById(String sId) {
+        return roomMapper.selectStudentById(sId);
+    }
+
 
 }

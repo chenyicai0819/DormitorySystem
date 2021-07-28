@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.BoardMapper">
     <select id="viewBoard" resultType="cn.edu.guet.bean.Board">
-        select * from board
+        select * from board order by boTime desc
     </select>
     <select id="selectBoard" parameterType="string" resultType="cn.edu.guet.bean.Board">
         SELECT * FROM board WHERE boId=#{boId}

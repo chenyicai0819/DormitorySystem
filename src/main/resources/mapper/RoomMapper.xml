@@ -50,4 +50,8 @@
         </foreach>
         group by rId
     </select>
+
+    <select id="selectStudentById" parameterType="string" resultType="cn.edu.guet.bean.Student">
+        select * from student where sId=#{sId}
+    </select>
 </mapper>

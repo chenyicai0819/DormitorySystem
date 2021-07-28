@@ -1,5 +1,6 @@
 package cn.edu.guet.controller;
 
+import cn.edu.guet.bean.Student;
 import cn.edu.guet.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,6 +74,10 @@ public class RoomController {
         String rBed=request.getParameter("rBed");
         String sId=request.getParameter("sId");
         String buId=request.getParameter("buId");
+        Student student=roomService.selectStudentById(sId);
+        if(student.getrId()!=""&&student.getrBed()!="") {
+            roomService.changeRoomStat_out(student.getrId(), student.getrBed());
+        }
         roomService.changeRoom(rId,rBed,sId,buId);
         roomService.changeRoomStat_in(rId,rBed);
         request.setAttribute("builds",roomService.viewBuild());
@@ -96,9 +101,4 @@ public class RoomController {
         return "room/editRoom";
     }
 
-    @GetMapping("viewRooms")
-    public String viewRooms(HttpServletRequest request){
-
-        return "";
-    }
 }

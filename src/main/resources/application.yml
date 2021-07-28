@@ -26,4 +26,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.guet.bean
 
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
 

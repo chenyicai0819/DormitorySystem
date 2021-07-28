@@ -23,7 +23,7 @@ input{
     right: 30px;
     height: 15px;
 }
-.submit{
+#submit{
     height: 25px;
 }
 textarea{
