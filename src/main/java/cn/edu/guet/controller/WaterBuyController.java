@@ -2,26 +2,22 @@ package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Room;
 import cn.edu.guet.bean.Water;
-import cn.edu.guet.bean.Waterorder;
-import cn.edu.guet.service.impl.WaterService;
+import cn.edu.guet.service.impl.WaterBuyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-public class WaterController {
+public class WaterBuyController {
     @Autowired
-    private WaterService waterService;
+    private WaterBuyService waterService;
     @GetMapping("WaterOnline.do")
     public String getWater(Model model,@RequestParam(defaultValue = "0", value = "pageNum") Integer pageNum) {
         model.addAttribute("stud",waterService.getStudent());

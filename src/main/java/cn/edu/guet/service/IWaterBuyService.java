@@ -8,7 +8,7 @@ import cn.edu.guet.bean.Waterorder;
 import java.util.Date;
 import java.util.List;
 
-public interface IWaterService {
+public interface IWaterBuyService {
     public List<Water> getWater();
     public int countWater();
     public List<Student> getStudent();

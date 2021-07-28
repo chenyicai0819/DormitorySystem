@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Mapper
 @Repository
-public interface WaterMapper {
+public interface WaterBuyMapper {
     public List<Water> getWater();
     public int countWater();
     public int countWaterbuid(String buid);
