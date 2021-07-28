@@ -1,6 +1,7 @@
 package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Message;
+import cn.edu.guet.bean.Water;
 import cn.edu.guet.service.IMessageService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,20 @@ public class MessageController {
     @GetMapping("viewMessages")
     public String viewMessages(Model model){
         return "viewMessages";
+    }
+
+    @GetMapping("thymeleafMessages")
+    public String thymeleafMessages(Model model){
+        String receiveId = "10324";
+        PageInfo messages = messageService.getReceiveMessages(receiveId, 1, 5);
+        model.addAttribute("messages", messages.getList());
+        return "thymeleafMessages";
+    }
+
+    @PostMapping("getMessageThymeleaf")
+    public String getMessageThymeleaf(String receiveId, int pageNum, int pageSize, Model model){
+        PageInfo messages = messageService.getReceiveMessages(receiveId, pageNum, pageSize);
+        model.addAttribute("messages", messages.getList());
+        return "thymeleafMessages::messageinfo";
     }
 }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"  th:href="@{css/page.css}">
+    <link rel="stylesheet"  th:href="@{css/viewMessages.css}">
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:inline="javascript">
+        $(function (){
+            var pageNum = 1;
+            var pageSize = 3;
+            var lastPage;
+            var receiveId = "10324";
+
+            $.ajax({
+                url:"getReceiveMessages?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                async: false,
+                method: 'post',
+                success:function(data) {
+                    console.log(data);
+                    setSelect(data);
+                    lastPage = data.navigateLastPage;
+                }
+            })
+
+/*            $("#body").on('click', '#test111', function(){
+                view();
+            })*/
+
+            function view(){
+                $.ajax({
+                    url:"getMessageThymeleaf?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        $(".messageinfo").html(data)
+                    }
+                })
+            }
+
+            // 点击页码
+            $(".lq-page").on('click','.page',function(){
+                $(".page.on").attr("class", "page");
+                $(this).attr("class", "page on");
+                pageNum = parseInt($(this).html());
+                view();
+            })
+
+            // 点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                pageNum = 1;
+                $(".page.on").attr("class", "page");
+                $(".page-before").next().attr("class", "page on");
+                view();
+            })
+
+            // 点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                pageNum = lastPage;
+                $(".page.on").attr("class", "page");
+                $(".page-after").prev().attr("class", "page on");
+                view();
+            })
+
+            // 点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum+1 <= lastPage){
+                    pageNum++;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.next().attr("class", "page on");
+                }
+            })
+
+            // 点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum-1 >= 1){
+                    pageNum--;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.prev().attr("class", "page on");
+                }
+            })
+
+            function setSelect(data){
+                $(".lq-page").html("");  // 清空
+                var pages = data.navigatepageNums;
+                if(pages.length >= 2){
+                    $(".lq-page").append('<span class="page-start">首页</span>');
+                    $(".lq-page").append('<span class="page-before">上一页</span>');
+                    $.each(pages, function(index, page) {
+                        if(index == 0){
+                            var span = $("<span class=\"page on\">"+ page +"</span>");
+                        }else {
+                            var span = $("<span class=\"page\">"+ page +"</span>")
+                        }
+                        $(".lq-page").append(span);
+                    })
+                    $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+                }
+            }
+
+        })
+
+
+    </script>
+</head>
+<body id="body">
+<div>
+<!--        <input type="button" id="test111" value="显示">-->
+    <div id="messageMain" class="messageinfo" th:fragment="messageinfo">
+        <table id="messageTable">
+            <thead>
+            <tr>
+                <th><input type='checkbox' id='setCheckBox'/></th>
+                <th></th>
+                <th>接收人</th>
+                <th>主题</th>
+                <th>内容</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="message,messagesStat:${messages}">
+                <td><input type="checkbox" name="messageCheckbox" th:value="${message.messageId}"></td>
+                <td class='ckeckRead' th:value='${message.messageId}' type='0' th:if="${message.isRead} eq '0'"><div class='cir Ru'></div></td>
+                <td class='ckeckRead' th:value='${message.messageId}' type='1' th:if="${message.isRead} eq '1'"><div class='cir Rr'></div></td>
+                <td><span class='receiveId' th:text="${message.receiveId}"></span></td>
+                <td><span class='title' th:text="${message.title}"></span></td>
+                <td><p class='content' th:text="${message.content}"></p></td>
+                <td><span class='sendTime' th:text="${message.sendTime}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="lq-page"></div>
+</div>
+</body>
+</html>

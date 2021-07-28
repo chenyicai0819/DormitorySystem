@@ -5,6 +5,7 @@ import cn.edu.guet.service.IWaterOrderService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,8 +48,18 @@ public class WaterOrderController {
         return waterOrderService.test();
     }
 
-    @GetMapping("test3")
-    public String test3(){
-        return "test";
+    @GetMapping("thymeleafWaterOrder")
+    public String thymeleafWaterOrder(Model model){
+        List<WaterOrder> waterOrders = waterOrderService.getAllWaterOrder(1,3).getList();
+        model.addAttribute("waterOrders", waterOrders);
+        return "thymeleafWaterOrder";
     }
+
+    @PostMapping("getAllWaterOrderThymeleaf")
+    public String getAllWaterOrdertest(int pageNum, int pageSize, Model model){
+        PageInfo waterOrders = waterOrderService.getAllWaterOrder(pageNum,pageSize);
+        model.addAttribute("waterOrders", waterOrders.getList());
+        return "thymeleafWaterOrder::waterOrderinfo";
+    }
+
 }

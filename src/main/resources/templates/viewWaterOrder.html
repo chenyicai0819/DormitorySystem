@@ -7,7 +7,7 @@
     <link rel="stylesheet"  th:href="@{css/page.css}">
     <script th:inline="javascript">
 
-        $(function (){
+        /*$(function (){
             $("#body").on('click', '#test111', function(){
                 console.log(111);
                 var pageNum = 1;
@@ -21,7 +21,7 @@
                 var curView = "viewAllWaterOrder";
 
                 // 旧页码跳转
-                /*$("#body").on("click", ".pageButton", function(){
+                /!*$("#body").on("click", ".pageButton", function(){
                     var beforePage = pageNum;
                     var value = $(this).attr("value");
                     if(value == "首页"){
@@ -53,7 +53,7 @@
                             viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, null);
                         }
                     }
-                })*/
+                })*!/
 
                 // 查看所有
                 $("#waterOrderSearch").on('click', '#viewAll', function(){
@@ -197,10 +197,10 @@
                     }
                 }
             })
-        })
+        })*/
 
 
-        /*$(function(){
+        $(function(){
             var pageNum = 1;
             var pageSize = 5;
             var lastPage;
@@ -211,40 +211,6 @@
             viewAllWaterOrder(pageNum, pageSize, setSelect);
             var curView = "viewAllWaterOrder";
 
-            // 旧页码跳转
-            /!*$("#body").on("click", ".pageButton", function(){
-                var beforePage = pageNum;
-                var value = $(this).attr("value");
-                if(value == "首页"){
-                    pageNum = 1;
-                }else if(value == "尾页"){
-                    pageNum = lastPage;
-                }else if(value == "上一页"){
-                    if(pageNum != 1){
-                        pageNum--;
-                    }else{
-                        alert("这是首页!")
-                    }
-                }else if(value == "下一页"){
-                    if(pageNum != lastPage){
-                        pageNum++;
-                    }else{
-                        alert("这是最后一页了!")
-                    }
-                }else if(value = "跳转"){
-                    pageNum = $("#page").val();
-                }
-                if(beforePage != pageNum){
-                    $("#option"+pageNum).prop("selected",true)  // 设置select标签跟随页码
-                    if(curView == "viewAllWaterOrder"){
-                        viewAllWaterOrder(pageNum, pageSize, null)
-                    }else if(curView == "viewBuildingWaterOrder"){
-                        viewBuildingWaterOrder(buildingId, pageNum, pageSize, null);
-                    }else if(curView == "viewRoomWaterOrder"){
-                        viewRoomWaterOrder(buildingId, roomId, pageNum, pageSize, null);
-                    }
-                }
-            })*!/
 
             // 查看所有
             $("#waterOrderSearch").on('click', '#viewAll', function(){
@@ -388,7 +354,7 @@
                 }
             }
 
-        })*/
+        })
 
         // 渲染数据
         function view(data){
