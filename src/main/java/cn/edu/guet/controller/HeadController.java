@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 public class HeadController {
     @Autowired
     private IHeadService headService;
+    @Autowired
+    private ITreeService treeService;
 
     @PostMapping("/addimage")
     public String addImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id, HttpServletRequest request, Model model) throws Exception{
@@ -36,8 +38,9 @@ public class HeadController {
             photo.setId(id);
             photo.setImage(image);
             headService.addImage(photo,id);
+            request.setAttribute("tree",treeService.getAllTree());
         }
-        return "image";
+        return "index";
     }
 
     @GetMapping("/getimage")

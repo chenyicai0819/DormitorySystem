@@ -30,6 +30,11 @@
                 toggle.classList.toggle('toggle');
                 $("#JTNR").html("");
             })
+            $("#loss").click(function (){
+              let toggle = document.querySelector('.lq-popup-container')
+              toggle.classList.toggle('toggle');
+              $("#JTNR").html("");
+            })
             var file = document.querySelector('#file');
             var preview = document.querySelector('#newImageShow');
             file.onchange = function(){
@@ -86,11 +91,11 @@
                 <div id="newImage"><img src="" id="newImageShow" alt="上传您的新头像"></div>
             </div>
             <form action="#" th:action="@{/addimage}" enctype="multipart/form-data" method="post">
-                <input type="text" name="id" id="id" value="1800710318">
+                <input type="text" name="id" id="id" th:value="${#session.getAttribute('userId')}" readonly>
                 <input type="file" name="file" id="file">
                 <input type="submit" value="确认" class="inputButton" id="enter">
             </form>
-
+            <input type="button" value="退出" class="inputButton" id="loss">
         </div>
     </div>
 </div>

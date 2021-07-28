@@ -5,7 +5,7 @@ import cn.edu.guet.bean.Dormitory;
 
 import java.util.List;
 
-public interface IDormitoryService {
+public interface IDormitoryMeggerService {
     public List<Dormitory> getDormitoryM();
     public List<Build> getDormBuid();
 }

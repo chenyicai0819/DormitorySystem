@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface DormitoryMapper {
+public interface DormitoryMeggerMapper {
     public List<Dormitory> getDormitoryM();
     public List<Build> getDormBuid();
 }
