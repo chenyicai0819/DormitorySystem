@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>宿管信息</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <style>
+        h1{
+            letter-spacing: 15px;
+            text-align: center;
+            margin: 50px;
+            background-color:darksalmon;
+        }
+        table{
+            font-size: 20px;
+            position: absolute;
+            left: 200px;
+            top: 180px;
+            width: 900px;
+            height: 250px;
+        }
+        .dormM{
+            border: none;
+        }
+        #dUpdate{
+            position: absolute;
+            top: 472px;
+            left:825px;
+        }
+        #dConfirm{
+            position: absolute;
+            top: 472px;
+            left:825px;
+        }
+        #dCancal{
+            position: absolute;
+            top: 472px;
+            left:520px;
+        }
+    </style>
+    <script th:inline="javascript">
+        var AllDBuid = [[${buid}]];
+        var dMessage = '';
+        $(function () {
+            $("#dUpdate").click(function () {
+                $(".dormM").attr("disabled", false);
+                $("#dBuid").attr("disabled", false);
+                $("#dBuid").empty();
+                for (var i = 0; i < AllDBuid.length; i++) {
+                    $("#dBuid").append("<option>" + AllDBuid[i].buid + "</option>");
+                }
+                //$("body").append('<a id="lookP" href="#" onclick="lookPwd(1)">查看</a>')
+                $("#dUpdate").attr("style", "display:none");
+                $("#dConfirm").attr("style", "width:150px;height: 28px;display:block");
+                $("#dCancal").attr("style", "width:150px;height: 28px;display:block");
+                $(".dormM").change(function () {
+                    dMessage = dMessage + ("您将" + $(this).parent().text().substring(0, 2) + "修改为" + $(this).val()) + ";";
+                })
+            })
+            $("#dCancal").click(function () {
+                $("body").load("SgManage.do");
+            })
+            $("#dConfirm").click(function () {
+                if([[${suguan[0].buid}]] != $("#dBuid").val() ){
+                    dMessage = dMessage+$("#dId").val()+"将宿舍楼栋修改为"+$("#dBuid").val()+";";
+                }
+                if (dMessage == '') {
+                    alert("未修改信息");
+                } else {
+                    $("body").load("commitApply.do?applyId=" + $("#dId").val() + "&message=" + dMessage + "&reply=" + "审批中");
+                    alert("修改信息申请已经提交");
+                }
+                $("body").load("SgManage.do");
+            })
+        })
+    </script>
+</head>
+<body>
+<h1>我的信息</h1>
+<table th:each="suguan,suguanStat:${suguan}">
+    <tr>
+        <td>工号：<input class="dormId" id="dId" type="text" th:value="${suguan.dId}" disabled="true"  style="width:160px;height: 20px;border: none"></td>
+        <td>姓名：<input class="dormM" id="dName" type="text" th:value="${suguan.dName}" disabled="true" style="width:160px;height: 24px"></td>
+    </tr>
+    <tr>
+        <td>职位:
+            <input class="dormM" th:if="${suguan.roleId} eq 'ro102'" th:value="宿舍管理员" type="text" disabled="true" style="margin-left: 9px;width:160px;height: 25px">
+        </td>
+        <td>电话：<input class="dormM" id="dPhone" type="text" th:value="${suguan.dPhone}" disabled="true" style="width:160px;height: 24px"></td>
+    </tr>
+    <tr>
+        <td>密码：<input class="dormM" id="dPwd" type="password" th:value="${suguan.dPwd}" disabled="true" style="width:160px;height:24px"></td>
+        <td>管理楼栋：<select id="dBuid" disabled="true" style="width:125px;height:24px;border: none">
+            <option th:text="${suguan.buid}"></option>
+        </select>
+    </tr>
+</table>
+<input type="button" id="dUpdate" value="修改信息" style="width:150px;height: 28px">
+<input type="button" id="dConfirm" value="确定上传" style="display: none">
+<input type="button" id="dCancal" value="取消修改" style="display: none">
+</body>
+</html>

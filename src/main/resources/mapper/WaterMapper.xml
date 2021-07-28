@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.WaterMapper">
+
+  <select id="getWater" resultType="cn.edu.guet.bean.Water">
+        select * from water
+    </select>
+    <select id="countWater" resultType="int">
+        select count(*) count from water
+    </select>
+  <select id="countWaterbuid" resultType="int" parameterType="string">
+    select count(*) count from water WHERE buid=#{value}
+  </select>
+    <select id="getStudent" resultType="cn.edu.guet.bean.Student">
+         select * from student where sId = 1800710318
+    </select>
+    <select id="getAllRoom" resultType="cn.edu.guet.bean.Room">
+       select distinct(rId) from room where buid=#{value}
+    </select>
+    <select id="insertOrder" resultType="cn.edu.guet.bean.Waterorder">
+       insert into waterorder values(#{woId},#{buid},#{woNum},#{woRoom},#{woMoney},now(),#{woUser})
+    </select>
+    <select id="getAllOrder" resultType="cn.edu.guet.bean.Waterorder">
+       select * from waterOrder where woUser = #{value}
+    </select>
+  <update id="upWaterNum" parameterType="map">
+    update water Set wnum=#{num} Where buid=#{buid}
+  </update>
+</mapper>

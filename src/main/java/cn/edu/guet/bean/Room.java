@@ -4,17 +4,17 @@ public class Room {
     private String rId;
     private String rBed;
     private String buid;
+    private String hpeople;
 
-    public Room() {
-    }
+  public String getHpeople() {
+    return hpeople;
+  }
 
-    public Room(String rId, String rBed, String buid) {
-        this.rId = rId;
-        this.rBed = rBed;
-        this.buid = buid;
-    }
+  public void setHpeople(String hpeople) {
+    this.hpeople = hpeople;
+  }
 
-    public String getrId() {
+  public String getrId() {
         return rId;
     }
 
@@ -38,12 +38,4 @@ public class Room {
         this.buid = buid;
     }
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "rId='" + rId + '\'' +
-                ", rBed='" + rBed + '\'' +
-                ", buid='" + buid + '\'' +
-                '}';
-    }
 }

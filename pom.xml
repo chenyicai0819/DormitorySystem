@@ -60,7 +60,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+    <dependency>
+      <groupId>com.alipay.sdk</groupId>
+      <artifactId>alipay-sdk-java</artifactId>
+      <version>4.10.192.ALL</version>
+    </dependency>
+		<!-- Mybatis 分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>

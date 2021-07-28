@@ -1,0 +1,51 @@
+.BoardTable {
+    border-collapse: collapse;
+    width: 100%;
+    border-top: none;
+    border-bottom: none;
+}
+
+.BoardTable th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.BoardTable tr{background-color: #f2f2f2}
+
+.BoardTable th {
+    background-color: #2f3640	;
+    color: white;
+}
+
+.lq-popup-container{
+    position: fixed;
+    top:-120%; left:0;
+    z-index: 1000;
+    background:rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width:100%;
+}
+.lq-popup-container.toggle{
+    top:0%;
+}
+.lq-popup-container .lq-popup{
+    background:#fff;
+    text-align: center;
+    margin:10px;
+    padding:10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.5);
+    border-radius: 5px;
+    position: relative;
+}
+.lq-popup-container .lq-popup p{
+    color:#444;
+    padding:20px 40px;
+    font-size: 25px;
+}
+#allPage{
+    position: absolute;
+    bottom: 10px;
+}

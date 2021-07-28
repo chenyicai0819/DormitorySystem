@@ -1,5 +1,6 @@
 package cn.edu.guet.service.impl;
 
+import cn.edu.guet.bean.Board;
 import cn.edu.guet.bean.Tree;
 import cn.edu.guet.mapper.TreeMapper;
 import cn.edu.guet.service.ITreeService;
@@ -25,5 +26,10 @@ public class TreeServiceImpl implements ITreeService {
     @Override
     public List<Tree> getAllTree() {
         return treeMapper.getAllTree();
+    }
+
+    @Override
+    public Board seeBoard() {
+        return treeMapper.seeBoard();
     }
 }
