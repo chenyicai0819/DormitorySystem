@@ -56,13 +56,20 @@ public class MessageController {
         return "viewMessages";
     }
 
-    @GetMapping("thymeleafMessages")
-    public String thymeleafMessages(Model model){
+    @GetMapping("Feedback.do")
+    public String Feedback(Model model){
         String receiveId = "10324";
         PageInfo messages = messageService.getReceiveMessages(receiveId, 1, 5);
         model.addAttribute("messages", messages.getList());
         return "thymeleafMessages";
     }
+  @GetMapping("SeeFeedback.do")
+  public String SeeFeedback(Model model){
+    String receiveId = "10324";
+    PageInfo messages = messageService.getReceiveMessages(receiveId, 1, 5);
+    model.addAttribute("messages", messages.getList());
+    return "thymeleafMessages";
+  }
 
     @PostMapping("getMessageThymeleaf")
     public String getMessageThymeleaf(String receiveId, int pageNum, int pageSize, Model model){

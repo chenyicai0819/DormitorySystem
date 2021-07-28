@@ -1,6 +1,6 @@
 package cn.edu.guet.controller;
 
-import cn.edu.guet.bean.WaterOrder;
+import cn.edu.guet.bean.Waterorder;
 import cn.edu.guet.service.IWaterOrderService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +50,8 @@ public class WaterOrderController {
 
     @GetMapping("thymeleafWaterOrder")
     public String thymeleafWaterOrder(Model model){
-        List<WaterOrder> waterOrders = waterOrderService.getAllWaterOrder(1,3).getList();
-        model.addAttribute("waterOrders", waterOrders);
+        List<Waterorder> waterorders = waterOrderService.getAllWaterOrder(1,3).getList();
+        model.addAttribute("waterOrders", waterorders);
         return "thymeleafWaterOrder";
     }
 

@@ -152,11 +152,11 @@
             </thead>
             <tbody>
             <tr th:each="waterState,treeStat:${waterStates}">
-                <td><input type="hidden" class="buildingId" name="buildingId" th:value="${waterState.buildingId}"></td>
-                <td th:text='${waterState.buildingId}'></td>
-                <td><input type='text' class='number' name='number' th:value='${waterState.number}' readonly='true'></td>
-                <td> <input type='button' class='button1' value='更新' th:id='${waterState.buildingId}'></td>
-                <td> <input type='button' class='button2' value='删除' th:id='${waterState.buildingId}'></td>
+                <td><input type="hidden" class="buildingId" name="buildingId" th:value="${waterState.buid}"></td>
+                <td th:text='${waterState.buid}'></td>
+                <td><input type='text' class='number' name='number' th:value='${waterState.wnum}' readonly='true'></td>
+                <td> <input type='button' class='button1' value='更新' th:id='${waterState.buid}'></td>
+                <td> <input type='button' class='button2' value='删除' th:id='${waterState.buid}'></td>
             </tr>
             </tbody>
         </table>

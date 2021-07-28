@@ -1,7 +1,6 @@
 package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Water;
-import cn.edu.guet.bean.WaterOrder;
 import cn.edu.guet.service.IWaterService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class WaterController {
     @ResponseBody
     public void updateAllWaterState(@RequestBody List<Water> waters){
         for(Water water : waters){
-            System.out.println(water.getBuildingId());
+            System.out.println(water.getBuid());
         }
     }
 
@@ -53,7 +52,7 @@ public class WaterController {
         return "test";
     }
 
-    @GetMapping("thymeleafWaterStates")
+    @GetMapping("WaterManage.do")
     public String thymeleafWaterStates(Model model){
         List<Water> waterStates = waterSeverce.getAllWaterState(1,3).getList();
         model.addAttribute("waterStates", waterStates);

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.WaterOrderMapper">
-    <insert id="insertWaterOrder" parameterType="cn.edu.guet.bean.WaterOrder">
-        INSERT INTO waterorder VALUES(null, #{username}, #{buildingId}, #{roomId}, #{number}, #{amount}, #{orderTime})
+    <insert id="insertWaterOrder" parameterType="cn.edu.guet.bean.Waterorder">
+        INSERT INTO waterorder VALUES(null, #{woUser}, #{buid}, #{woRoom}, #{woNum}, #{woMoney}, #{woTime})
     </insert>
 
-    <select id="getWaterOrderByUser" parameterType="string" resultType="cn.edu.guet.bean.WaterOrder">
+    <select id="getWaterOrderByUser" parameterType="string" resultType="cn.edu.guet.bean.Waterorder">
         SELECT * FROM waterorder WHERE userId = #{value}
     </select>
-    <select id="getWaterOrderByBuilding" resultType="cn.edu.guet.bean.WaterOrder">
-        SELECT * FROM waterorder WHERE buildingId = #{buildingId}
+    <select id="getWaterOrderByBuilding" resultType="cn.edu.guet.bean.Waterorder">
+        SELECT * FROM waterorder WHERE buildingId = #{buid}
     </select>
-    <select id="getWaterOrderByRoom" resultType="cn.edu.guet.bean.WaterOrder">
-        SELECT * FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId}
+    <select id="getWaterOrderByRoom" resultType="cn.edu.guet.bean.Waterorder">
+        SELECT * FROM waterorder WHERE buildingId = #{buid} AND roomId = #{woRoom}
     </select>
-    <select id="getAllWaterOrder" resultType="cn.edu.guet.bean.WaterOrder">
+    <select id="getAllWaterOrder" resultType="cn.edu.guet.bean.Waterorder">
         SELECT * FROM waterorder
     </select>
     <select id="getAllWaterOrderCount" resultType="int">
@@ -24,10 +24,10 @@
         SELECT COUNT(*) FROM waterorder WHERE buildingId = #{value}
     </select>
     <select id="getRoomWaterOrderCount" resultType="int">
-        SELECT COUNT(*) FROM waterorder WHERE buildingId = #{buildingId} AND roomId = #{roomId}
+        SELECT COUNT(*) FROM waterorder WHERE buildingId = #{buid} AND roomId = #{woRoom}
     </select>
 
-    <select id="getTest" resultType="cn.edu.guet.bean.WaterOrder">
+    <select id="getTest" resultType="cn.edu.guet.bean.Waterorder">
         SELECT * FROM waterorder
     </select>
 
