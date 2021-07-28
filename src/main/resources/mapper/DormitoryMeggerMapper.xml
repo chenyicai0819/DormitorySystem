@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.DormitoryMeggerMapper">
+    <select id="getDormitoryM" resultType="cn.edu.guet.bean.Dormitory">
+        select * from dormitory WHERE did = 10201
+    </select>
+    <select id="getDormBuid" resultType="cn.edu.guet.bean.Build">
+        SELECT * FROM build
+    </select>
+</mapper>

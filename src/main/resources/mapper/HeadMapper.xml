@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.HeadMapper">
+    <resultMap id="TestResultMap" type="cn.edu.guet.bean.Photo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="image" jdbcType="BLOB" property="image" />
+    </resultMap>
+
+    <insert id = "insertImage" parameterType="cn.edu.guet.bean.Photo">
+        insert into image(id,image) values(#{id},#{image})
+    </insert>
+    <update id="updateImage" parameterType="cn.edu.guet.bean.Photo">
+        update image set image=#{image} where id=#{id}
+    </update>
+    <select id="selectImageById" parameterType="Integer" resultType="cn.edu.guet.bean.Photo">
+        select * from image where id = #{id}
+    </select>
+</mapper>

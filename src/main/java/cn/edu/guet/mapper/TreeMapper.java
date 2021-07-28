@@ -1,5 +1,6 @@
 package cn.edu.guet.mapper;
 
+import cn.edu.guet.bean.Board;
 import cn.edu.guet.bean.Tree;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -12,4 +13,6 @@ import java.util.List;
 @Component
 public interface TreeMapper {
     List<Tree> getAllTree();
+
+    Board seeBoard();
 }

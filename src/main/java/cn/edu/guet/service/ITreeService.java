@@ -1,5 +1,6 @@
 package cn.edu.guet.service;
 
+import cn.edu.guet.bean.Board;
 import cn.edu.guet.bean.Tree;
 import org.springframework.stereotype.Service;
 
@@ -15,4 +16,5 @@ import java.util.List;
 
 public interface ITreeService {
     List<Tree> getAllTree();
+    Board seeBoard();
 }
