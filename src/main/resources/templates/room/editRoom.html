@@ -38,20 +38,21 @@
 <div class="wrapper">
   <div class="message">
     <h3 class="title">调整宿舍成员信息</h3><br><br>
-    <table border="1" cellspacing="0" width="500px">
+    <table border="1" cellspacing="0" width="500px" id="stuTable">
       <tr>
-        <th th:text="${rId}" colspan="4"></th>
+        <th th:text="${rId}" colspan="3"></th>
+        <th colspan="1"><a href="javascript:history.back()" id="fan">返回上一页</a></th>
       </tr>
       <tr>
-        <th width="125">床号</th>
-        <th width="125">学生</th>
+        <th width="100">床号</th>
+        <th width="100">学生</th>
         <th width="250" colspan="2">操作</th>
       </tr>
       <tr th:each="student,studentStat:${students}">
         <td th:text="'&nbsp;'+${student.rBed}"></td>
         <td th:text="'&nbsp;'+${student.sName}"></td>
-        <td th:width="125"><a class="change" th:value="${student.sId}" th:title="${student.rBed}" href="javascript:void(0)">&nbsp;调整宿舍</a></td>
-        <td><a class="add" th:value="${student.buid}" href="javascript:void(0);">&nbsp;添加宿舍成员</a></td>
+        <td th:width="100"><a class="change" th:value="${student.sId}" th:title="${student.rBed}" href="javascript:void(0)">调整宿舍</a></td>
+        <td><a class="add" th:value="${student.buid}" href="javascript:void(0);">添加宿舍成员</a></td>
       </tr>
     </table>
   </div>

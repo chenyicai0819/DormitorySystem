@@ -5,7 +5,7 @@
         SELECT * FROM build
     </select>
     <select id="viewRoom" parameterType="string" resultType="String">
-        SELECT DISTINCT(rId) FROM room WHERE buid=#{buId} AND rId LIKE CONCAT(#{buNo},'%')
+        SELECT DISTINCT(rId) FROM room WHERE buid=#{buId} AND rId LIKE CONCAT(#{buId},#{buNo},'%')
     </select>
     <select id="selectStudent" parameterType="string" resultType="cn.edu.guet.bean.Student">
         SELECT * FROM student WHERE rId=#{rId}
@@ -14,10 +14,10 @@
         UPDATE student SET rId=#{rId},rBed=#{rBed},buid=#{buId} WHERE sId=#{sId}
     </update>
     <update id="changeRoomStat_in" parameterType="string">
-        update room set isMan='1' where rId=#{rId} and rBed=#{rBed}
+        update room set hpeople='true' where rId=#{rId} and rBed=#{rBed}
     </update>
     <update id="changeRoomStat_out" parameterType="string">
-        update room set isMan='0' where rId=#{rId} and rBed=#{rBed}
+        update room set hpeople='false' where rId=#{rId} and rBed=#{rBed}
     </update>
 
     <resultMap id="resRoom" type="hashmap">
@@ -33,7 +33,7 @@
         (select
         rId,count(*) num
         from room
-        where isMan='1' and rId in
+        where hpeople='true' and rId in
         <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
             #{rIds}
         </foreach>
@@ -44,7 +44,7 @@
         select
         rId,count(*) num
         from room
-        where isMan='0' and rId in
+        where hpeople='false' and rId in
         <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
             #{rIds}
         </foreach>

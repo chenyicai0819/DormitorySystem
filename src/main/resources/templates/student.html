@@ -7,14 +7,19 @@
     <link rel="stylesheet"  th:href="@{/css/pages.css}"/>
     <script th:src="@{/js/student.js}"></script>
     <script th:src="@{/js/pageForlzf.js}"></script>
-  <script>
-    $(function (){
-      $("#uppull").click(function (){
-        $(".fileup").toggle();
-      })
-    })
+    <script th:inline="javascript">
 
-  </script>
+        $(function (){
+          $("#uppull").click(function (){
+            $(".fileup").toggle();
+          })
+          var retInfo = [[${retInfo}]];
+          if (null!=retInfo){
+            alert(retInfo);
+          }
+        })
+
+    </script>
 </head>
 <body id="body1" th:fragment="body1">
 <div>
@@ -22,11 +27,10 @@
         <input type="text" value="" id="text" class="text">
         <input type="button" value="搜索" id="search" class="search" >
         <input type="button" value="上传学生信息" id="uppull" class="uppull">
-      <form action="/import" method="post" enctype="multipart/form-data" id="form3">
-        <input type="file" name="file1" class="fileup" style="display: none">
+      <form action="/importStudent" method="post" enctype="multipart/form-data" id="form3">
+        <input type="file" name="file" class="fileup" style="display: none">
         <input type="submit" value="上传" class="fileup" style="display: none">
       </form>
-
 
     </div>
 

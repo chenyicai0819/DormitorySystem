@@ -44,4 +44,9 @@ public class WaterServiceImpl implements IWaterService {
         waterMapper.addWaterState(water);
     }
 
+    @Override
+    public void upWaterMoney(double money) {
+      waterMapper.upWaterMoney(money);
+    }
+
 }

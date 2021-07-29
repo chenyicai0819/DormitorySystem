@@ -55,6 +55,8 @@ public class WaterController {
     @GetMapping("WaterManage.do")
     public String thymeleafWaterStates(Model model){
         List<Water> waterStates = waterSeverce.getAllWaterState(1,3).getList();
+        double money=waterStates.get(0).getWprice();
+        model.addAttribute("money",money);
         model.addAttribute("waterStates", waterStates);
         return "thymeleafWaterStates";
     }
@@ -64,5 +66,16 @@ public class WaterController {
         PageInfo waterState = waterSeverce.getAllWaterState(pageNum, pageSize);
         model.addAttribute("waterStates", waterState.getList());
         return "thymeleafWaterStates::waterStateinfo";
+    }
+
+    @PostMapping("updataWaterMoney")
+    @ResponseBody
+    public String updataWaterMoney(double money,Model model){
+      waterSeverce.upWaterMoney(money);
+      List<Water> waterStates = waterSeverce.getAllWaterState(1,3).getList();
+      double money1=waterStates.get(0).getWprice();
+      model.addAttribute("money",money1);
+      model.addAttribute("waterStates", waterStates);
+      return "thymeleafWaterStates";
     }
 }

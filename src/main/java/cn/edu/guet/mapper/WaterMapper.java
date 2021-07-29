@@ -17,5 +17,5 @@ public interface WaterMapper {
 //    void updataWaterState(List<Water> waters);
     void delteWaterState(String buildingId);
     void addWaterState(Water water);
-
+    void upWaterMoney(double money);
 }

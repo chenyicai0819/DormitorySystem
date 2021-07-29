@@ -2,6 +2,7 @@ package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Repair;
 import cn.edu.guet.service.IRepairService;
+import cn.edu.guet.service.IRoomService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -22,26 +24,31 @@ public class RepairController {
 
     @Autowired
     private IRepairService repairService;
+    @Autowired
+    private IRoomService roomService;
 
     @GetMapping("RepairUp.do")
-    public String repairUp(Repair repair){
+    public String repairUp(Repair repair, HttpServletRequest request, HttpSession session){
         try {
             int RepairNum= repairService.repairSele()+1;
             repair.setReId(String.valueOf(RepairNum));
             Timestamp time=new Timestamp(System.currentTimeMillis());
             repair.setReTime(time);
             repair.setReStatus("未处理");
-            repair.setReUser("陈益财");
+            repair.setReUser((String) session.getAttribute("username"));
             repairService.repairUp(repair);
+            request.setAttribute("builds",roomService.viewBuild());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return "RepairMan";
     }
 
     @RequestMapping("RepairMan.do")
-    public String repairMan(){return "RepairMan";}
+    public String repairMan(HttpServletRequest request){
+      request.setAttribute("builds",roomService.viewBuild());
+      return "RepairMan";
+    }
 
     @GetMapping("RepairForUs.do")
     public String repairForUs(String reUser, HttpServletRequest request,Model model){

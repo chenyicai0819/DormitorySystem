@@ -20,7 +20,7 @@ public class RoomController {
     @Autowired
     private IRoomService roomService;
 
-    @GetMapping("viewRoom")
+    @GetMapping("DormitoryMessage.do")
     public String viewRoom(HttpServletRequest request){
         request.setAttribute("builds",roomService.viewBuild());
         return "room/viewRoom";

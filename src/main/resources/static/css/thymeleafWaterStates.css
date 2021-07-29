@@ -41,3 +41,8 @@
   font-family: "黑体";
   font-size: x-large;
 }
+#money{
+  position: absolute;
+  left: 500px;
+  top: 30px;
+}

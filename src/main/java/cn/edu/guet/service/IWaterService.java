@@ -12,5 +12,5 @@ public interface IWaterService {
     void updataWaterState(Water water);
     void delteWaterState(String buildingId);
     void addWaterState(Water water);
-
+    void upWaterMoney(double money);
 }

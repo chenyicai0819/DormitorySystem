@@ -133,7 +133,27 @@
                     $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
                 }
             }
-
+            $("#upWater").click(function (){
+              var value = $(this).attr("value");
+              if(value == "更新"){
+                $("#upWaterInput").attr("readonly", false);
+                $(this).attr("value", "确定");
+              }else if(value == "确定"){
+                $("#upWaterInput").attr("readonly", true);
+                var number = $("#upWaterInput").attr("value");  // 获取更新前的数据
+                // 如果数据有变化 更新数据
+                if(number != $("#upWaterInput").val()){
+                  $.ajax({
+                    url : "updataWaterMoney?money=" + $("#upWaterInput").val(),
+                    type : "post",
+                    success : function(){
+                      alert("更新成功");
+                    }
+                  })
+                }
+                $(this).attr("value", "更新");
+              }
+            })
         })
 
 
@@ -161,6 +181,12 @@
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <div id="money">
+      <span>当前饮用水价格:</span>
+      <input type='text' class='number' name='number' th:value='${money}' readonly='true' id="upWaterInput">
+      <input type='button' class='button1' value='更新' id="upWater">
     </div>
     <div class="lq-page"></div>
 </div>

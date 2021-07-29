@@ -26,7 +26,7 @@ public class BoardController {
         return "board/viewBoard";
     }
 
-    @GetMapping("editBoard")
+    @GetMapping("EditAnnoun.do")
     public String editBoard(HttpServletRequest request,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         PageHelper.startPage(pageNum,5);
         List<Board> boardList=boardService.viewBoard();

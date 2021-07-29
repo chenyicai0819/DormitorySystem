@@ -56,13 +56,8 @@
         <div class="repairManDiv">
             <label for="reBuild" class="reLable">所在楼栋：</label>
             <select class="reSelect" id="reBuild">
-                <option value="25栋">25栋</option>
-                <option value="26栋">26栋</option>
-                <option value="27栋">27栋</option>
-                <option value="28栋">28栋</option>
-                <option value="29栋">29栋</option>
-                <option value="30栋">30栋</option>
-                <option value="室外">室外</option>
+                <option th:each="build,buildStat:${builds}" th:selected="${buId eq build.buid}" th:text="${build.buid}+栋"></option>
+
             </select>
         </div>
 

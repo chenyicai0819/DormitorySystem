@@ -7,12 +7,15 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dormitory?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
-    mvc:
-    view:
-      prefix: /WEB-INF/pages/
-      suffix: .jsp
+    username: chenyicai
+    password: cyc1234
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 30MB  #设置上传文件的大小
+      max-request-size: 30MB
+
 
 #日志级别（一般设置为INFO）
 logging:
