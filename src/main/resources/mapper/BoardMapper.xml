@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.BoardMapper">
+    <select id="viewBoard" resultType="cn.edu.guet.bean.Board">
+        select * from board order by boTime desc
+    </select>
+    <select id="selectBoard" parameterType="string" resultType="cn.edu.guet.bean.Board">
+        SELECT * FROM board WHERE boId=#{boId}
+    </select>
+    <insert id="saveBoard" parameterType="cn.edu.guet.bean.Board">
+        INSERT INTO board (boId,boName,boContent,boTime,boUser) VALUES(#{boId},#{boName},#{boContent},#{boTime},#{boUser})
+    </insert>
+    <delete id="deleteBoard" parameterType="string">
+        DELETE FROM board WHERE boId=#{boId}
+    </delete>
+    <update id="saveModifyBoard" parameterType="cn.edu.guet.bean.Board">
+        UPDATE board SET boName=#{boName},boContent=#{boContent},boTime=#{boTime},boUser=#{boUser} WHERE boId=#{boId}
+    </update>
+    <select id="searchBoard" parameterType="cn.edu.guet.bean.Board" resultType="cn.edu.guet.bean.Board">
+        SELECT * FROM board
+        <where>
+            <if test="boName!=null and boName!=''">
+                AND boName LIKE CONCAT('%',#{boName},'%')
+            </if>
+            <if test="boUser!=null and boUser!=''">
+                AND boUser LIKE CONCAT('%',#{boUser},'%')
+            </if>
+            <if test="boTime!=null and boTime!=''">
+                AND boTime=#{boTime}
+            </if>
+        </where>
+    </select>
+</mapper>

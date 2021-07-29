@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+}
+.first{
+    text-align: center;
+}
+.wrapper{
+    margin: 0 auto;
+    width: 600px;
+    background-color: aqua;
+    position: relative;
+    height: 600px;
+}
+label{
+    position: absolute;
+    left: 30px;
+}
+input{
+    width: 400px;
+    position: absolute;
+    right: 30px;
+    height: 15px;
+}
+#submit{
+    height: 25px;
+}
+textarea{
+    position: absolute;
+    right: 30px;
+    width: 400px;
+}

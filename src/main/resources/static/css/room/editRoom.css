@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+}
+.wrapper{
+    width: 500px;
+    height: 500px;
+    position: relative;
+}
+.title{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.message{
+    z-index: 1000;
+}
+.addStu{
+    display: none;
+    width: 300px;
+    position: absolute;
+    background-color: azure;
+    top: 100px;
+    left: 100px;
+    z-index: 1025;
+}
+.close{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.submit{
+    position: absolute;
+    top: 120px;
+    left: 165px;
+}
+.changeStu{
+    display: none;
+    width: 300px;
+    position: absolute;
+    background-color: azure;
+    top: 100px;
+    left: 100px;
+    z-index: 1025;
+}
+.close1{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}
+.submit1{
+    position: absolute;
+    top: 120px;
+    left: 165px;
+}
+.mask{
+    width: 1000px;
+    height: 600px;
+    position: absolute;
+    z-index: 1020;
+    left: -200px;
+    top: 0px;
+    display: none;
+}
+.change,.add{
+    display: block;
+    background-color: aqua;
+}
