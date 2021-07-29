@@ -23,7 +23,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-thymeleaf:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
@@ -35,7 +34,6 @@
     <orderEntry type="library" name="Maven: org.thymeleaf:thymeleaf:3.0.12.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.attoparser:attoparser:2.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.31" level="project" />
     <orderEntry type="library" name="Maven: org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-json:2.5.2" level="project" />
@@ -98,5 +96,21 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.48" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-jasper:9.0.48" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.eclipse.jdt:ecj:3.18.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.17" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.17" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.17" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.virtuald:curvesapi:1.04" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.9" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.31" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.5.2" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-starter:1.2.13" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-autoconfigure:1.2.13" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.1.11" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.23" level="project" />
   </component>
 </module>

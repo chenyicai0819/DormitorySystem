@@ -10,6 +10,21 @@ public class Student {
     private String sName;
     private String sSex;
     private String sCollege;
+
+    public Student(int sId, String roleId, String buid, String rId, String rBed, String sPwd, String sName, String sSex, String sCollege, String sGrade, String sPhone) {
+        this.sId = sId;
+        this.roleId = roleId;
+        this.buid = buid;
+        this.rId = rId;
+        this.rBed = rBed;
+        this.sPwd = sPwd;
+        this.sName = sName;
+        this.sSex = sSex;
+        this.sCollege = sCollege;
+        this.sGrade = sGrade;
+        this.sPhone = sPhone;
+    }
+
     private String sGrade;
     private String sPhone;
 

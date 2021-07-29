@@ -73,3 +73,17 @@
     height: 80px;
     background-color:darkcyan;
 }
+.inputButton{
+    width: 100px;
+    height: 30px;
+    background-color: #00a8ff;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px;
+    border: 1px solid #dcdde1;
+    opacity: 1;
+    position: relative;
+}
+.inputButton:active {
+    opacity: .8;
+}

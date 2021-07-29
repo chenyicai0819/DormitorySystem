@@ -13,6 +13,19 @@ spring:
     view:
       prefix: /WEB-INF/pages/
       suffix: .jsp
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 30MB  #设置上传文件的大小
+      max-request-size: 30MB
+
+
+pagehelper:
+  helper-dialect: mysql # 指定数据库类型
+  reasonable: true
+  params: count=countSql
+  support-methods-arguments: true
 
 #日志级别（一般设置为INFO）
 logging:
