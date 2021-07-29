@@ -13,6 +13,7 @@ public interface StudentMapper {
     void deleteStudent(String sId);
     void updateStudent(Student student);
     void addStudent(Student student);
+    void upRoomisPeople(HashMap<String,Object> map);
     List<Student> searchStudent(int sId);
     int getStudentCount();
 }

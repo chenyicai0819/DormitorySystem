@@ -4,7 +4,7 @@ import cn.edu.guet.bean.Room;
 
 import java.util.List;
 
-public interface IRoomService {
+public interface IRoomManageService {
     List<Room> getRoom(int currentPage,int allPage);
     List<Room> getrId(Room room);
     //void updateRoom(Room room );

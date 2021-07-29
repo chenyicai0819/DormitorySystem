@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface RoomMapper {
+public interface RoomManageMapper {
     List<Room> getRoom(HashMap<String,Integer> map);
     void updateRoom(Room room);
     void addRoom(Room room);

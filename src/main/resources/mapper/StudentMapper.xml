@@ -14,6 +14,9 @@
         sSex=#{sSex},sCollege=#{sCollege},sGrade=#{sGrade},sPhone=#{sPhone}
         where sId=#{sId}
     </update>
+    <update id="upRoomisPeople" parameterType="hashmap">
+      UPDATE room SET hpeople='true' WHERE rBed=#{bed} AND rId=#{rid}
+    </update>
 
     <insert id="addStudent" parameterType="cn.edu.guet.bean.Student">
         INSERT INTO student values(#{sId},#{roleId},#{buid},#{rId},#{rBed},#{sPwd},#{sName},#{sSex},#{sCollege},#{sGrade},#{sPhone})

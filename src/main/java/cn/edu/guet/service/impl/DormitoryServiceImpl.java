@@ -6,6 +6,7 @@ import cn.edu.guet.mapper.OperationlogMapper;
 import cn.edu.guet.service.IDormitoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ private OperationlogMapper operationlogMapper;
     }
 
     @Override
+    @Transactional
     public void deleteDormitory(String dId) {
         String opName="删除了一条舍管信息";
         operationlogMapper.insertLog(opName);
@@ -33,6 +35,7 @@ private OperationlogMapper operationlogMapper;
     }
 
     @Override
+    @Transactional
     public void updateDormitory(Dormitory dormitory) {
         String opName="修改了一条舍管信息";
         operationlogMapper.insertLog(opName);
@@ -40,6 +43,7 @@ private OperationlogMapper operationlogMapper;
     }
 
     @Override
+    @Transactional
     public void addDormitory(Dormitory dormitory) {
         String opName="添加了一条舍管信息";
         operationlogMapper.insertLog(opName);
@@ -48,8 +52,6 @@ private OperationlogMapper operationlogMapper;
 
     @Override
     public List<Dormitory> searchDormitory(String dId) {
-        String opName="查询了一条舍管信息";
-        operationlogMapper.insertLog(opName);
          return dormitoryMapper.searchDormitory(dId);
     }
 

@@ -22,7 +22,7 @@ public class DormitoryInfController {
 
     @GetMapping("DormitoryInform.do")
     public String getStuInf(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iDormitoryInfService.getStuInf();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -32,7 +32,7 @@ public class DormitoryInfController {
     @GetMapping("updateStuInf")
     public String updateStuInf(Model model, Student student,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         iDormitoryInfService.updateStuInf(student);
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iDormitoryInfService.getStuInf();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -42,7 +42,7 @@ public class DormitoryInfController {
     @GetMapping("addStuInf")
     public String addStuInf(Model model, Student student,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         iDormitoryInfService.addStuInf(student);
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iDormitoryInfService.getStuInf();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -55,7 +55,7 @@ public class DormitoryInfController {
     public String search(Model model, String buid,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         iDormitoryInfService.search(buid);
         System.out.println("dada"+buid);
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iDormitoryInfService.search(buid);
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -64,7 +64,7 @@ public class DormitoryInfController {
     }
     @GetMapping("pagination3")
     public String pagination(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iDormitoryInfService.getStuInf();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);

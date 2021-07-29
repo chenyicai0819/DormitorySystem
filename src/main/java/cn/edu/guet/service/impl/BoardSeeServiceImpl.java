@@ -1,9 +1,8 @@
 package cn.edu.guet.service.impl;
 
 import cn.edu.guet.bean.Board;
-import cn.edu.guet.mapper.BoardMapper;
-import cn.edu.guet.service.IBoardService;
-import org.apache.ibatis.session.SqlSession;
+import cn.edu.guet.mapper.BoardSeeMapper;
+import cn.edu.guet.service.IBoardSeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,20 +17,20 @@ import java.util.List;
  */
 
 @Service
-public class BoardServiceImpl implements IBoardService {
+public class BoardSeeServiceImpl implements IBoardSeeService {
 
     @Autowired
-    private BoardMapper boardMapper;
+    private BoardSeeMapper boardSeeMapper;
 
     @Override
     public List<Board> seeBoard(int curPage) {
         int start=(curPage-1)*5;
-        return boardMapper.seeBoard(start);
+        return boardSeeMapper.seeBoard(start);
     }
 
     @Override
     public int seeBoardPage() {
-        return boardMapper.seeBoardPage();
+        return boardSeeMapper.seeBoardPage();
     }
 
 }

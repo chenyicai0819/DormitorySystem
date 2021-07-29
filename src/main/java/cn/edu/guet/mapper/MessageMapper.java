@@ -1,5 +1,6 @@
 package cn.edu.guet.mapper;
 
+import cn.edu.guet.bean.Dormitory;
 import cn.edu.guet.bean.Message;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,4 +16,5 @@ public interface MessageMapper {
     void sendMessage(Message message);
     void deleteMessage(String messageId);
     void readMessage(int messageId);
+    List<Dormitory> seleAunt();
 }

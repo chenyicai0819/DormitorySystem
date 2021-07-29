@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet"  th:href="@{css/page.css}">
+    <link rel="stylesheet"  th:href="@{css/pages.css}">
+    <link rel="stylesheet"  th:href="@{css/thymeleafWaterStates.css}">
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <script th:inline="javascript">
         $(function (){
@@ -107,7 +108,7 @@
             // 提交单条数据更新
             function updataWaterState(buildingId, number){
                 $.ajax({
-                    url : "updataWaterState?buildingId=" + buildingId + "&number=" + number,
+                    url : "updataWaterState?buid=" + buildingId + "&wnum=" + number,
                     type : "post",
                     success : function(){
                         alert("更新成功");

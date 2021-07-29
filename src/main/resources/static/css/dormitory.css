@@ -1,6 +1,7 @@
 .table1 {
     border-collapse: collapse;
     width: 100%;
+    margin-top: 10px;
 }
 .table1 th, td {
 
@@ -34,7 +35,7 @@
     background-color: aliceblue;
     border-collapse: collapse;
 }
-.search{
+.search, .uppull{
     width: 100px;
     height: 30px;
     background-color: #00a8ff;
@@ -47,6 +48,9 @@
 }
 .search:active {
     opacity: .8;
+}
+.uppull:active {
+  opacity: .8;
 }
 .text{
     border-radius: 3px;
@@ -101,4 +105,9 @@
 }
 #bottom1:active {
     opacity: .8;
+}
+#form3{
+  position: absolute;
+  left: 550px;
+  top: 11px;
 }

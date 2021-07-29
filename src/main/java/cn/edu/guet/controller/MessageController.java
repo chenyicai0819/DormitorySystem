@@ -1,5 +1,6 @@
 package cn.edu.guet.controller;
 
+import cn.edu.guet.bean.Dormitory;
 import cn.edu.guet.bean.Message;
 import cn.edu.guet.bean.Water;
 import cn.edu.guet.service.IMessageService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -57,15 +59,14 @@ public class MessageController {
     }
 
     @GetMapping("Feedback.do")
-    public String Feedback(Model model){
-        String receiveId = "10324";
-        PageInfo messages = messageService.getReceiveMessages(receiveId, 1, 5);
-        model.addAttribute("messages", messages.getList());
-        return "thymeleafMessages";
+    public String Feedback(Model model,HttpSession session,HttpServletRequest request){
+      request.setAttribute("aunt",messageService.seleAunt());
+      return "sendMessage";
     }
   @GetMapping("SeeFeedback.do")
-  public String SeeFeedback(Model model){
-    String receiveId = "10324";
+  public String SeeFeedback(Model model,HttpSession session){
+
+    String receiveId = (String) session.getAttribute("userId");
     PageInfo messages = messageService.getReceiveMessages(receiveId, 1, 5);
     model.addAttribute("messages", messages.getList());
     return "thymeleafMessages";
@@ -77,4 +78,5 @@ public class MessageController {
         model.addAttribute("messages", messages.getList());
         return "thymeleafMessages::messageinfo";
     }
+
 }

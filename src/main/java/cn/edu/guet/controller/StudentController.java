@@ -21,7 +21,7 @@ public class StudentController {
     private IStudentService iStudentService;
     @GetMapping("StuManage.do")
     public String getStudent(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
        // 默认从第一页开始，每页展示五条数据
         List<Student> userList = iStudentService.getStudent();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
@@ -32,7 +32,7 @@ public class StudentController {
     @RequestMapping("deleteStudent")
     public String deleteStudent(Model model,String sId,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         iStudentService.deleteStudent(sId);
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iStudentService.getStudent();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -42,7 +42,7 @@ public class StudentController {
     @RequestMapping("updateStudent")
     public String deleteStudent(Model model, Student student,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         iStudentService.updateStudent(student);
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iStudentService.getStudent();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -59,10 +59,10 @@ public class StudentController {
         int allPage=iStudentService.getStudentCount();
         model.addAttribute("maxPage",allPage);
         System.out.println("总数目"+allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         model.addAttribute("allPage",allPage);
         System.out.println("总页目"+allPage);
@@ -72,7 +72,7 @@ public class StudentController {
     }
     @PostMapping("searchStudent")
     public String searchStudent(Model model,int sId,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         List<Student> userList = iStudentService.searchStudent(sId);
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
@@ -81,7 +81,7 @@ public class StudentController {
     }
     @GetMapping("pagination2")
     public String pagination(Model model,HttpServletRequest request, @RequestParam(defaultValue = "1", value = "pageNum")Integer pageNum){
-        PageHelper.startPage(pageNum,4);
+        PageHelper.startPage(pageNum,10);
         System.out.println(pageNum);
         List<Student> userList = iStudentService.getStudent();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);

@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2021/7/13 10:39
  * @since 1.0
  */
-public interface IBoardService {
+public interface IBoardSeeService {
     List<Board> seeBoard(int curPage);
     int seeBoardPage();
 }

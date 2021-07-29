@@ -24,15 +24,15 @@ private IDormitoryService iDormitoryService;
         int allPage=iDormitoryService.getDormitoryCount();
         model.addAttribute("maxPage",allPage);
         System.out.println("总数目"+allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         model.addAttribute("allPage",allPage);
         System.out.println("总页目"+allPage);
 
-        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,4));
+        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,10));
         return "dormitory";
     }
     @RequestMapping("deleteDormitory")
@@ -44,15 +44,15 @@ private IDormitoryService iDormitoryService;
         int allPage=iDormitoryService.getDormitoryCount();
         model.addAttribute("maxPage",allPage);
         System.out.println("总数目"+allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         model.addAttribute("allPage",allPage);
         System.out.println("总页目"+allPage);
 
-        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,4));
+        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,10));
         return "dormitory";
     }
     @PostMapping("updateDormitory")
@@ -63,13 +63,13 @@ private IDormitoryService iDormitoryService;
         iDormitoryService.updateDormitory(dormitory);
         int allPage=iDormitoryService.getDormitoryCount();
         model.addAttribute("maxPage",allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         model.addAttribute("allPage)",allPage);
-        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,4));
+        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,10));
         return "dormitory";
     }
     @RequestMapping("addDormitory")
@@ -81,15 +81,15 @@ private IDormitoryService iDormitoryService;
         int allPage=iDormitoryService.getDormitoryCount();
         model.addAttribute("maxPage",allPage);
         System.out.println("总数目"+allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         model.addAttribute("allPage",allPage);
         System.out.println("总页目"+allPage);
 
-        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,4));
+        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,10));
         return "dormitory";
     }
 
@@ -103,13 +103,13 @@ private IDormitoryService iDormitoryService;
     public String pagination1(Model model,Integer currentPage){
         int allPage=iDormitoryService.getDormitoryCount();
         model.addAttribute("maxPage",allPage);
-       if(allPage%4==0){
-            allPage=allPage/4;
+       if(allPage%10==0){
+            allPage=allPage/10;
         }else {
-           allPage=allPage/4+1;
+           allPage=allPage/10+1;
       }
         model.addAttribute("allPage)",allPage);
-        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,4));
+        model.addAttribute("dormitory",iDormitoryService.getDormitory(currentPage,10));
         return "dormitory::table1";
    }
 }

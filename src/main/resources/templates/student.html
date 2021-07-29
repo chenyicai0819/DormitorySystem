@@ -4,15 +4,30 @@
     <title>Student</title>
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet"  th:href="@{/css/dormitory.css}"/>
-    <link rel="stylesheet"  th:href="@{/css/page.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/pages.css}"/>
     <script th:src="@{/js/student.js}"></script>
     <script th:src="@{/js/pageForlzf.js}"></script>
+  <script>
+    $(function (){
+      $("#uppull").click(function (){
+        $(".fileup").toggle();
+      })
+    })
+
+  </script>
 </head>
 <body id="body1" th:fragment="body1">
 <div>
     <div class="ser">
         <input type="text" value="" id="text" class="text">
         <input type="button" value="搜索" id="search" class="search" >
+        <input type="button" value="上传学生信息" id="uppull" class="uppull">
+      <form action="/import" method="post" enctype="multipart/form-data" id="form3">
+        <input type="file" name="file1" class="fileup" style="display: none">
+        <input type="submit" value="上传" class="fileup" style="display: none">
+      </form>
+
+
     </div>
 
     <table th:class="table1" border="1" th:id="table1" th:fragment="table1">

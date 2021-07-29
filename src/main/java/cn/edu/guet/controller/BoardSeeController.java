@@ -1,14 +1,12 @@
 package cn.edu.guet.controller;
 
-import cn.edu.guet.bean.Board;
-import cn.edu.guet.service.IBoardService;
+import cn.edu.guet.service.IBoardSeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author George
@@ -19,10 +17,10 @@ import java.util.List;
  */
 
 @Controller
-public class BoardController {
+public class BoardSeeController {
 
     @Autowired
-    private IBoardService boardService;
+    private IBoardSeeService boardService;
 
     @RequestMapping("SeeAnnoun.do")
     public String SeeAnnoun(HttpServletRequest request, Model model){

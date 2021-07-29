@@ -13,7 +13,7 @@
     </insert>
 
     <update id="updataWaterState" parameterType="cn.edu.guet.bean.Water">
-        UPDATE water SET wprice=#{wprice},number=#{wnum} WHERE buid=#{buid}
+        UPDATE water SET wprice=#{wprice},wnum=#{wnum} WHERE buid=#{buid}
     </update>
 
     <delete id="delteWaterState" parameterType="string">

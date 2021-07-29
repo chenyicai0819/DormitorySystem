@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Mapper
-public interface BoardMapper {
+public interface BoardSeeMapper {
     List<Board> seeBoard(int start);
     int seeBoardPage();
 }

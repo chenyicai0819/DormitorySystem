@@ -1,5 +1,6 @@
 package cn.edu.guet.service.impl;
 
+import cn.edu.guet.bean.Dormitory;
 import cn.edu.guet.bean.Message;
 import cn.edu.guet.mapper.MessageMapper;
 import cn.edu.guet.service.IMessageService;
@@ -29,7 +30,7 @@ public class MessageServiceImpl implements IMessageService {
     public PageInfo getReceiveMessages(String receiveId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Message> messages = messageMapper.getReceiveMessages(receiveId);
-        return new PageInfo(messages);
+      return new PageInfo(messages);
     }
 
 
@@ -48,5 +49,10 @@ public class MessageServiceImpl implements IMessageService {
     public void readMessage(int messageId) {
         messageMapper.readMessage(messageId);
     }
+
+  @Override
+  public List<Dormitory> seleAunt() {
+    return messageMapper.seleAunt();
+  }
 
 }

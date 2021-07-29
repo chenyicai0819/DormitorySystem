@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet"  th:href="@{css/page.css}">
+    <link rel="stylesheet"  th:href="@{css/pages.css}">
     <link rel="stylesheet"  th:href="@{css/viewMessages.css}">
+  <link rel="stylesheet"  th:href="@{css/thymeleafMessages.css}">
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
     <script th:inline="javascript">
         $(function (){
             var pageNum = 1;
             var pageSize = 3;
             var lastPage;
-            var receiveId = "10324";
+            var receiveId = "<%=session.getAttribute('userId')%>";
 
-            $.ajax({
+          $.ajax({
                 url:"getReceiveMessages?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
                 async: false,
                 method: 'post',
@@ -100,7 +101,8 @@
             $("#messageMain").on('click', '#read', function(){
                 $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
                     if($(this).parent().siblings(".ckeckRead").attr("type") == '0'){
-                        readMessage($(this).attr("value"));
+                      console.log("aaa");
+                      readMessage($(this).attr("value"));
                         view()
                     }
                 })
@@ -168,23 +170,21 @@
                     $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
                 }
             }
-
         })
-
-
     </script>
 </head>
 <body id="body">
 <div>
 <!--        <input type="button" id="test111" value="显示">-->
     <div id="messageMain" class="messageinfo" th:fragment="messageinfo">
-        <table id="messageTable">
-            <input type="button" id="delete" value="删除">
-            <input type="button" id="read" value="标记为已读">
-            <input type="button" id="readAll" value="全部标记为已读">
+      <input type="button" id="delete" value="删除" class="button1">
+      <input type="button" id="read" value="标记为已读" class="button1">
+      <input type="button" id="readAll" value="全部标记为已读" class="button1">
+        <table id="messageTable" class="messageTable">
+
 <!--            <input type="button" id="viewReceive" value="查看接收">-->
 <!--            <input type="button" id="viewSend" value="查看发送">-->
-            <br>
+
             <thead>
             <tr>
                 <th><input type='checkbox' id='setCheckBox'/></th>

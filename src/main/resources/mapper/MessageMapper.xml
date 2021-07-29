@@ -9,8 +9,11 @@
     <select id="getReceiveMessages" parameterType="string" resultType="cn.edu.guet.bean.Message">
         SELECT * FROM Messages WHERE receiveId = #{value}
     </select>
+    <select id="seleAunt" resultType="cn.edu.guet.bean.Dormitory">
+      SELECT * FROM dormitory
+    </select>
 
-    <insert id="sendMessage" parameterType="cn.edu.guet.bean.Message">
+  <insert id="sendMessage" parameterType="cn.edu.guet.bean.Message">
         INSERT INTO Messages VALUES (0, #{sendId}, #{receiveId}, #{title}, #{content}, #{isRead}, #{sendTime})
     </insert>
 

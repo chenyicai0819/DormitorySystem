@@ -1,34 +1,33 @@
 package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Room;
-import cn.edu.guet.service.IRoomService;
+import cn.edu.guet.service.IRoomManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RoomController {
+public class RoomMenageController {
     @Autowired
-    private IRoomService iRoomService;
+    private IRoomManageService iRoomManageService;
     @RequestMapping("BuildManage.do")
     public String getRoom(Model model,Integer currentPage){
         if(currentPage==null){
             currentPage=1;
         }
-    int allPage=iRoomService.getRoomPage();
+    int allPage= iRoomManageService.getRoomPage();
     System.out.println("总数目"+allPage);
     model.addAttribute("maxPage",allPage);
-    if(allPage%4==0){
-        allPage=allPage/4;
+    if(allPage%10==0){
+        allPage=allPage/10;
     }else{
-        allPage=allPage/4+1;
+        allPage=allPage/10+1;
     }
         System.out.println("总页数"+currentPage);
-        model.addAttribute("rooms",iRoomService.getRoom(currentPage,4));
+        model.addAttribute("rooms", iRoomManageService.getRoom(currentPage,10));
         model.addAttribute("allPage",allPage);
         return "room";
     }
@@ -47,27 +46,27 @@ public class RoomController {
 //    }
     @PostMapping("addRoom")
     public String addRoom(Model model, Room room){
-        iRoomService.addRoom(room);
-        model.addAttribute("rooms",iRoomService.getRoom(0,0));
+        iRoomManageService.addRoom(room);
+        model.addAttribute("rooms", iRoomManageService.getRoom(0,0));
 
         return "room";
     }
     @RequestMapping("deleteRoom")
     public String deleteRoom(Model model, Room room,Integer currentPage){
-        iRoomService.deleteRoom(room);
+        iRoomManageService.deleteRoom(room);
         if(currentPage==null){
             currentPage=1;
         }
-        int allPage=iRoomService.getRoomPage();
+        int allPage= iRoomManageService.getRoomPage();
         System.out.println("总数目"+allPage);
         model.addAttribute("maxPage",allPage);
-        if(allPage%4==0){
-            allPage=allPage/4;
+        if(allPage%10==0){
+            allPage=allPage/10;
         }else{
-            allPage=allPage/4+1;
+            allPage=allPage/10+1;
         }
         System.out.println("总页数"+currentPage);
-        model.addAttribute("rooms",iRoomService.getRoom(currentPage,4));
+        model.addAttribute("rooms", iRoomManageService.getRoom(currentPage,10));
         model.addAttribute("allPage",allPage);
         return "room";
     }
@@ -80,16 +79,16 @@ public class RoomController {
 //    }
 @RequestMapping("pagination") //分页
 public String pagination(Model model,Integer currentPage){
-    int allPage=iRoomService.getRoomPage();
+    int allPage= iRoomManageService.getRoomPage();
     System.out.println("总数目"+allPage);
     model.addAttribute("maxPage",allPage);//传总数目
-    if(allPage%4==0){
-        allPage=allPage/4;
+    if(allPage%10==0){
+        allPage=allPage/10;
     }else{
-        allPage=allPage/4+1;
+        allPage=allPage/10+1;
     }
     System.out.println("总页数"+currentPage);
-    model.addAttribute("rooms",iRoomService.getRoom(currentPage,4));
+    model.addAttribute("rooms", iRoomManageService.getRoom(currentPage,10));
     model.addAttribute("allPage",allPage);//传总页数
     return "room::table1";
 }

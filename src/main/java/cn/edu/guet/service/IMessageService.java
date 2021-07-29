@@ -1,5 +1,6 @@
 package cn.edu.guet.service;
 
+import cn.edu.guet.bean.Dormitory;
 import cn.edu.guet.bean.Message;
 import com.github.pagehelper.PageInfo;
 
@@ -11,4 +12,5 @@ public interface IMessageService {
     void sendMessage(Message message);
     void deleteMessage(String messageId);
     void readMessage(int messageId);
+    List<Dormitory> seleAunt();
 }
