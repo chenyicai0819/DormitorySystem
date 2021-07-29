@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Dormitory</title>
+    <link rel="stylesheet"  th:href="@{/css/dormitory.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/pages.css}"/>
+    <script th:src="@{/js/dormitory.js}"></script>
+    <script th:src="@{/js/pageForlzf.js}"></script>
+</head>
+
+<body>
+<div class="ser">
+    <input type="text" value="" id="text" class="text">
+    <input type="button" value="搜索" id="search" class="search">
+</div >
+
+    <table class="table1" border="1" th:fragment="table1" th:id="table1"  >
+        <tr>
+            <th>账号</th>
+            <th>角色</th>
+            <th>楼栋</th>
+            <th>舍管姓名</th>
+            <th>舍管登入密码</th>
+            <th>舍管电话</th>
+            <th colspan="2">操作</th>
+
+        </tr>
+        <tr th:each="dormitory,dormitoryStat :${dormitory}">
+            <td th:text="${dormitory.dId}" ></td>
+            <td th:text="${dormitory.roleId}" ></td>
+            <td th:text="${dormitory.buid}" ></td>
+            <td th:text="${dormitory.dName}" ></td>
+            <td th:text="${dormitory.dPwd}"></td>
+            <td th:text="${dormitory.dPhone}"></td>
+            <td> <a href="javascript:void(0)" class="update1">修改</a></td>
+            <td><a th:href="@{deleteDormitory(dId=${dormitory.dId})}">删除</a></td>
+        </tr>
+    </table>
+<div>
+    <input type="submit" id="submit" value="添加"  class="submit">
+    <input type="submit" id="return" value="返回"  class="return" style="position:relative;float:right;display:none" >
+</div>
+
+<form    class="form1" id="form1" >
+    账号:<input type="text" id="dId" value="" class="add">
+    角色:<input type="text" id="roleId" value="" class="add">
+    楼栋:<input type="text" id="buid" value="" class="add">
+    舍管姓名:<input type="text" id="dName" value="" class="add">
+    舍管登入密码:<input type="text" id="dPwd" value="" class="add">
+    舍管电话:<input type="text" id="dPhone" value="" class="add">
+    <br>
+    <input type="button" name="" value="修改"  id="bottom1" >
+</form>
+<form   class="form2" id="form2">
+    账号:<input type="text" id="dId2" value="" class="add">
+    角色:<input type="text" id="roleId2" value="" class="add">
+    楼栋:<input type="text" id="buid2" value="" class="add">
+    舍管姓名:<input type="text" id="dName2" value="" class="add">
+    舍管登入密码:<input type="text" id="dPwd2" value="" class="add">
+    舍管电话:<input type="text" id="dPhone2" value=""class="add">
+    <br>
+    <input type="button" name="" value="确定"  id="bottom2" >
+</form>
+<div class="lq-page" ></div>
+
+<div th:text="${maxPage}" style="display: none"></div>
+<div th:text="${allPage}" id="allPage" style="display: none"></div>
+</body>
+</html>

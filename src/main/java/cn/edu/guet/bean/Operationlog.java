@@ -42,7 +42,7 @@ public class Operationlog {
 
     @Override
     public String toString() {
-        return "Operationlog{" +
+        return "OperationlogMapper{" +
                 "opId='" + opId + '\'' +
                 ", opName='" + opName + '\'' +
                 ", opUser='" + opUser + '\'' +

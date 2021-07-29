@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"  th:href="@{css/pages.css}">
+    <link rel="stylesheet"  th:href="@{css/thymeleafWaterStates.css}">
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:inline="javascript">
+        $(function (){
+            var pageNum = 1;
+            var pageSize = 3;
+            var lastPage;
+
+            $.ajax({
+                url:'getAllWaterState?pageNum=' + pageNum + '&pageSize=' + pageSize,
+                async: false,
+                method: 'post',
+                success:function(data) {
+                    setSelect(data);
+                    lastPage = data.navigateLastPage;
+                }
+            })
+
+            /*$("#waterOrder").on('click', '#test111', function(){
+                view();
+            })*/
+
+            function view(){
+                $.ajax({
+                    url:"getWaterStateThymeleaf?pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        console.log(data);
+                        $(".waterStateinfo").html(data)
+                    }
+                })
+            }
+
+            // 点击页码
+            $(".lq-page").on('click','.page',function(){
+                $(".page.on").attr("class", "page");
+                $(this).attr("class", "page on");
+                pageNum = parseInt($(this).html());
+                view();
+            })
+
+            // 点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                pageNum = 1;
+                $(".page.on").attr("class", "page");
+                $(".page-before").next().attr("class", "page on");
+                view();
+            })
+
+            // 点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                pageNum = lastPage;
+                $(".page.on").attr("class", "page");
+                $(".page-after").prev().attr("class", "page on");
+                view();
+            })
+
+            // 点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum+1 <= lastPage){
+                    pageNum++;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.next().attr("class", "page on");
+                }
+            })
+
+            // 点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum-1 >= 1){
+                    pageNum--;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.prev().attr("class", "page on");
+                }
+            })
+
+            // 更新&确定监听器
+            $("#waterStateTable").on("click", ".button1", function(){
+                var value = $(this).attr("value");
+                var td = $(this).parent().prevAll();
+                if(value == "更新"){
+                    td.children(".number").attr("readonly", false);
+                    $(this).attr("value", "确定");
+                }else if(value == "确定"){
+                    td.children(".number").attr("readonly", true);
+                    var number = td.children(".number").attr("value");  // 获取更新前的数据
+                    var buildingId = td.children(".buildingId").val();
+                    // 如果数据有变化 更新数据
+                    if(number != td.children(".number").val()){
+                        updataWaterState(buildingId, td.children(".number").val())
+                    }
+                    $(this).attr("value", "更新");
+                }
+            })
+
+            // 提交单条数据更新
+            function updataWaterState(buildingId, number){
+                $.ajax({
+                    url : "updataWaterState?buid=" + buildingId + "&wnum=" + number,
+                    type : "post",
+                    success : function(){
+                        alert("更新成功");
+                    }
+                })
+            }
+
+            function setSelect(data){
+                $(".lq-page").html("");  // 清空
+                var pages = data.navigatepageNums;
+                if(pages.length >= 2){
+                    $(".lq-page").append('<span class="page-start">首页</span>');
+                    $(".lq-page").append('<span class="page-before">上一页</span>');
+                    $.each(pages, function(index, page) {
+                        if(index == 0){
+                            var span = $("<span class=\"page on\">"+ page +"</span>");
+                        }else {
+                            var span = $("<span class=\"page\">"+ page +"</span>")
+                        }
+                        $(".lq-page").append(span);
+                    })
+                    $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+                }
+            }
+
+        })
+
+
+    </script>
+</head>
+<body id="body">
+<div id="waterOrder">
+<!--    <input type="button" id="test111" value="显示">-->
+    <div id="waterStateMain" class="waterStateinfo" th:fragment="waterStateinfo">
+        <table id="waterStateTable">
+            <thead>
+            <tr>
+                <th>   </th>
+                <th>楼栋</th>
+                <th>数量</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="waterState,treeStat:${waterStates}">
+                <td><input type="hidden" class="buildingId" name="buildingId" th:value="${waterState.buid}"></td>
+                <td th:text='${waterState.buid}'></td>
+                <td><input type='text' class='number' name='number' th:value='${waterState.wnum}' readonly='true'></td>
+                <td> <input type='button' class='button1' value='更新' th:id='${waterState.buid}'></td>
+                <td> <input type='button' class='button2' value='删除' th:id='${waterState.buid}'></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="lq-page"></div>
+</div>
+</body>
+</html>

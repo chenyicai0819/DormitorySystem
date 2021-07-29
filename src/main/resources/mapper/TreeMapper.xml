@@ -4,4 +4,9 @@
     <select id="getAllTree" resultType="cn.edu.guet.bean.Tree">
         select t.* from tree t,usertree ut WHERE ut.treeId=t.treeId AND ut.roleId='ro101'
     </select>
+
+    <select id="seeBoard" resultType="cn.edu.guet.bean.Board">
+        SELECT * FROM board ORDER BY boTime DESC LIMIT 1
+    </select>
+
 </mapper>

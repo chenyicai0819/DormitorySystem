@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OnlineWater</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/pages.css" th:href="@{/css/pages.css}">
+    <link rel="stylesheet" type="text/css" href="css/water.css" th:href="@{/css/water.css}">
+</head>
+<script th:inline="javascript">
+    var allStudent = [[${stud}]];
+    var orderId='';
+    function zhezhao(buid){
+        $("#back").show();
+        $("#order").show();
+        $("#pBuid").val(buid);
+        $("#byWman").val(allStudent[0].sName);
+    }
+    function closeP(){
+        $("#toPay").hide();
+    }
+    function closeR(){
+        $("#payRecode").hide();
+        $("#back").hide();
+    }
+    $(function(){
+        var Nurl = window.location.href;
+        if(Nurl.indexOf("method=alipay.trade.page.pay.return") == -1) {
+            sessionStorage.setItem('1111', '');
+            sessionStorage.setItem('2222', '');
+            sessionStorage.setItem('3333', '');
+            sessionStorage.setItem('4444', '');
+            sessionStorage.setItem('5555', '');
+            sessionStorage.setItem('6666', '');
+        }
+        else{
+            $("#table1").load("AddOrder.do?woId="+sessionStorage.getItem('1111')+"&buid="+sessionStorage.getItem('2222')
+                +"&woNum="+ sessionStorage.getItem('3333')+"&woRoom="+sessionStorage.getItem('4444')+"&woMoney="+
+                sessionStorage.getItem('5555')+"&woUser="+sessionStorage.getItem('6666')
+            );
+            $("#back").show();
+            $("#successPay").show();
+        }
+        $("#count").change(function(){
+            $("#price").attr("disabled",false);
+            $("#price").attr("value",9*$("#count").find("option:selected").text());
+            $("#price").attr("disabled",true);
+        })
+        $("#cancle").click(function(){
+            $("#back").hide();
+            $("#order").hide();
+        })
+        $("#Orecode").click(function () {
+            $("#table4").load("ShowOrder.do?woUser="+allStudent[0].sName);
+            $("#back").show();
+            $("#payRecode").show();
+
+        })
+        $("#goMain").click(function () {
+            window.location.href = "http://localhost:8080/getAllTree.do";
+        })
+        $("#confirm").click(function () {
+            var judge = false;
+            $.ajax({
+                url: 'getAllRoom.do?buid=' + $("#pBuid").val(),
+                async:false,
+                success:function (data) {
+                    $.each(data, function (index, room) {
+                        if($("#pRoom").val() == room.rId){
+                            judge = true;
+                        }
+                    });
+                }
+            })
+            if(judge) {
+                $("#toPay").show();
+                $("#factPay").val($("#price").val());
+                for(var i=0; i<8; i++){
+                    orderId += Math.floor(Math.random()*10);
+                }
+                $("#ddId").val(orderId);
+                orderId = '';
+                $("#ddName").val("网上订水");
+            }else{
+                alert("输入信息有误！");
+            }
+            sessionStorage.setItem('1111',$("#ddId").val());
+            sessionStorage.setItem('2222',$("#pBuid").val());
+            sessionStorage.setItem('3333',$("#count").find("option:selected").text());
+            sessionStorage.setItem('4444',$("#pRoom").val());
+            sessionStorage.setItem('5555',9*$("#count").find("option:selected").text());
+            sessionStorage.setItem('6666',$("#byWman").val());
+        })
+
+        var Maxpages = [[${pageInfo}]].pages;
+        function addPage(current,maxPage){
+            //清空容器
+            $(".lq-page").html('');
+            //1.显示 [首页] [上一页]
+            if(maxPage>1){
+                $(".lq-page").append('<span class="page-start">首页</span><span class="page-before">上一页</span>');
+            }
+            //3.显示页码  首页 上一页 ...  2 3 【4】 5 6 ...
+            var start=current-2
+            var end=current+2;
+            //特殊的位置：开头位置 current=1 / 2
+            if(current <= 2 ){
+                start=1;
+                end=maxPage>5?5:maxPage;
+            }
+            if(current >= maxPage-1){
+                start=maxPage-4>0?maxPage-4:1;
+                end=maxPage;
+            }
+            for(;start<=end;start++){
+                if(start==current){
+                    $(".lq-page").append('<span class="page on">'+start+'</span>');
+                }else{
+                    $(".lq-page").append('<span class="page">'+start+'</span>');
+                }
+            }
+            //5.下一页 和 尾页
+            if(maxPage>1){
+                $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+            }
+        }
+        //二、点击事件 ---动态创建的元素---必须通过绑定添加事件
+        function addEvent(maxPage){
+            $(".lq-page").off('click');
+            $(".lq-page").on('click','.page',function(){
+                var num=parseInt($(this).html());
+                $('#table1').load("WaterOnline.do?pageNum="+num);
+                addPage(num,maxPage);
+            })
+            //2.点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                $('#table1').load("WaterOnline.do?pageNum=1");
+                addPage(1,Maxpages);
+            })
+            //3.点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                $('#table1').load("WaterOnline.do?pageNum="+maxPage);
+                addPage(maxPage,Maxpages);
+            })
+
+            //4.点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var num=parseInt($(this).siblings('.on').html());
+                if(num < maxPage) {
+                    num = num+1;
+                    $('#table1').load("WaterOnline.do?pageNum="+num);
+                    addPage(num+1,Maxpages);
+                }
+            })
+            //5.点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var num=parseInt($(this).siblings('.on').html());
+                if(num > 1) {
+                    num = num-1;
+                    $('#table1').load("WaterOnline.do?pageNum="+num);
+                    addPage(num,Maxpages);
+                }
+            })
+        }
+        addPage(1,Maxpages);
+        addEvent(Maxpages);
+    })
+</script>
+<body>
+<h1>在线订水</h1>
+<table id="table1" th:fragment="table1">
+    <tr>
+        <th>宿舍栋数</th>
+        <th>单价(含配送费)</th>
+        <th>剩余数量</th>
+        <th></th>
+    </tr>
+    <tr id="fenye"  th:each="water:${pageInfo.list}" >
+        <td class="nowBuid" th:text="${water.buid}"></td>
+        <td>9</td>
+        <td th:text="${water.wnum}"></td>
+        <td th:if="${water.wnum}>0"><a href="#" th:onclick="zhezhao([[${water.buid}]])">订水</a> </td>
+    </tr>
+</table>
+<p id="pageM">当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+<input type="button" id="Orecode" value="购买记录" style="width:150px;height: 28px">
+<div id="back">
+    <div id="order">
+        <h2>在线支付</h2>
+        <table id="table2">
+            <tr>
+                <th>楼栋</th>
+                <th>房间号</th>
+                <th>数量</th>
+                <th>价格</th>
+                <th>支付人</th>
+            </tr>
+            <tr>
+                <td><input type="text" id="pBuid" disabled="true" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
+                <td><input type="text" id="pRoom" placeholder="请输入宿舍" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
+                <td><select id="count" style="height: 28px;width: 80px;font-size: 20px; border: 0;text-align:center;text-align-last:center">
+                    <option>1</option>
+                    <option>2</option>>
+                </select></td>
+                <td><input type="text" id="price" value="9" disabled="true" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
+                <td><input id="byWman" type="text" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
+            </tr>
+        </table>
+        <input id="cancle" type="button" value="取消订单">
+        <input id="confirm" type="button" value="确认支付">
+    </div>
+    <div id="toPay">
+        <p><a id="closePay" href="#"  onclick="closeP()">关闭</a></p>
+        <form th:action="@{/pay}" method="post">
+            <h3>订单信息</h3>
+            <table id="table3">
+                <tr>
+                    <td>订单号：</td>
+                    <td><input id="ddId" type="text" name="WIDout_trade_no" required readonly style="width:264px;height:20px"></td>
+                </tr>
+                <tr>
+                    <td>订单名称：</td>
+                    <td><input id="ddName" type="text" name="WIDsubject" required readonly style="width:264px;height:20px"></td>
+                </tr>
+                <tr>
+                    <td>付款金额：</td>
+                    <td><input type="text" id="factPay" name="WIDtotal_amount" required readonly style="width:264px;height:20px"></td>
+                </tr>
+                <tr>
+                <td>WIDbody：</td>
+                <td><input type="text" name="WIDbody" style="width:264px;height:20px"></td>
+                </tr>
+                <input id="cOrder" type="submit" value="下单" style="width:150px;height: 28px">
+                <input id="reset" type="reset" value="重置" style="width:150px;height: 28px">
+            </table>
+        </form>
+    </div>
+    <div id="successPay">
+        <h4>支付成功！</h4>
+        <input id="goMain" type="button" value="返回主页面" style="width:150px;height: 28px">
+    </div>
+    <div id="payRecode">
+        <p><a id="closeRec" href="#"  onclick="closeR()">关闭</a></p>
+        <h3>订单记录</h3>
+        <table id="table4" th:fragment="table4">
+            <tr>
+                <th>楼栋</th>
+                <th>房间</th>
+                <th>购买数量</th>
+                <th>实付金额</th>
+                <th>购买时间</th>
+                <th>付款人</th>
+            </tr>
+            <tr th:each="order,orderStat:${order}">
+                <td th:text="${order.buid}"></td>
+                <td th:text="${order.woRoom}"></td>
+                <td th:text="${order.woNum}"></td>
+                <td th:text="${order.woMoney}"></td>
+                <td th:text="${#dates.format(order.woTime,'yyyy-mm-dd hh:mm:ss')}"></td>
+                <td th:text="${order.woUser}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="lq-page" ></div>
+</body>
+</html>

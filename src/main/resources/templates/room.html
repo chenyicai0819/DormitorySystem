@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dormitory.css" th:href="@{/css/dormitory.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/pages.css" th:href="@{/css/pages.css}"/>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <script  th:src="@{/js/pageForlzf.js}"></script>
+
+    <script>
+        $(function () {
+                $("#submit").click(function () {
+                    $("#back").show();
+                    $("#order").show();
+                })
+            $("#bottom2").click(function () {
+                $("#back").toggle();
+                $("#order").toggle();
+                var add1 = $("#rId2").val();
+                var add2 = $("#rBed2").val();
+                var add3 = $("#buid2").val();
+
+                $.ajax({
+                    url:"addRoom",
+                    type:'POST',
+                    data:{rId:add1,rBed:add2,buid:add3},
+                    // url: 'addRoom?rId=' + add1 + '&roleId=' + add2 + '&buid=' + add3+ '&dName='+add4+'&dPwd='+add5+
+                    //     '&dPhone='+add6,
+                    success:function (data) {
+                        window.location.reload();
+                    }
+                })
+            })
+        })
+
+    </script>
+    <style>
+        #back{
+            z-index: 10;
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+
+            top: 0;
+            background-color: rgba(0,0,0,0.6);
+        }
+        #order{
+
+            z-index: 20;
+            display: none;
+            width: 700px;
+            height: 350px;
+            margin: auto;
+            margin-top: 60px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .table1 {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table1 th, td {
+
+            text-align: left;
+            padding: 8px;
+        }
+        .table1 tr{
+            background-color: #f2f2f2;
+
+        }
+
+        .table1 th {
+            background-color: #2f3640	;
+            color: white;
+        }
+        .form3 {
+            z-index: 40;
+            border: 1px solid salmon;
+            height: 500px;
+            width: 100%;
+            background-color: aliceblue;
+            border-collapse: collapse;
+        }
+
+    </style>
+</head>
+
+
+<body>
+<table class="table1" border="1" id="table1" th:fragment="table1">
+    <tr>
+        <th>宿舍号</th>
+        <th>床号</th>
+        <th>楼栋</th>
+        <th colspan="2">操作</th>
+    </tr>
+
+    <tr th:each="room,roomStat:${rooms}">
+        <td th:text="${room.rId}" ></td>
+        <td th:text="${room.rBed}" ></td>
+        <td th:text="${room.buid}" ></td>
+
+        <td><a th:href="@{deleteRoom(rId=${room.rId},rBed=${room.rBed},buid=${room.buid})}">删除</a></td>
+    </tr>
+</table>
+<div>
+    <input type="submit" id="submit" value="添加"  class="submit">
+</div>
+
+<div id="back">
+    <div id="order">
+        <form class="form3" id="form2">
+            宿舍号:<input type="text" id="rId2" value="" class="add" >
+            <br>
+            床号:<input type="text" id="rBed2" value="" class="add">
+            <br>
+            楼栋:<input type="text" id="buid2" value="" class="add">
+            <br>
+            <input type="button" name="" value="确定"  id="bottom2" >
+        </form>
+
+    </div>
+</div>
+
+
+<div class="lq-page" ></div>
+
+<div th:text="${maxPage}" style="display: none"></div>
+<div th:text="${allPage}" id="allPage" style="display: none"></div>
+
+</body>
+
+</html>

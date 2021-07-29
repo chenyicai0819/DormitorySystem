@@ -1,82 +1,83 @@
 package cn.edu.guet.bean;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Waterorder {
-    private String woId;
-    private String buid;
-    private int woNum;
-    private String woRoom;
-    private int woMoney;
-    private Timestamp woTime;
+    private int woId;
     private String woUser;
+    private String buid;
+    private String woRoom;
+    private int woNum;
+    private double woMoney;
+    private Timestamp woTime;
 
-    public String getWoId() {
-        return woId;
-    }
+  public int getWoId() {
+    return woId;
+  }
 
-    public void setWoId(String woId) {
-        this.woId = woId;
-    }
+  public void setWoId(int woId) {
+    this.woId = woId;
+  }
 
-    public String getBuid() {
-        return buid;
-    }
+  public String getWoUser() {
+    return woUser;
+  }
 
-    public void setBuid(String buid) {
-        this.buid = buid;
-    }
+  public void setWoUser(String woUser) {
+    this.woUser = woUser;
+  }
 
-    public int getWoNum() {
-        return woNum;
-    }
+  public String getBuid() {
+    return buid;
+  }
 
-    public void setWoNum(int woNum) {
-        this.woNum = woNum;
-    }
+  public void setBuid(String buid) {
+    this.buid = buid;
+  }
 
-    public String getWoRoom() {
-        return woRoom;
-    }
+  public String getWoRoom() {
+    return woRoom;
+  }
 
-    public void setWoRoom(String woRoom) {
-        this.woRoom = woRoom;
-    }
+  public void setWoRoom(String woRoom) {
+    this.woRoom = woRoom;
+  }
 
-    public int getWoMoney() {
-        return woMoney;
-    }
+  public int getWoNum() {
+    return woNum;
+  }
 
-    public void setWoMoney(int woMoney) {
-        this.woMoney = woMoney;
-    }
+  public void setWoNum(int woNum) {
+    this.woNum = woNum;
+  }
 
-    public Timestamp getWoTime() {
-        return woTime;
-    }
+  public double getWoMoney() {
+    return woMoney;
+  }
 
-    public void setWoTime(Timestamp woTime) {
-        this.woTime = woTime;
-    }
+  public void setWoMoney(double woMoney) {
+    this.woMoney = woMoney;
+  }
 
-    public String getWoUser() {
-        return woUser;
-    }
+  public Timestamp getWoTime() {
+    return woTime;
+  }
 
-    public void setWoUser(String woUser) {
-        this.woUser = woUser;
-    }
+  public void setWoTime(Timestamp woTime) {
+    this.woTime = woTime;
+  }
 
-    @Override
-    public String toString() {
-        return "Waterorder{" +
-                "woId='" + woId + '\'' +
-                ", buid='" + buid + '\'' +
-                ", woNum=" + woNum +
-                ", woRoom='" + woRoom + '\'' +
-                ", woMoney=" + woMoney +
-                ", woTime=" + woTime +
-                ", woUser='" + woUser + '\'' +
-                '}';
-    }
+
+  @Override
+  public String toString() {
+    return "Waterorder{" +
+      "woId=" + woId +
+      ", woUser='" + woUser + '\'' +
+      ", buid='" + buid + '\'' +
+      ", woRoom='" + woRoom + '\'' +
+      ", woNum=" + woNum +
+      ", woMoney=" + woMoney +
+      ", woTime=" + woTime +
+      '}';
+  }
 }

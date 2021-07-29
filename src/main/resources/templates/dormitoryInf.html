@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>dormitoryInf</title>
+    <link rel="stylesheet"  th:href="@{/css/dormitory.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/pages.css}"/>
+    <script th:src="@{/js/DormitoryStuInf.js}"></script>
+    <script th:src="@{/js/pageForlzf.js}"></script>
+</head>
+<body>
+<div class="ser">
+    <input type="text" value="" id="text" class="text">
+    <input type="button" value="搜索" id="search" class="search">
+</div>
+<table th:class="table1" border="1" th:id="table1" th:fragment="table1">
+    <tr>
+        <th>楼栋</th>
+        <th>宿舍号</th>
+        <th>床号</th>
+        <th>学号</th>
+        <th>学生姓名</th>
+        <th>学院</th>
+        <th>年级</th>
+        <th>电话</th>
+        <th colspan="2">操作</th>
+    </tr>
+    <tr th:each="student,studentStat :${students}">
+        <td th:text="${student.buid}" ></td>
+        <td th:text="${student.rId}" ></td>
+        <td th:text="${student.rBed}"></td>
+        <td th:text="${student.sId}" ></td>
+        <td th:text="${student.sName}"></td>
+        <td th:text="${student.sCollege}"></td>
+        <td th:text="${student.sGrade}"></td>
+        <td th:text="${student.sPhone}"></td>
+        <td> <a href="javascript:void(0)" class="update1">修改</a></td>
+    </tr>
+</table>
+<div>
+<!--    <input type="submit" id="submit" value="添加"  class="submit">-->
+    <input type="submit" id="return" value="返回"  class="return" style="position:relative;bottom:0px;float:right;display:none" >
+</div>
+
+<form    class="form1" id="form1">
+
+    楼栋:<input type="text" id="buid" value="" class="add">
+    宿舍号:<input type="text" id="rId" value="" class="add">
+    床号:<input type="text" id="rBed" value="" class="add">
+    学号:<input type="text" id="sId" value="" class="add">
+    <br>
+    学生姓名:<input type="text" id="sName" value="" class="add">
+    学院:<input type="text" id="sCollege" value="" class="add">
+    年级:<input type="text" id="sGrade" value="" class="add">
+    电话:<input type="text" id="sPhone" value="" class="add">
+    <br>
+    <input type="button" name="" value="修改"  id="bottom1" >
+</form>
+
+<div class="lq-page" id="lq-page"></div>
+<span th:text="${pageInfo.getTotal()}" style="display: none" ></span>
+<span th:text="${pageInfo.getPages()}" id="allPage"  style="display: none"></span>
+
+</body>
+</html>

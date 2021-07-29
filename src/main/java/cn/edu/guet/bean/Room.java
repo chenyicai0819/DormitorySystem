@@ -2,21 +2,19 @@ package cn.edu.guet.bean;
 
 public class Room {
     private String rId;
-    private String bBed;
+    private String rBed;
     private String buid;
-    private String isMan;
+    private String hpeople;
 
-    public Room() {
-    }
+  public String getHpeople() {
+    return hpeople;
+  }
 
-    public Room(String rId, String bBed, String buid, String isMan) {
-        this.rId = rId;
-        this.bBed = bBed;
-        this.buid = buid;
-        this.isMan = isMan;
-    }
+  public void setHpeople(String hpeople) {
+    this.hpeople = hpeople;
+  }
 
-    public String getrId() {
+  public String getrId() {
         return rId;
     }
 
@@ -24,12 +22,12 @@ public class Room {
         this.rId = rId;
     }
 
-    public String getbBed() {
-        return bBed;
+    public String getrBed() {
+        return rBed;
     }
 
-    public void setbBed(String bBed) {
-        this.bBed = bBed;
+    public void setrBed(String rBed) {
+        this.rBed = rBed;
     }
 
     public String getBuid() {
@@ -40,21 +38,4 @@ public class Room {
         this.buid = buid;
     }
 
-    public String getIsMan() {
-        return isMan;
-    }
-
-    public void setIsMan(String isMan) {
-        this.isMan = isMan;
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "rId='" + rId + '\'' +
-                ", bBed='" + bBed + '\'' +
-                ", buid='" + buid + '\'' +
-                ", isMan='" + isMan + '\'' +
-                '}';
-    }
 }
