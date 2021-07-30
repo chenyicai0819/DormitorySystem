@@ -128,6 +128,23 @@
                     }
                 })
             })
+          // 显示详细内容
+          $("#body").on('click', '#seeMessage', function (){
+            var messageId = $(this).parent().parent().find("input").attr("value");
+            $.ajax({
+              url : 'viewMessage?messageId=' + messageId,
+              async : false,
+              method : 'post',
+              success : function(data) {
+                $(".mask").show();
+                $(".mask").html(data);
+              }
+            })
+          })
+          // 隐藏遮罩层
+          $("#body").on('click', '#messageout', function (){
+            $(".mask").hide();
+          })
 
             // 删除消息
             function deleteMessage(messageId){
@@ -189,26 +206,49 @@
             <tr>
                 <th><input type='checkbox' id='setCheckBox'/></th>
                 <th></th>
+                <th>发送人</th>
                 <th>接收人</th>
                 <th>主题</th>
                 <th>内容</th>
                 <th>时间</th>
+                <th>详情</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="message,messagesStat:${messages}">
+            <tr class="messageTr" th:each="message,messagesStat:${messages}">
                 <td><input type="checkbox" name="messageCheckbox" th:value="${message.messageId}"></td>
                 <td class='ckeckRead' th:value='${message.messageId}' type='0' th:if="${message.isRead} eq '0'"><div class='cir Ru'></div></td>
                 <td class='ckeckRead' th:value='${message.messageId}' type='1' th:if="${message.isRead} eq '1'"><div class='cir Rr'></div></td>
+                <td><span class='sendId' id="sendId1" th:text="${message.sendId}"></span></td>
                 <td><span class='receiveId' th:text="${message.receiveId}"></span></td>
                 <td><span class='title' th:text="${message.title}"></span></td>
                 <td><p class='content' th:text="${message.content}"></p></td>
-                <td><span class='sendTime' th:text="${message.sendTime}"></span></td>
+                <td><span class='sendTimea' th:text="${message.sendTime}"></span></td>
+                <td><a href="javascript:void(0)" id="seeMessage" >查看详情</a></td>
             </tr>
             </tbody>
         </table>
     </div>
     <div class="lq-page"></div>
+
+    <div class="mask">
+      <div id="message" class="message" th:fragment="viewMessage">
+        <span th:text="${message.title}"></span>
+        <span th:text="${message.sendId}"></span>
+        <span th:text="${message.sendTime}"></span>
+        <p th:text="${message.content}"></p>
+        <br>
+        <hr>
+        <form action="outputMessage" method="post">
+          <input type="hidden" name="sendId" value="">
+          回复发给:<input name="receiveId" type="text" id="outputUser" readonly class="outPutClass" th:value="${message.sendId}"><br>
+          回复标题:<input type="text" name="title" class="outPutClass" value="回复消息" readonly><br>
+          回复内容:<textarea name="content" id="outputText" class="outPutClass" placeholder="这是回复给对方的内容"></textarea><br>
+          <input type="submit" class="reSubmit">
+        </form>
+        <input type="button" value="退出" id="messageout">
+      </div>
+    </div>
 </div>
 </body>
 </html>

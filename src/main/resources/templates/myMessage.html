@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/myManage.css" th:href="@{/css/myManage.css}">
+  <title>title</title>
+</head>
+<body>
+<div class="my" id="table1" th:fragment="table1">
+  <table border="1" class="RepairTable">
+    <tr>
+      <th>编号</th>
+      <th>标题</th>
+      <th>发送者</th>
+      <th>接收者</th>
+      <th>内容</th>
+      <th>时间</th>
+      <th width="50px"><a href="javascript:void(0)" onClick="javascript :history.go(-1);" style="color: red">返回</a></th>
+    </tr>
+    <tr th:each="myMana,myManaStat : ${myMana}">
+      <td th:text="${myMana.messageId}"></td>
+      <td th:text="${myMana.title}"></td>
+      <td th:text="${myMana.sendId}"></td>
+      <td th:text="${myMana.receiveId}"></td>
+      <td th:text="${myMana.content}"></td>
+      <td th:text="${myMana.sendTime}" colspan="2"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

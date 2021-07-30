@@ -92,3 +92,8 @@
 .AuntTable a{
   display: block;
 }
+#myManage{
+  position: absolute;
+  left: 120px;
+  top: 260px;
+}

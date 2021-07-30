@@ -8,7 +8,7 @@
     <body>
     <div class="messDiv">
       <p class="reP">反馈信息</p>
-      <form action="Feedback.do" method="post">
+      <form action="sendMessage" method="post">
         <input type="hidden" name="sendId" value="">
         <label class="reLable">接收人ID:</label>
         <input type="text" name="receiveId" placeholder="填写宿管得id" class="reInput">
@@ -18,6 +18,7 @@
         <textarea name="content" id="reText" class="reText" placeholder="请写明反馈的的具体内容"></textarea>
         <input type="submit" class="reSubmit">
       </form>
+      <a href="/myMess1" id="myManage">我的反馈</a>
     </div>
     <div id="auntsId">
       <p class="reP">以下是宿管阿姨的id</p>

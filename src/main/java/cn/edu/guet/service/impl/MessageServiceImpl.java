@@ -20,6 +20,10 @@ public class MessageServiceImpl implements IMessageService {
 
 
     @Override
+    public Message getMessage(int messageId) {
+    return messageMapper.getMessage(messageId);
+  }
+    @Override
     public PageInfo getSendMessages(String sendId, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Message> messages = messageMapper.getSendMessages(sendId);
@@ -53,6 +57,16 @@ public class MessageServiceImpl implements IMessageService {
   @Override
   public List<Dormitory> seleAunt() {
     return messageMapper.seleAunt();
+  }
+
+  @Override
+  public List<Message> myMess(String id) {
+    return messageMapper.myMess(id);
+  }
+
+  @Override
+  public List<Message> myMessIn(String id) {
+    return messageMapper.myMessIn(id);
   }
 
 }

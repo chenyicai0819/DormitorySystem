@@ -37,3 +37,23 @@
 .messageTable a{
   display: block;
 }
+.mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+#messageout{
+  z-index: 100;
+}
+#message{
+  position: relative;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  background: white;
+
+}

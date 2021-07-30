@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  * @since 1.0
  */
 public class Message {
-    private int messageId;
+    private String messageId;
     private String sendId;
     private String receiveId;
     private String title;
@@ -18,15 +18,15 @@ public class Message {
     private String isRead = "0";
     private Timestamp sendTime;
 
-    public int getMessageId() {
-        return messageId;
-    }
+  public String getMessageId() {
+    return messageId;
+  }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
-    }
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
 
-    public String getSendId() {
+  public String getSendId() {
         return sendId;
     }
 
