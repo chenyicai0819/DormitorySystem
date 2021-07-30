@@ -5,20 +5,12 @@ public class Apply {
     private String message;
     private String reply;
 
-    public Apply(){};
+    public String getReply() {
+        return reply;
+    }
 
-    public Apply(String applyId, String message, String reply) {
-        this.applyId = applyId;
-        this.message = message;
+    public void setReply(String reply) {
         this.reply = reply;
-    }
-
-    public String getApplyId() {
-        return applyId;
-    }
-
-    public void setApplyId(String applyId) {
-        this.applyId = applyId;
     }
 
     public String getMessage() {
@@ -29,11 +21,11 @@ public class Apply {
         this.message = message;
     }
 
-    public String getReply() {
-        return reply;
+    public String getApplyId() {
+        return applyId;
     }
 
-    public void setReply(String reply) {
-        this.reply = reply;
+    public void setApplyId(String applyId) {
+        this.applyId = applyId;
     }
 }

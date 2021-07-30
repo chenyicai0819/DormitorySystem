@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>公告管理</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/page.css" th:href="@{/css/page.css}">
+    <link rel="stylesheet" type="text/css" href="css/board/editBoard.css" th:href="@{/css/board/editBoard.css}">
+    <script th:src="@{js/page.js}"></script>
+    <script>
+        $(function () {
+            $("#board").on("click", $("#addBoard"), function (e) {
+                var e = e || window.event;                    //处理兼容性
+                var target = e.target || e.srcElement;
+                var timestamp=new Date().getTime()
+                if (target.id == 'addBoard') {
+                    $(".window").show();
+                    $(".wrapper").show();
+                    $("#boID").val(timestamp);
+                    $("#board").css({opacity: 0.3});
+                }
+            })
+            $(".close").click(function () {
+                $(".window").hide();
+                $("#window1").hide();
+                $(".wrapper").hide();
+                $("#board").css({opacity: 1});
+            })
+            $("#board").on("click", $("#modify"), function (e) {
+                var e = e || window.event;                    //处理兼容性
+                var target = e.target || e.srcElement;
+                $("#change").attr("src","modifyBoard?boId="+target.title);
+                if (target.id == 'modify') {
+                    $("#window1").show();
+                    $(".wrapper").show();
+                    $("#board").css({opacity: 0.3});
+                }
+            })
+        })
+    </script>
+</head>
+<body id="body">
+<div id="board">
+    <table th:fragment="table" th:id="table" border="1" cellspacing="0" class="boardTable">
+        <tr>
+            <th width="500" colspan="4">公告</th>
+            <th width="100" colspan="2"><a id="addBoard" href="javascript:void(0)">发布公告</a></th>
+        </tr>
+        <tr>
+            <th width="150">标题</th>
+            <th>内容</th>
+            <th width="100">时间</th>
+            <th width="100">发布者</th>
+            <th width="100" colspan="2">操作</th>
+        </tr>
+        <tr th:each="board,boardStat:${boards}">
+            <td th:text="${board.boName}"></td>
+            <td th:text="${board.boContent}"></td>
+            <td th:text="${board.boTime}"></td>
+            <td th:text="${board.boUser}"></td>
+            <td width="50" class="modify1"><a id="modify" th:title="${board.boId}" href="javascript:void(0)">修 改</a></td>
+            <td width="50" class="delete1"><a class="delete" th:href="@{deleteBoard(boId=${board.boId})}">删 除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="wrapper"></div>
+<div class="window">
+    <a class="close" href="javascript:void(0)" id="x1">&times</a>
+    <h3 class="first">发布公告</h3><br>
+    <form action="saveBoard">
+        <label for="boID">ID</label><input type="text" name="boId" id="boID" value="" readonly><br>
+        <label for="boName">标题</label><input type="text" name="boName" id="boName"><br>
+        <label>内容</label><textarea name="boContent" cols="100" rows="30"></textarea><br>
+        <label for="boTime">时间</label><input type="date" name="boTime" id="boTime"><br>
+        <label for="boUser">发布人(单位)</label><input type="text" name="boUser" id="boUser"><br>
+        <input class="submit" type="submit" value="发布" id="submit">
+    </form>
+</div>
+<div id="window1">
+    <a class="close" href="javascript:void(0)" id="x2">&times</a>
+    <iframe id="change" src="" width="600" height="500"></iframe>
+</div>
+<div class="lq-page"></div>
+<div th:text="${maxPage}" style="display: none"></div>
+<div th:text="${allPage}" style="display: none" id="allPage"></div>
+</body>
+</html>

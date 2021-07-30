@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>公告管理</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/board/viewBoard.css" th:href="@{/css/board/viewBoard.css}">
+
+</head>
+<body>
+    <div class="wrapper">
+        <h4 class="title">通知公告</h4>
+        <br>
+        <ul>
+            <li th:each="board,boardStat:${boards}">
+                <a th:href="@{seeBoard(boId=${board.boId})}" th:text="${board.boName}+' '+${board.boTime}"></a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

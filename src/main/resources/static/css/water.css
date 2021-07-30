@@ -1,0 +1,188 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+h1{
+  letter-spacing: 15px;
+  text-align: center;
+  margin: 50px;
+  background-color: rosybrown;
+}
+#table1{
+  font-size: 20px;
+  position: absolute;
+  left: 110px;
+  top: 180px;
+  width: 900px;
+  height: 200px;
+  text-align: center;
+}
+#back{
+  z-index: 10;
+  display: none;
+  width: 1300px;
+  height: 1000px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.6);
+}
+#order{
+  z-index: 20;
+  display: none;
+  position: absolute;
+  width: 700px;
+  height: 350px;
+  top: 30px;
+  left: 770px;
+  transform: translateX(-50%);
+  margin-top: 60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+#toPay{
+  z-index: 30;
+  display: none;
+  position: absolute;
+  width: 700px;
+  height: 350px;
+  top: 30px;
+  left: 770px;
+  transform: translateX(-50%);
+  margin-top: 60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+#table2{
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  width: 700px;
+  border-spacing: 35px;
+}
+#cancle{
+  width: 90px;
+  height: 36px;
+  position: absolute;
+  top:230px;
+  left:100px;
+}
+#confirm{
+  width: 90px;
+  height: 36px;
+  position: absolute;
+  top:230px;
+  left:500px;
+}
+h2{
+  letter-spacing: 10px;
+  font-size: 30px;
+  text-align: center;
+  background-color: aquamarine;
+  width: 700px;
+}
+#closePay{
+  font-size: 18px;
+  position: fixed;
+  right: 10px;
+  text-decoration: none;
+}
+#table3{
+  font-size: 20px;
+  position: absolute;
+  left: 150px;
+  top: 70px;
+  width: 400px;
+  height: 200px;
+}
+h3{
+  letter-spacing: 10px;
+  font-size: 30px;
+  text-align: center;
+  background-color:aqua;
+  width: 700px;
+}
+#reset{
+  position: absolute;
+  left: 120px;
+  bottom: 40px;
+}
+#cOrder{
+  position: absolute;
+  right: 120px;
+  bottom: 40px;
+}
+#successPay{
+  z-index: 40;
+  display: none;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: 130px;
+  left: 770px;
+  transform: translateX(-50%);
+  margin-top: 60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+#successPay h4{
+  letter-spacing: 10px;
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  font-size: 30px;
+}
+#goMain{
+  position: absolute;
+  bottom: 20px;
+  left: 75px;
+  background-color:turquoise;
+}
+#Orecode{
+  position: absolute;
+  right: 100px;
+  bottom: 171.5px;
+}
+#payRecode{
+  z-index: 30;
+  display: none;
+  position: absolute;
+  width: 800px;
+  height: 900px;
+  top: 30px;
+  left: 770px;
+  transform: translateX(-50%);
+  margin-top: 60px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+#table4{
+  text-align: center;
+  border: none;
+  font-size: 20px;
+  position: fixed;
+  left: 40px;
+  top: 85px;
+  width: 700px;
+  height: auto;
+}
+#payRecode h3{
+  letter-spacing: 10px;
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  font-size: 30px;
+  background-color: pink;
+}
+#closeRec{
+  font-size: 18px;
+  position: fixed;
+  right: 10px;
+  text-decoration: none;
+}
+#pageM{
+  font-size: 19px;
+  position: absolute;
+  bottom: 120px;
+  left: 390px;
+}

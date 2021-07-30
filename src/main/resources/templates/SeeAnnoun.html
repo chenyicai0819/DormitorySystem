@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>查看公告</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:src="@{/js/pageforcyc.js}"></script>
+    <link rel="stylesheet" type="text/css" href="css/SeeAnnoun.css" th:href="@{/css/SeeAnnoun.css}" >
+    <link rel="stylesheet" type="text/css" href="css/pages.css" th:href="@{/css/pages.css}">
+    <script>
+        $(function (){
+            $(".BoardTable").on("mouseover","td",function (){
+                $(this).parent().css("background-color","#00a8ff");
+            })
+            $(".BoardTable").on("mouseout","td",function (){
+                $(this).parent().css("background-color","#f2f2f2");
+            })
+            $("#tb").on("click","#see",function(){
+                // 如何拿到userId，当前元素（超链接）的父元素的父元素的第一个td的内容就是userId
+                var boId=$(this).parent().parent().find("td:nth-child(3)").text();//如果让你使用原生的JavaScript去实现这个功能会怎样？
+                console.log(boId);
+                $.ajax({
+                    success: function (data) {
+                        var text=$("<p id='repCon'>" + boId+ "</p>")
+                        $("#JTNR").append(text);
+                    }
+                })
+                let toggle = document.querySelector('.lq-popup-container')
+                toggle.classList.toggle('toggle');
+            });
+            $("#enter").click(function (){
+                let toggle = document.querySelector('.lq-popup-container')
+                toggle.classList.toggle('toggle');
+                $("#JTNR").html("");
+            })
+        })
+    </script>
+</head>
+<body id="body" th:fragment="body">
+<div id="table1" th:fragment="table1">
+    <table border="1" class="BoardTable" >
+        <tr>
+            <th>序号</th>
+            <th>公告标题</th>
+            <th>公告内容</th>
+            <th>公告时间</th>
+            <th>署名</th>
+            <th>查看具体</th>
+        </tr>
+        <tr th:each="board,boardStat : ${board}" id="tb">
+            <td th:text="${board.boId}"></td>
+            <td th:text="${board.boName}"></td>
+            <td th:text="${board.boContent}"></td>
+            <td th:text="${board.boTime}"></td>
+            <td th:text="${board.boUser}"></td>
+            <td><a href="javascript:(0)" id="see">查看具体</a></td>
+        </tr>
+    </table>
+</div>
+<div class="lq-popup-container">
+    <div class="lq-popup">
+        <p style="border: #000000 1px solid"> 以下是公告的具体内容</p>
+        <div id="JTNR" style="border: #000000 1px solid">
+        </div>
+        <input type="submit" value="确认" class="inputButton" id="enter">
+    </div>
+</div>
+
+<div id="allPage">
+    总页数:<span th:text="${allPage}" id="maxPage">unknows</span>
+</div>
+<div class="lq-page" ></div >
+</body>
+</html>

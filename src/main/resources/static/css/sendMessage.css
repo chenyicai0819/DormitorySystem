@@ -1,0 +1,99 @@
+.reP{
+  font-family: "黑体";
+  font-size: x-large;
+  margin: 0 auto; text-align: center
+}
+.messDiv{
+  width: 500px;
+}
+.reInput{
+  width: 400px;
+  height: 35px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  font-size: 16px;
+}
+.reSubmit {
+  width: 100px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+  left: 190px;
+}
+.reSubmit:active {
+  /* border: .5px solid #7f8fa6;
+  box-sizing: content-box; */
+  opacity: .8;
+}
+
+.reText{
+  width: 400px;
+  height: 100px;
+  max-width: 400px;
+  max-height: 200px;
+  min-width: 400px;
+  min-height: 100px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  font-size: 16px;
+}
+
+.reLable{
+  color: black;
+  font-family: "宋体";
+  font-weight: bold;
+}
+#reTextLable{
+  position: relative;
+  top: -90px;
+}
+#auntsId{
+  width: 500px;
+  height: 500px;
+  border-top: 5px;
+  position: absolute;
+  left: 550px;
+  top: 10px;
+}
+
+.AuntTable {
+  border-collapse: collapse;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+
+.AuntTable th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.AuntTable tr{background-color: #f2f2f2}
+
+.AuntTable th {
+  background-color: #2f3640	;
+  color: white;
+}
+.AuntTable a{
+  display: block;
+}
+#myManage{
+  position: absolute;
+  left: 120px;
+  top: 260px;
+}

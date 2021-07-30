@@ -1,0 +1,49 @@
+.inputButton{
+    width: 100px;
+    height: 30px;
+    background-color: #00a8ff;
+    color: #fff;
+    border-radius: 3px;
+    padding: 8px;
+    border: 1px solid #dcdde1;
+    opacity: 1;
+    position: relative;
+}
+.inputButton:active {
+    opacity: .8;
+}
+.inputTime{
+    width: 200px;
+    height: 30px;
+    border-radius: 3px;
+    padding: 8px;
+    border: 1px solid #dcdde1;
+    opacity: 1;
+    position: relative;
+}
+
+.RepairTable {
+    border-collapse: collapse;
+    width: 100%;
+    border-top: none;
+    border-bottom: none;
+}
+.RepairTable th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.RepairTable tr{background-color: #f2f2f2}
+
+.RepairTable th {
+    background-color: #2f3640	;
+    color: white;
+}
+.RepairTable a{
+    display: block;
+}
+
+#allPage{
+    position: absolute;
+    bottom: 10px;
+}

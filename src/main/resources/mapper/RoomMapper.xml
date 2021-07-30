@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.RoomMapper">
+    <select id="viewBuild" resultType="cn.edu.guet.bean.Build">
+        SELECT * FROM build
+    </select>
+    <select id="viewRoom" parameterType="string" resultType="String">
+        SELECT DISTINCT(rId) FROM room WHERE buid=#{buId} AND rId LIKE CONCAT(#{buId},#{buNo},'%')
+    </select>
+    <select id="selectStudent" parameterType="string" resultType="cn.edu.guet.bean.Student">
+        SELECT * FROM student WHERE rId=#{rId}
+    </select>
+    <update id="changeRoom" parameterType="string">
+        UPDATE student SET rId=#{rId},rBed=#{rBed},buid=#{buId} WHERE sId=#{sId}
+    </update>
+    <update id="changeRoomStat_in" parameterType="string">
+        update room set hpeople='true' where rId=#{rId} and rBed=#{rBed}
+    </update>
+    <update id="changeRoomStat_out" parameterType="string">
+        update room set hpeople='false' where rId=#{rId} and rBed=#{rBed}
+    </update>
+
+    <resultMap id="resRoom" type="hashmap">
+        <result property="rId" column="rId" jdbcType="VARCHAR" />
+        <result property="num" column="num" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="viewRooms" parameterType="list" resultMap="resRoom">
+        select distinct r.rId rId,ifnull(tb.num,0) num
+        from (select rId from room where rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>) r left join
+        (select
+        rId,count(*) num
+        from room
+        where hpeople='true' and rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>
+        group by rId) as tb
+        on r.rId=tb.rId
+    </select>
+    <select id="viewEmptyRooms" parameterType="list" resultMap="resRoom">
+        select
+        rId,count(*) num
+        from room
+        where hpeople='false' and rId in
+        <foreach collection="list" item="rIds" index="index" open="(" close=")" separator=",">
+            #{rIds}
+        </foreach>
+        group by rId
+    </select>
+
+    <select id="selectStudentById" parameterType="string" resultType="cn.edu.guet.bean.Student">
+        select * from student where sId=#{sId}
+    </select>
+</mapper>

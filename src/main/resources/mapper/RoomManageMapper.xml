@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.RoomManageMapper">
+    <select id="getRoom" parameterType="hashmap" resultType="cn.edu.guet.bean.Room">
+        select * from room limit #{currentPage},#{allPage}
+    </select>
+   <update id="updateRoom" parameterType="cn.edu.guet.bean.Room">
+       update room set rId=#{rId} and rBed=#{rBed} and buid=#{buid} where rId=#{rId} and rBed=#{rBed} and buid=#{buid}
+   </update>
+    <insert id="addRoom" parameterType="cn.edu.guet.bean.Room">
+        insert into room values(#{rId},#{rBed},#{buid})
+    </insert>
+    <delete id="deleteRoom" parameterType="cn.edu.guet.bean.Room">
+        delete from room where rId=#{rId} and rBed=#{rBed} and buid=#{buid}
+    </delete>
+
+    <select id="getrId" parameterType="string" resultType="cn.edu.guet.bean.Room">
+        select * from room where rId=#{rId} and rBed=#{rBed} and buid=#{buid}
+    </select>
+
+    <select id="getRoomPage" resultType="int">
+        select count(*) from room
+    </select>
+</mapper>

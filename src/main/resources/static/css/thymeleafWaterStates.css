@@ -1,0 +1,48 @@
+.button1{
+  width: 80px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+}
+.button1:active {
+  opacity: .8;
+}
+.button2{
+  width: 80px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+}
+.button2:active {
+  opacity: .8;
+}
+.number{
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+  width: 100px;
+  height: 10px;
+  top: 0px;
+  border-top: 0px;
+}
+.th{
+  font-family: "黑体";
+  font-size: x-large;
+}
+#money{
+  position: absolute;
+  left: 500px;
+  top: 30px;
+}

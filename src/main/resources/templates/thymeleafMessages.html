@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"  th:href="@{css/pages.css}">
+    <link rel="stylesheet"  th:href="@{css/viewMessages.css}">
+  <link rel="stylesheet"  th:href="@{css/thymeleafMessages.css}">
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <script th:inline="javascript">
+        $(function (){
+            var pageNum = 1;
+            var pageSize = 3;
+            var lastPage;
+            var receiveId = "<%=session.getAttribute('userId')%>";
+
+          $.ajax({
+                url:"getReceiveMessages?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                async: false,
+                method: 'post',
+                success:function(data) {
+                    setSelect(data);
+                    lastPage = data.navigateLastPage;
+                }
+            })
+
+/*            $("#body").on('click', '#test111', function(){
+                view();
+            })*/
+
+            function view(){
+                $.ajax({
+                    url:"getMessageThymeleaf?receiveId=" + receiveId + "&pageNum=" + pageNum + "&pageSize=" + pageSize,
+                    async: false,
+                    method: 'post',
+                    success:function(data) {
+                        $(".messageinfo").html(data)
+                    }
+                })
+            }
+
+            // 点击页码
+            $(".lq-page").on('click','.page',function(){
+                $(".page.on").attr("class", "page");
+                $(this).attr("class", "page on");
+                pageNum = parseInt($(this).html());
+                view();
+            })
+
+            // 点击首页
+            $(".lq-page").on('click','.page-start',function(){
+                pageNum = 1;
+                $(".page.on").attr("class", "page");
+                $(".page-before").next().attr("class", "page on");
+                view();
+            })
+
+            // 点击尾页
+            $(".lq-page").on('click','.page-end',function(){
+                pageNum = lastPage;
+                $(".page.on").attr("class", "page");
+                $(".page-after").prev().attr("class", "page on");
+                view();
+            })
+
+            // 点击下一页
+            $(".lq-page").on('click','.page-after',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum+1 <= lastPage){
+                    pageNum++;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.next().attr("class", "page on");
+                }
+            })
+
+            // 点击上一页
+            $(".lq-page").on('click','.page-before',function(){
+                var pageOn = $(this).siblings('.on');
+                pageNum = parseInt(pageOn.html());
+                if(pageNum-1 >= 1){
+                    pageNum--;
+                    view();
+                    $(".page.on").attr("class", "page");
+                    pageOn.prev().attr("class", "page on");
+                }
+            })
+
+            // 删除消息
+            $("#messageMain").on('click', '#delete', function(){
+                $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
+                    // arr.push();	//将我们遍历出来的值push到数组中
+                    deleteMessage($(this).val());
+                    view()
+                    //最后可以提交arr就可以实现将我们选中的checkbox的value值提交
+                })
+            })
+
+            // 标记为已读
+            $("#messageMain").on('click', '#read', function(){
+                $("input[name='messageCheckbox']:checked").each(function(i){	//遍历
+                    if($(this).parent().siblings(".ckeckRead").attr("type") == '0'){
+                      console.log("aaa");
+                      readMessage($(this).attr("value"));
+                        view()
+                    }
+                })
+            })
+
+            // 全部标记为已读
+            $("#messageMain").on('click', '#readAll', function(){
+                $(".ckeckRead").each(function(){	//遍历
+                    if($(this).attr("type") == '0'){
+                        readMessage($(this).attr("value"));
+                        view()
+                    }
+                })
+            })
+
+            $("#messageMain").on('click', '#setCheckBox', function(){
+                var flag = $("#setCheckBox").prop("checked");
+                $("input[name='messageCheckbox']").each(function(i){	//遍历
+                    if(flag){
+                        $(this).prop("checked", true);
+                    }else{
+                        $(this).prop("checked", false);
+                    }
+                })
+            })
+          // 显示详细内容
+          $("#body").on('click', '#seeMessage', function (){
+            var messageId = $(this).parent().parent().find("input").attr("value");
+            $.ajax({
+              url : 'viewMessage?messageId=' + messageId,
+              async : false,
+              method : 'post',
+              success : function(data) {
+                $(".mask").show();
+                $(".mask").html(data);
+              }
+            })
+          })
+          // 隐藏遮罩层
+          $("#body").on('click', '#messageout', function (){
+            $(".mask").hide();
+          })
+
+            // 删除消息
+            function deleteMessage(messageId){
+                $.ajax({
+                    url : 'deleteMessage?messageId=' + messageId,
+                    async : false,
+                    method : 'post',
+                    success : function() {
+
+                    }
+                })
+            }
+
+            // 标记消息
+            function readMessage(messageId){
+                $.ajax({
+                    url : 'readMessage?messageId=' + messageId,
+                    async : false,
+                    method : 'post',
+                    success : function() {
+
+                    }
+                })
+            }
+
+            function setSelect(data){
+                $(".lq-page").html("");  // 清空
+                var pages = data.navigatepageNums;
+                if(pages.length >= 2){
+                    $(".lq-page").append('<span class="page-start">首页</span>');
+                    $(".lq-page").append('<span class="page-before">上一页</span>');
+                    $.each(pages, function(index, page) {
+                        if(index == 0){
+                            var span = $("<span class=\"page on\">"+ page +"</span>");
+                        }else {
+                            var span = $("<span class=\"page\">"+ page +"</span>")
+                        }
+                        $(".lq-page").append(span);
+                    })
+                    $(".lq-page").append('<span class="page-after">下一页</span><span class="page-end">尾页</span>');
+                }
+            }
+        })
+    </script>
+</head>
+<body id="body">
+<div>
+<!--        <input type="button" id="test111" value="显示">-->
+    <div id="messageMain" class="messageinfo" th:fragment="messageinfo">
+      <input type="button" id="delete" value="删除" class="button1">
+      <input type="button" id="read" value="标记为已读" class="button1">
+      <input type="button" id="readAll" value="全部标记为已读" class="button1">
+        <table id="messageTable" class="messageTable">
+
+<!--            <input type="button" id="viewReceive" value="查看接收">-->
+<!--            <input type="button" id="viewSend" value="查看发送">-->
+
+            <thead>
+            <tr>
+                <th><input type='checkbox' id='setCheckBox'/></th>
+                <th></th>
+                <th>发送人</th>
+                <th>接收人</th>
+                <th>主题</th>
+                <th>内容</th>
+                <th>时间</th>
+                <th>详情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="messageTr" th:each="message,messagesStat:${messages}">
+                <td><input type="checkbox" name="messageCheckbox" th:value="${message.messageId}"></td>
+                <td class='ckeckRead' th:value='${message.messageId}' type='0' th:if="${message.isRead} eq '0'"><div class='cir Ru'></div></td>
+                <td class='ckeckRead' th:value='${message.messageId}' type='1' th:if="${message.isRead} eq '1'"><div class='cir Rr'></div></td>
+                <td><span class='sendId' id="sendId1" th:text="${message.sendId}"></span></td>
+                <td><span class='receiveId' th:text="${message.receiveId}"></span></td>
+                <td><span class='title' th:text="${message.title}"></span></td>
+                <td><p class='content' th:text="${message.content}"></p></td>
+                <td><span class='sendTimea' th:text="${message.sendTime}"></span></td>
+                <td><a href="javascript:void(0)" id="seeMessage" >查看详情</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="lq-page"></div>
+
+    <div class="mask">
+      <div id="message" class="message" th:fragment="viewMessage">
+        <span th:text="${message.title}"></span>
+        <span th:text="${message.sendId}"></span>
+        <span th:text="${message.sendTime}"></span>
+        <p th:text="${message.content}"></p>
+        <br>
+        <hr>
+        <form action="outputMessage" method="post">
+          <input type="hidden" name="sendId" value="">
+          回复发给:<input name="receiveId" type="text" id="outputUser" readonly class="outPutClass" th:value="${message.sendId}"><br>
+          回复标题:<input type="text" name="title" class="outPutClass" value="回复消息" readonly><br>
+          回复内容:<textarea name="content" id="outputText" class="outPutClass" placeholder="这是回复给对方的内容"></textarea><br>
+          <input type="submit" class="reSubmit">
+        </form>
+        <input type="button" value="退出" id="messageout">
+      </div>
+    </div>
+</div>
+</body>
+</html>

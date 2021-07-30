@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.ApplyMapper">
+    <select id="addApply" resultType="cn.edu.guet.bean.Apply">
+        insert into apply values(#{applyId},#{message},#{reply})
+    </select>
+    <select id="lookApply" resultType="cn.edu.guet.bean.Apply">
+      select * from apply where reply='审批中'
+    </select>
+    <select id="updateState" resultType="cn.edu.guet.bean.Apply">
+      update apply set reply=#{reply} WHERE sqlMessage=#{sqlMessage}
+    </select>
+    <select id="updateApply" resultType="cn.edu.guet.bean.Student">
+      update student set ${sql} where sId = #{sId}
+    </select>
+</mapper>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>报修页面</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/RepairMan.css" th:href="@{/css/RepairMan.css}">
+    <script>
+        $(function (){
+
+            $("#reFqbx").click(function (){
+                var reNames=$("#title").val();
+                var reClass=$("#reClass").val();
+                var reText=$("#reText").val();
+                var reBuild=$("#reBuild").val();
+                var reRoom=$("#reRoom").val();
+                var rePhone=$("#rePhone").val();
+                if($.trim(reNames) == '' ||$.trim(reClass) == '' ||$.trim(reText) == '' ||$.trim(reBuild) == '' || $.trim(reRoom) == '' ||$.trim(rePhone) == ''){
+                    alert("请完整输入内容")
+                }else {
+                    $.ajax({
+                        url:'RepairUp.do?reNames='+reNames+'&reClass='+reClass+'&reText='+reText+'&reRoom='+reBuild+reRoom+'&rePhone='+rePhone,
+                    })
+                    alert("报修成功，请等待工作人员维修");
+                    $("#title").val("");
+                    $("#reText").val("");
+                    $("#reRoom").val("");
+                    $("#rePhone").val("");
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="repairManDiv">
+    <p class="reP">桂电报修系统</p>
+    <form action="RepairUp.do" method="POST">
+        <label for="title" class="reLable">报修标题： </label><input type="text" name="title" id="title" class="reInput" placeholder="输入一个直观的标题"/>
+
+        <div class="repairManDiv">
+            <label for="reClass" class="reLable">报修类型：</label>
+            <select class="reSelect" id="reClass">
+                <option value="五金">五金</option>
+                <option value="水">水</option>
+                <option value="电">电</option>
+                <option value="卡机">卡机</option>
+                <option value="网络">网络</option>
+                <option value="床柜">床柜</option>
+                <option value="其它">其它</option>
+            </select>
+        </div>
+
+        <label for="reText" class="reLable" id="reTextLable">报修内容：</label>
+        <textarea name="reText" id="reText" class="reText" placeholder="请写明报修的具体内容以便维修工人准备"></textarea>
+
+        <div class="repairManDiv">
+            <label for="reBuild" class="reLable">所在楼栋：</label>
+            <select class="reSelect" id="reBuild">
+                <option th:each="build,buildStat:${builds}" th:selected="${buId eq build.buid}" th:text="${build.buid}+栋"></option>
+
+            </select>
+        </div>
+
+        <label for="reRoom" class="reLable">报修房间：</label>
+        <input type="text" name="reRoom" id="reRoom" class="reInput" placeholder="请写明宿舍号,如在室外则写明地点" />
+
+        <label for="rePhone" class="reLable">联系方式：</label>
+        <input type="text" name="rePhone" id="rePhone" class="reInput" placeholder="写明联系方式，以便联系到您" />
+
+        <input type="button" class="reSubmit" id="reFqbx" value="发起报修" />
+        <a href="RepairForUs.do">我的报修</a>
+    </form>
+</div>
+</body>
+</html>

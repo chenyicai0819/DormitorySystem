@@ -9,23 +9,12 @@ spring:
     url: jdbc:mysql://localhost:3306/dormitory?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: chenyicai
     password: cyc1234
-  mvc:
-    view:
-      prefix: /WEB-INF/pages/
-      suffix: .jsp
   jpa:
     show-sql: true
   servlet:
     multipart:
       max-file-size: 30MB  #设置上传文件的大小
       max-request-size: 30MB
-
-
-pagehelper:
-  helper-dialect: mysql # 指定数据库类型
-  reasonable: true
-  params: count=countSql
-  support-methods-arguments: true
 
 #日志级别（一般设置为INFO）
 logging:
@@ -39,4 +28,8 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.edu.guet.bean
 
-
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

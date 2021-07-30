@@ -1,0 +1,71 @@
+lable{
+  color: black;
+  font-family: "宋体";
+  font-weight: bold;
+}
+.wrapper{
+    width: 510px;
+    height: 500px;
+    position: relative;
+  left: 100px;
+}
+
+.title{
+  font-family: "黑体";
+  font-size: x-large;
+  margin: 0 auto;
+  text-align: center
+}
+a{
+    text-decoration: none;
+}
+select {
+  width: 100px;
+  padding: 6px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  position: relative;
+}
+.input1{
+  width: 60px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+}
+#wzm{
+  width: 110px;
+}
+.input1:active {
+  /* border: .5px solid #7f8fa6;
+  box-sizing: content-box; */
+  opacity: .8;
+}
+#roomTable {
+  border-collapse: collapse;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+
+#roomTable th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+#roomTable tr{background-color: #f2f2f2}
+
+#roomTable th {
+  background-color: #2f3640	;
+  color: white;
+}
+#roomTable a{
+  display: block;
+}
+.aa{
+  color: #00a8ff;
+}

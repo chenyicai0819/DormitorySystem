@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+}
+.boardTable {
+  border-collapse: collapse;
+  width: 80%;
+  border-top: none;
+  border-bottom: none;
+}
+
+.boardTable th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.boardTable tr{background-color: #f2f2f2}
+
+.boardTable th {
+  background-color: #2f3640	;
+  color: white;
+}
+.window{
+    position: relative;
+    width: 600px;
+    top: -150px;
+    display: none;
+    z-index: 1025;
+    background-color: white;
+    height: 500px;
+}
+.wrapper{
+    width: 100%;
+    z-index: 1020;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 300px;
+}
+.close{
+    position: absolute;
+    color: black;
+    right: 0;
+}
+a{
+  text-decoration: none;
+}
+#addBoard{
+  color: red;
+}
+.first{
+    text-align: center;
+}
+label{
+    position: absolute;
+    left: 30px;
+}
+input{
+  width: 400px;
+  height: 25px;
+  padding: 12px 20px;
+  margin: 3px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  position: relative;
+  left: 150px;
+}
+input:focus{
+  border: 3px solid #555;
+}
+.submit{
+    height: 25px;
+}
+#submit {
+  width: 400px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+  left: 150px;
+}
+#submit:active {
+  opacity: .8;
+}
+textarea{
+  width: 400px;
+  height: 200px;
+  max-height: 200px;
+  max-width: 400px;
+  min-height: 200px;
+  min-width: 400px;
+  padding: 12px 20px;
+  margin: 3px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  position: relative;
+  left: 150px;
+}
+#window1{
+    position: absolute;
+    width: 600px;
+    top: 30px;
+    left: 400px;
+    display: none;
+    z-index: 1025;
+    background-color: white;
+    height: 500px;
+}
+#x1,#x2{
+  background-color: red;
+  text-decoration:none;
+}

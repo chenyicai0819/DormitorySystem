@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+}
+.wrapper{
+    width: 500px;
+}
+.title{
+    color: aqua;
+}
+a{
+    text-decoration: none;
+    color: black;
+}

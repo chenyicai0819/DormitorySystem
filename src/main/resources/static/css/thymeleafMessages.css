@@ -1,0 +1,59 @@
+.button1{
+  width: 110px;
+  height: 30px;
+  background-color: #00a8ff;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px;
+  border: 1px solid #dcdde1;
+  opacity: 1;
+  position: relative;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.button1:active {
+  opacity: .8;
+}
+.messageTable {
+  border-collapse: collapse;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+
+.messageTable th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.messageTable tr{
+  background-color: #f2f2f2;
+}
+
+.messageTable th {
+  background-color: #2f3640	;
+  color: white;
+}
+.messageTable a{
+  display: block;
+}
+.mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+#messageout{
+  z-index: 100;
+}
+#message{
+  position: relative;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+  background: white;
+
+}

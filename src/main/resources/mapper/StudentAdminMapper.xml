@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.StudentAdminMapper">
+    <select id="getStudent"   resultType="cn.edu.guet.bean.Student">
+        select * from student
+    </select>
+
+    <delete id="deleteStudent" parameterType="string">
+        delete from student where sId=#{values}
+    </delete>
+
+    <update id="updateStudent" parameterType="cn.edu.guet.bean.Student">
+        update student set sId=#{sId},roleId=#{roleId},buid=#{buid},rId=#{rId},rBed=#{rBed},sPwd=#{sPwd},sName=#{sName},
+        sSex=#{sSex},sCollege=#{sCollege},sGrade=#{sGrade},sPhone=#{sPhone}
+        where sId=#{sId}
+    </update>
+    <update id="upRoomisPeople" parameterType="hashmap">
+      UPDATE room SET hpeople='true' WHERE rBed=#{bed} AND rId=#{rid}
+    </update>
+
+    <insert id="addStudent" parameterType="cn.edu.guet.bean.Student">
+        INSERT INTO student values(#{sId},#{roleId},#{buid},#{rId},#{rBed},#{sPwd},#{sName},#{sSex},#{sCollege},#{sGrade},#{sPhone})
+    </insert>
+
+    <select id="searchStudent" parameterType="int" resultType="cn.edu.guet.bean.Student">
+        select * from student where sId=#{sId}
+    </select>
+    <select id="getStudentCount"  resultType="java.lang.Integer">
+        select count(*) from student
+    </select>
+</mapper>

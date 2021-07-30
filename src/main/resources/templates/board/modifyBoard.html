@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>修改公告</title>
+  <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/board/modifyBoard.css" th:href="@{/css/board/modifyBoard.css}">
+</head>
+<body>
+<div class="wrapper">
+  <h3 class="first">修改公告</h3><br>
+  <form action="saveModifyBoard" target="_parent">
+    <label for="boID">ID</label><input type="text" name="boId" id="boID" th:value="${board.boId}"><br>
+    <label for="boName">标题</label><input type="text" name="boName" id="boName" th:value="${board.boName}"><br>
+    <label>内容</label><textarea name="boContent" cols="100" rows="30" th:text="${board.boContent}"></textarea><br>
+    <label for="boTime">时间</label><input type="date" name="boTime" id="boTime" th:value="${board.boTime}"><br>
+    <label for="boUser">发布人(单位)</label><input type="text" name="boUser" id="boUser" th:value="${board.boUser}"><br>
+    <input id="submit" type="submit" value="修改">
+  </form>
+</div>
+</body>
+</html>

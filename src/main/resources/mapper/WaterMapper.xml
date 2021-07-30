@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.WaterMapper">
+    <select id="getWaterState" parameterType="string" resultType="cn.edu.guet.bean.Water">
+        SELECT * FROM water WHERE buid = #{value}
+    </select>
+    <select id="getAllWaterState" resultType="cn.edu.guet.bean.Water">
+        SELECT * FROM water
+    </select>
+
+
+  <insert id="insertWaterState" parameterType="cn.edu.guet.bean.Water">
+        INSERT INTO water VALUES(#{buid}, #{wprice}, #{wnum})
+    </insert>
+
+    <update id="updataWaterState" parameterType="cn.edu.guet.bean.Water">
+        UPDATE water SET wnum=#{wnum} WHERE buid=#{buid}
+    </update>
+    <update id="upWaterMoney" parameterType="double">
+      UPDATE water SET wprice=#{wprice}
+    </update>
+
+  <delete id="delteWaterState" parameterType="string">
+        DELETE FROM water WHERE buid = #{value}
+    </delete>
+
+    <insert id="addWaterState" parameterType="cn.edu.guet.bean.Water">
+        INSERT INTO water VALUES(#{buid}, #{wprice}, #{wnum})
+    </insert>
+
+</mapper>

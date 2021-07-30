@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.mapper.MessageMapper">
+
+  <select id="getMessage" parameterType="int" resultType="cn.edu.guet.bean.Message">
+    SELECT * FROM Messages WHERE messageId = #{value}
+  </select>
+
+  <select id="getSendMessages" parameterType="string" resultType="cn.edu.guet.bean.Message">
+        SELECT * FROM Messages WHERE sendId = #{value}
+    </select>
+
+    <select id="getReceiveMessages" parameterType="string" resultType="cn.edu.guet.bean.Message">
+        SELECT * FROM Messages WHERE receiveId = #{value}
+    </select>
+    <select id="seleAunt" resultType="cn.edu.guet.bean.Dormitory">
+      SELECT * FROM dormitory
+    </select>
+  <select id="myMess" resultType="cn.edu.guet.bean.Message" parameterType="string">
+    SELECT * FROM messages WHERE sendId=#{value} OR receiveId=#{value} order by sendTime DESC
+  </select>
+  <select id="myMessIn" resultType="cn.edu.guet.bean.Message" parameterType="string">
+    SELECT * FROM messages WHERE receiveId=#{value}
+  </select>
+
+  <insert id="sendMessage" parameterType="cn.edu.guet.bean.Message">
+        INSERT INTO Messages VALUES (#{messageId}, #{sendId}, #{receiveId}, #{title}, #{content}, #{isRead}, now())
+    </insert>
+
+    <delete id="deleteMessage" parameterType="string">
+        DELETE FROM Messages WHERE messageId = #{value}
+    </delete>
+
+    <update id="readMessage" parameterType="int">
+        UPDATE Messages SET isRead='1' WHERE messageId = #{value}
+    </update>
+
+
+</mapper>

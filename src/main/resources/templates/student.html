@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet"  th:href="@{/css/dormitory.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/pages.css}"/>
+    <link rel="stylesheet"  th:href="@{/css/yhsq.css}"/>
+    <script th:src="@{/js/student.js}"></script>
+    <script th:src="@{/js/pageForlzf.js}"></script>
+    <script th:inline="javascript">
+
+        $(function (){
+          $("#uppull").click(function (){
+            $(".fileup").toggle();
+          })
+          var retInfo = [[${retInfo}]];
+          if (null!=retInfo){
+            alert(retInfo);
+          }
+        })
+        function closeApp(){
+          $("#backG").hide();
+          $("#showApply").hide();
+        }
+        $(function () {
+          if($(".showMes").val() != null){
+            $("i").show();
+          }
+          $("#lookA").click(function () {
+            $("#backG").show();
+            $("#showApply").show();
+          })
+          $("#can").click(function () {
+            $("body").load("StuManage.do");
+          })
+          $("#con").click(function () {
+            $(".judegA").each(function (index,value) {
+              if($(this).val() == "同意申请") {
+                $("#backG").load("UpdateApp.do?sql="+[[${apply}]][index].sqlMessage+"&sId="+[[${apply}]][index].applyId);
+                $("#backG").load("getState.do?reply=审批成功&sqlMessage="+[[${apply}]][index].sqlMessage);
+              }
+              else if($(this).val() == "拒绝申请"){
+                $("#backG").load("getState.do?reply=未通过&sqlMessage="+[[${apply}]][index].sqlMessage);
+              }
+            })
+            location.reload();
+          })
+        })
+    </script>
+</head>
+<body id="body1" th:fragment="body1">
+<div>
+    <div class="ser">
+        <input type="text" value="" id="text" class="text">
+        <input type="button" value="搜索" id="search" class="search" >
+        <input type="button" value="上传学生信息" id="uppull" class="uppull">
+      <form action="/importStudent" method="post" enctype="multipart/form-data" id="form3">
+        <input type="file" name="file" class="fileup" style="display: none">
+        <input type="submit" value="上传" class="fileup" style="display: none">
+      </form>
+
+    </div>
+  <i></i>
+  <input id="lookA" type="button" value="查看申请" style="width:150px;height: 28px">
+    <table th:class="table1" border="1" th:id="table1" th:fragment="table1">
+        <tr>
+            <th>学号</th>
+            <th>角色</th>
+            <th>楼栋</th>
+            <th>宿舍号</th>
+            <th>床号</th>
+            <th>学生登入密码</th>
+            <th>学生姓名</th>
+            <th>性别</th>
+            <th>学院</th>
+            <th>年级</th>
+            <th>电话</th>
+            <th colspan="2">操作</th>
+        </tr>
+
+        <tr th:each="student,studentStat :${students}">
+            <td th:text="${student.sId}" ></td>
+            <td th:text="${student.roleId}" ></td>
+            <td th:text="${student.buid}" ></td>
+            <td th:text="${student.rId}" ></td>
+            <td th:text="${student.rBed}"></td>
+            <td th:text="${student.sPwd}"></td>
+            <td th:text="${student.sName}"></td>
+            <td th:text="${student.sSex}"></td>
+            <td th:text="${student.sCollege}"></td>
+            <td th:text="${student.sGrade}"></td>
+            <td th:text="${student.sPhone}"></td>
+            <td> <a href="javascript:void(0)" class="update1">修改</a></td>
+            <td><a th:href="@{deleteStudent(sId=${student.sId})}">删除</a></td>
+        </tr>
+    </table>
+
+
+    <div>
+        <input type="submit" id="submit" value="添加"  class="submit">
+        <input type="submit" id="return" value="返回"  class="return" style="position:relative;bottom:0px;float:right;display:none" >
+    </div>
+
+    <form    class="form1" id="form1">
+        学号:<input type="text" id="sId" value="" class="add">
+        角色:<input type="text" id="roleId" value="" class="add">
+        楼栋:<input type="text" id="buid" value="" class="add">
+        <br>
+        宿舍号:<input type="text" id="rId" value="" class="add">
+        床号:<input type="text" id="rBed" value="" class="add">
+        学生登入密码:<input type="text" id="sPwd" value="" class="add">
+        学生姓名:<input type="text" id="sName" value="" class="add">
+        <br>
+        性别:<input type="text" id="sSex" value="" class="add">
+        学院:<input type="text" id="sCollege" value="" class="add">
+        年级:<input type="text" id="sGrade" value="" class="add">
+        电话:<input type="text" id="sPhone" value="" class="add">
+        <br>
+        <input type="button" name="" value="修改"  id="bottom1" >
+    </form>
+
+    <form   class="form2" id="form2">
+        学号:<input type="text" id="sId2" value="" class="add">
+        角色:<input type="text" id="roleId2" value="" class="add">
+        楼栋:<input type="text" id="buid2" value="" class="add">
+        <br>
+        宿舍号:<input type="text" id="rId2" value="" class="add">
+        床号:<input type="text" id="rBed2" value="" class="add">
+        学生登入密码:<input type="text" id="sPwd2" value="" class="add">
+        学生姓名:<input type="text" id="sName2" value="" class="add">
+        <br>
+        性别:<input type="text" id="sSex2" value="" class="add">
+        学院:<input type="text" id="sCollege2" value="" class="add">
+        年级:<input type="text" id="sGrade2" value="" class="add">
+        电话:<input type="text" id="sPhone2" value="" class="add">
+        <br>
+        <input type="button" name="" value="确定"  id="bottom2" >
+    </form>
+    <div class="lq-page" id="lq-page"></div>
+    <span th:text="${pageInfo.getTotal()}" style="display: none" ></span>
+    <span th:text="${pageInfo.getPages()}" id="allPage"  style="display: none"></span>
+</div>
+
+<div id="backG">
+  <div id="showApply">
+    <p><a id="closeApply" href="#"  onclick="closeApp()">关闭</a></p>
+    <h2>申请列表</h2>
+    <p class="showMes" th:each="apply,applyStat:${apply}" th:if="${apply.reply} eq '审批中'">
+      <span th:text="'学号'+${apply.applyId}+'申请'+${apply.message.replace('您将','')}"></span>
+      <select class="judegA">
+        <option>审批中</option>
+        <option>同意申请</option>
+        <option>拒绝申请</option>
+      </select>
+    </p>
+    <input type="button" id="con" value="确认修改" style="width:150px;height: 28px">
+    <input type="button" id="can" value="取消修改" style="width:150px;height: 28px">
+  </div>
+</div>
+</body>
+</html>

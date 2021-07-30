@@ -5,36 +5,27 @@ public class Water {
     private double wprice;
     private int wnum;
 
-    public String getBuid() {
-        return buid;
-    }
+  public String getBuid() {
+    return buid;
+  }
 
-    public void setBuid(String buid) {
-        this.buid = buid;
-    }
+  public void setBuid(String buid) {
+    this.buid = buid;
+  }
 
-    public double getWprice() {
-        return wprice;
-    }
+  public double getWprice() {
+    return wprice;
+  }
 
-    public void setWprice(double wprice) {
-        this.wprice = wprice;
-    }
+  public void setWprice(double wprice) {
+    this.wprice = wprice;
+  }
 
-    public int getWnum() {
-        return wnum;
-    }
+  public int getWnum() {
+    return wnum;
+  }
 
-    public void setWnum(int wnum) {
-        this.wnum = wnum;
-    }
-
-    @Override
-    public String toString() {
-        return "Water{" +
-                "buid='" + buid + '\'' +
-                ", wprice=" + wprice +
-                ", wnum=" + wnum +
-                '}';
-    }
+  public void setWnum(int wnum) {
+    this.wnum = wnum;
+  }
 }

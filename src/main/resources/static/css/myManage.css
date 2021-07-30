@@ -1,0 +1,21 @@
+.RepairTable {
+  border-collapse: collapse;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+
+.RepairTable th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.RepairTable tr{background-color: #f2f2f2}
+
+.RepairTable th {
+  background-color: #2f3640	;
+  color: white;
+}
+.RepairTable a{
+  display: block;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>编辑宿舍信息</title>
+  <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/room/editRoom.css" th:href="@{/css/room/editRoom.css}">
+  <script>
+    $(function () {
+      $(".add").click(function () {
+        $("#buId").attr("value",$(this).attr("value"));
+        $(".addStu").show();
+        $(".mask").show();
+        $(".message").css({opacity:0.3});
+      })
+      $(".close").click(function () {
+        $(".addStu").hide();
+        $(".mask").hide();
+        $(".message").css({opacity: 1});
+      })
+      $(".change").click(function () {
+        $("#sId").attr("value",$(this).attr("value"));
+        $("#oldrBed").attr("value",$(this).attr("title"));
+        $(".changeStu").show();
+        $(".mask").show();
+        $(".message").css({opacity:0.3});
+      })
+      $(".close1").click(function () {
+        $(".changeStu").hide();
+        $(".mask").hide();
+        $(".message").css({opacity: 1});
+      })
+    })
+  </script>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="message">
+    <h3 class="title">调整宿舍成员信息</h3><br><br>
+    <table border="1" cellspacing="0" width="500px" id="stuTable">
+      <tr>
+        <th th:text="${rId}" colspan="3"></th>
+        <th colspan="1"><a href="javascript:history.back()" id="fan">返回上一页</a></th>
+      </tr>
+      <tr>
+        <th width="100">床号</th>
+        <th width="100">学生</th>
+        <th width="250" colspan="2">操作</th>
+      </tr>
+      <tr th:each="student,studentStat:${students}">
+        <td th:text="'&nbsp;'+${student.rBed}"></td>
+        <td th:text="'&nbsp;'+${student.sName}"></td>
+        <td th:width="100"><a class="change" th:value="${student.sId}" th:title="${student.rBed}" href="javascript:void(0)">调整宿舍</a></td>
+        <td><a class="add" th:value="${student.buid}" href="javascript:void(0);">添加宿舍成员</a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="addStu">
+    <p>&nbsp;添加宿舍成员</p>
+    <a class="close" href="javascript:void(0)">X</a>
+    <br>
+    <form action="roomAddStudent">
+      <input type="text" name="rId" hidden th:value="${rId}">
+      <input type="text" id="buId" name="buId" hidden>
+      <label>&nbsp;床号: </label><input type="text" name="rBed"><br>
+      <label>&nbsp;学号: </label><input type="text" name="sId"><br>
+      <label>&nbsp;姓名: </label><input type="text" name="sName"><br><br>
+      <span>&nbsp;</span><input class="submit" type="submit" value="&nbsp;确定&nbsp;">
+    </form>
+  </div>
+  <div class="changeStu">
+    <p>&nbsp;调整住宿信息</p>
+    <a class="close1" href="javascript:void(0)">X</a>
+    <br>
+    <form action="roomChangeStudent">
+      <input id="sId" type="text" hidden name="sId">
+      <input type="text" hidden name="oldrId" th:value="${rId}">
+      <input id="oldrBed" type="text" hidden name="oldrBed">
+      <label>&nbsp;宿舍: </label><input type="text" name="rId"><br>
+      <label>&nbsp;床号: </label><input type="text" name="rBed"><br>
+      <label>&nbsp;楼栋: </label>
+      <select name="buId">
+        <option th:each="build,buildStat:${builds}" th:text="${build.buid}"></option>
+      </select><br><br>
+      <span>&nbsp;</span><input class="submit1" type="submit" value="&nbsp;确定&nbsp;">
+    </form>
+  </div>
+  <div class="mask"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="css/sendMessage.css" th:href="@{/css/sendMessage.css}">
+</head>
+    <body>
+    <div class="messDiv">
+      <p class="reP">反馈信息</p>
+      <form action="sendMessage" method="post">
+        <input type="hidden" name="sendId" value="">
+        <label class="reLable">接收人ID:</label>
+        <input type="text" name="receiveId" placeholder="填写宿管得id" class="reInput">
+        <label class="reLable">反馈标题:</label>
+        <input type="text" name="title" class="reInput">
+        <label class="reLable" id="reTextLable">反馈内容:</label>
+        <textarea name="content" id="reText" class="reText" placeholder="请写明反馈的的具体内容"></textarea>
+        <input type="submit" class="reSubmit">
+      </form>
+      <a href="/myMess1" id="myManage">我的反馈</a>
+    </div>
+    <div id="auntsId">
+      <p class="reP">以下是宿管阿姨的id</p>
+      <table border="1" class="AuntTable" >
+        <tr>
+          <th>ID</th>
+          <th>楼栋</th>
+          <th>名字</th>
+        </tr>
+        <tr th:each="aunt,auntStat : ${aunt}" id="tb">
+          <td th:text="${aunt.dId}"></td>
+          <td th:text="${aunt.buid}"></td>
+          <td th:text="${aunt.dName}"></td>
+        </tr>
+      </table>
+    </div>
+    </body>
+</html>

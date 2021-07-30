@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="css/logintest.css" th:href="@{/css/logintest.css}">
+</head>
+<body>
+<form action="/login" method="get" id="form1">
+    <input type="username" name="username" placeholder="用户名">
+    <input type="password" name="password" placeholder="密码">
+    <input type="submit" value="登录">
+</form>
+<div id="tzl">
+    <p th:text="${board.getBoName()}" id="tzId"></p>
+    <div id="tzlZW">
+        <p th:text="${board.getBoContent()}"></p>
+    </div>
+    <p th:text="${board.getBoTime()}" id="tzlTime"></p>
+    <p th:text="${board.getBoUser()}" id="tzlUser"></p>
+</div>
+</body>
+</html>
