@@ -2,26 +2,24 @@ package cn.edu.guet.service.impl;
 
 import cn.edu.guet.bean.Student;
 import cn.edu.guet.mapper.OperationlogMapper;
-import cn.edu.guet.mapper.StudentMapper;
-import cn.edu.guet.service.IStudentService;
+import cn.edu.guet.mapper.StudentAdminMapper;
+import cn.edu.guet.service.IStudentAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class StudentServiceImpl implements IStudentService {
+public class StudentAdminServiceImpl implements IStudentAdminService {
     @Autowired
-    private StudentMapper studentMapper;
+    private StudentAdminMapper studentAdminMapper;
     @Autowired
     private OperationlogMapper operationlogMapper;
     @Override
     public List<Student> getStudent() {
-        return studentMapper.getStudent();
+        return studentAdminMapper.getStudent();
     }
 
     @Override
@@ -29,7 +27,7 @@ public class StudentServiceImpl implements IStudentService {
     public void deleteStudent(String sId) {
         String sql="DELETE FROM student where sId="+sId;
         operationlogMapper.insertLog("删除了一条学生信息："+sql);
-        studentMapper.deleteStudent(sId);
+        studentAdminMapper.deleteStudent(sId);
     }
 
     @Override
@@ -37,7 +35,7 @@ public class StudentServiceImpl implements IStudentService {
     public void updateStudent(Student student) {
         String opName="修改了一条学生信息";
         operationlogMapper.insertLog(opName);
-        studentMapper.updateStudent(student);
+        studentAdminMapper.updateStudent(student);
     }
 
     @Override
@@ -48,20 +46,20 @@ public class StudentServiceImpl implements IStudentService {
           HashMap<String,Object> map=new HashMap<>();
           map.put("rid",student.getrId());
           map.put("bed",student.getrBed());
-          studentMapper.upRoomisPeople(map);
+          studentAdminMapper.upRoomisPeople(map);
         }
         operationlogMapper.insertLog("添加了一条学生信息："+sql);
-        studentMapper.addStudent(student);
+        studentAdminMapper.addStudent(student);
     }
 
     @Override
     public List<Student> searchStudent(int sId) {
-        List<Student> students=studentMapper.searchStudent(sId);
+        List<Student> students= studentAdminMapper.searchStudent(sId);
         return students;
     }
 
     @Override
     public int getStudentCount() {
-        return studentMapper.getStudentCount();
+        return studentAdminMapper.getStudentCount();
     }
 }

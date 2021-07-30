@@ -4,7 +4,7 @@ package cn.edu.guet.controller;
 import cn.edu.guet.bean.ReturnInfoUtil;
 import cn.edu.guet.bean.Student;
 import cn.edu.guet.service.ExcelService;
-import cn.edu.guet.service.IStudentService;
+import cn.edu.guet.service.IStudentAdminService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import java.util.List;
 public class ExcelController {
 
     @Autowired
-    private IStudentService iStudentService;
+    private IStudentAdminService iStudentAdminService;
     @Autowired
     private ExcelService excelService;
     private ReturnInfoUtil returnInfoUtil;
@@ -48,7 +48,7 @@ public class ExcelController {
         }
         PageHelper.startPage(pageNum,10);
         // 默认从第一页开始，每页展示五条数据
-        List<Student> userList = iStudentService.getStudent();
+        List<Student> userList = iStudentAdminService.getStudent();
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
