@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf demo</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/page.css" th:href="@{/css/page.css}">
+    <link rel="stylesheet" type="text/css" href="css/stuManage.css" th:href="@{/css/stuManage.css}">
+    <script th:src="@{/js/page.js}"></script>
+    <script>
+        function getData(){
+            var content = $("#studentId").val();
+            var url="/searchStu";
+            $.ajax({
+                url: url,
+                type:'post',
+                data:{studentId:content},
+                success:function (data) {
+                    $("#body").html(data);
+                }
+            })
+        }
+    </script>
+</head>
+<body th:fragment="body" th:id="body">
+<div >
+    <input type="text" width="200px" id="studentId" name="studentId">
+    <input type="button" value="搜索" onclick="getData()" class="inputButton">
+</div>
+<div th:fragment="table1" th:id="table1">
+<table class="table1" border="1px">
+    <tr>
+        <th>学生ID</th>
+        <th>角色ID</th>
+        <th>楼栋ID</th>
+        <th>宿舍号</th>
+        <th>床号</th>
+        <th>密码</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>学院</th>
+        <th>年级</th>
+        <th>电话</th>
+    </tr>
+    <tr  th:each="student:${pageInfo}" >
+        <td th:text="${student.sId}"></td>
+        <td th:text="${student.roleId}"></td>
+        <td th:text="${student.buid}"></td>
+        <td th:text="${student.rId}"></td>
+        <td th:text="${student.rBed}"></td>
+        <td th:text="${student.sPwd}"></td>
+        <td th:text="${student.sName}"></td>
+        <td th:text="${student.sSex}"></td>
+        <td th:text="${student.sCollege}"></td>
+        <td th:text="${student.sGrade}"></td>
+        <td th:text="${student.sPhone}"></td>
+    </tr>
+</table>
+</div>
+<div class="lq-page" ></div>
+<div th:text="${maxPage}" style="display: none"></div>
+<div th:text="${allPage}" style="display: none" id="allPage"></div>
+</body>
+</html>

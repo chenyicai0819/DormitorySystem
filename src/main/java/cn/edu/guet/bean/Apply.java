@@ -29,5 +29,3 @@ public class Apply {
         this.applyId = applyId;
     }
 }
-
-

@@ -13,6 +13,5 @@ import java.util.List;
 @Component
 public interface TreeMapper {
     List<Tree> getAllTree();
-
     Board seeBoard();
 }

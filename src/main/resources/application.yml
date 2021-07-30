@@ -16,7 +16,6 @@ spring:
       max-file-size: 30MB  #设置上传文件的大小
       max-request-size: 30MB
 
-
 #日志级别（一般设置为INFO）
 logging:
   level:
