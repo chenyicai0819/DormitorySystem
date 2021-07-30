@@ -4,7 +4,9 @@ import cn.edu.guet.bean.Apply;
 import cn.edu.guet.service.impl.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -17,4 +19,19 @@ public class ApplyController {
     public List<Apply> commitApply(String applyId,String message,String reply){
         return applyService.addApply(applyId,message,reply);
     }
+  @GetMapping("yhsq.do")
+  public String stuManage(Model model){
+    model.addAttribute("apply",applyService.lookApply());
+    return "xsgl";
+  }
+  @GetMapping("UpdateApp.do")
+  @ResponseBody
+  public void UpdateApp(String sql,String sId){
+    applyService.updateApply(sql,sId);
+  }
+  @GetMapping("getState.do")
+  @ResponseBody
+  public void getState(String reply,String sqlMessage){
+    applyService.updateState(reply,sqlMessage);
+  }
 }

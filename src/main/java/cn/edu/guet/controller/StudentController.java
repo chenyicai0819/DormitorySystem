@@ -2,6 +2,7 @@ package cn.edu.guet.controller;
 
 import cn.edu.guet.bean.Student;
 import cn.edu.guet.service.IStudentService;
+import cn.edu.guet.service.impl.ApplyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private IStudentService iStudentService;
+    @Autowired
+    private ApplyService applyService;
+
     @GetMapping("StuManage.do")
     public String getStudent(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
         PageHelper.startPage(pageNum,10);
@@ -27,6 +31,7 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("apply",applyService.lookApply());
         return "student";
     }
     @RequestMapping("deleteStudent")
@@ -37,6 +42,7 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
+      model.addAttribute("apply",applyService.lookApply());
         return "student";
     }
     @RequestMapping("updateStudent")
@@ -47,7 +53,7 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
-
+        model.addAttribute("apply",applyService.lookApply());
         return "student";
     }
     @RequestMapping("addStudent")
@@ -66,7 +72,7 @@ public class StudentController {
         }
         model.addAttribute("allPage",allPage);
         System.out.println("总页目"+allPage);
-
+      model.addAttribute("apply",applyService.lookApply());
         model.addAttribute("students",iStudentService.getStudent());
         return "student";
     }
@@ -77,6 +83,7 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
+      model.addAttribute("apply",applyService.lookApply());
         return "student::table1";
     }
     @GetMapping("pagination2")
@@ -87,6 +94,7 @@ public class StudentController {
         PageInfo<Student> pageInfo = new PageInfo<>(userList);
         model.addAttribute("students",userList);
         model.addAttribute("pageInfo",pageInfo);
+      model.addAttribute("apply",applyService.lookApply());
            // 默认从第一页开始，每页展示五条数据
         return "student::table1";
     }

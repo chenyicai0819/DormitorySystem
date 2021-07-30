@@ -42,11 +42,10 @@ table{
 #rBack{
     z-index: 10;
     display: none;
-    width: 1300px;
-    height: 1000px;
-    position: absolute;
-    right: 0;
-    top: 0;
+    width: 100%;
+    height: 560px;
+  position: absolute;
+  top: 0;
     background-color: rgba(0,0,0,0.6);
 }
 #updateRecode{

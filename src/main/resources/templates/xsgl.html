@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生管理</title>
+    <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+    <style>
+        #backG{
+            z-index: 10;
+            display: none;
+            width: 100%;
+            height: 1200px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: rgba(0,0,0,0.6);
+        }
+        #showApply{
+            z-index: 20;
+            display: none;
+            position: absolute;
+            width: 700px;
+            height: 550px;
+            top: 30px;
+            left: 450px;
+            transform: translateX(-50%);
+            margin-top: 60px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        h2{
+            letter-spacing: 15px;
+            text-align: center;
+            margin: 35px;
+            background-color: rosybrown;
+        }
+        #closeApply{
+            font-size: 18px;
+            position: fixed;
+            right: 5px;
+            top: 3px;
+            text-decoration: none;
+        }
+        .showMes{
+            font-size: 18px;
+            position: relative;
+            left: 40px;
+        }
+        .judegA{
+            position: absolute;
+            right: 70px;
+            height: 24px;
+            width: 80px;
+        }
+        #con{
+            position: absolute;
+            bottom: 100px;
+            right: 100px;
+        }
+        #can{
+            position: absolute;
+            bottom: 100px;
+            right: 450px;
+        }
+        i{
+            position: absolute;
+            left: 143px;
+            height: 28px;
+            width:15px;
+            height:15px;
+            border-radius:50%;
+            background-color:red;
+            display: none;
+        }
+    </style>
+    <script th:inline="javascript">
+        function closeApp(){
+            $("#backG").hide();
+            $("#showApply").hide();
+        }
+        $(function () {
+            if($(".showMes").val() != null){
+                $("i").show();
+            }
+            $("#lookA").click(function () {
+                $("#backG").show();
+                $("#showApply").show();
+            })
+            $("#can").click(function () {
+                $("body").load("StuManage.do");
+            })
+            $("#con").click(function () {
+                $(".judegA").each(function (index,value) {
+                    if($(this).val() == "同意申请") {
+                      $("#backG").load("UpdateApp.do?sql="+[[${apply}]][index].sqlMessage+"&sId="+[[${apply}]][index].applyId);
+                      $("#backG").load("getState.do?reply=审批成功&sqlMessage="+[[${apply}]][index].sqlMessage);
+                    }
+                    else if($(this).val() == "拒绝申请"){
+                        $("#backG").load("getState.do?reply=未通过&sqlMessage="+[[${apply}]][index].sqlMessage);
+                    }
+                })
+                // if($(".showMes").val() == null){
+                //     $("i").hide();
+                // }
+                location.reload();
+            })
+        })
+    </script>
+</head>
+<body>
+    <i></i>
+    <div id="backG">
+        <div id="showApply">
+            <p><a id="closeApply" href="#"  onclick="closeApp()">关闭</a></p>
+            <h2>申请列表</h2>
+            <p class="showMes" th:each="apply,applyStat:${apply}" th:if="${apply.reply} eq '审批中'">
+                <span th:text="'学号'+${apply.applyId}+'申请'+${apply.message.replace('您将','')}"></span>
+                <select class="judegA">
+                    <option>审批中</option>
+                    <option>同意申请</option>
+                    <option>拒绝申请</option>
+                </select>
+            </p>
+            <input type="button" id="con" value="确认修改" style="width:150px;height: 28px">
+            <input type="button" id="can" value="取消修改" style="width:150px;height: 28px">
+        </div>
+    </div>
+</body>
+</html>
