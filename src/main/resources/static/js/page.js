@@ -52,7 +52,7 @@ $(function() {
     function addEvent(maxPage) {
         $(".lq-page").off('click');
         $(".lq-page").on('click', '.page', function () {
-            console.log($(this).html());//string 
+            console.log($(this).html());//string
             var num = parseInt($(this).html());
             getData(num);
         })
@@ -66,7 +66,7 @@ $(function() {
             getData(maxPage)
         })
 
-        //4.点击下一页  
+        //4.点击下一页
         $(".lq-page").on('click', '.page-after', function () {
             var num = parseInt($(this).siblings('.on').html());
             num++;
@@ -97,5 +97,17 @@ $(function() {
             addPage(num, allPage);
             addEvent(allPage);
         }
+    }else if (document.title=="Thymeleaf demo"){
+      function getData(num) {
+        $("#table1").load("/getStu?pageNum="+num);
+        addPage(num,allPage);
+        addEvent(allPage);
+      }
+    }else if(document.title=="StuView1"){
+      function getData(num) {
+        $("#table1").load("/getStu1?pageNum="+num);
+        addPage(num,allPage);
+        addEvent(allPage);
+      }
     }
 })

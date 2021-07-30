@@ -27,7 +27,7 @@ public class StudentController {
 
     @GetMapping("StuInform.do")
     public String stuManage(Model model,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,10);
         System.out.println(pageNum);
         List<Student> studentList = studentService.stuManage();
         PageInfo<Student> pageInfo=new PageInfo<>(studentList);
@@ -39,7 +39,7 @@ public class StudentController {
 
     @PostMapping("/searchStu")
     public String searchStu(Model model,int studentId,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum){
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,10);
         List<Student> studentList=studentService.searchStu(studentId);
         PageInfo<Student> pageInfo=new PageInfo<>(studentList);
         model.addAttribute("allPage",pageInfo.getPages());
@@ -50,7 +50,7 @@ public class StudentController {
 
     @RequestMapping("getStu")
     public String getStu(Model model,@RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,10);
         List<Student> studentList = studentService.stuManage();
         PageInfo<Student> pageInfo=new PageInfo<>(studentList);
         model.addAttribute("allPage",pageInfo.getPages());

@@ -11,7 +11,7 @@ public class Student {
     private String sSex;
     private String sCollege;
 
-    public Student(int sId, String roleId, String buid, String rId, String rBed, String sPwd, String sName, String sSex, String sCollege, String sGrade, String sPhone) {
+    public Student() {
         this.sId = sId;
         this.roleId = roleId;
         this.buid = buid;
