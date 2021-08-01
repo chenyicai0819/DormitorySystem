@@ -15,6 +15,6 @@ import java.util.List;
  */
 
 public interface ITreeService {
-    List<Tree> getAllTree();
+    List<Tree> getAllTree(String roId);
     Board seeBoard();
 }

@@ -24,8 +24,8 @@ public class TreeServiceImpl implements ITreeService {
     private TreeMapper treeMapper;
 
     @Override
-    public List<Tree> getAllTree() {
-        return treeMapper.getAllTree();
+    public List<Tree> getAllTree(String roId) {
+        return treeMapper.getAllTree(roId);
     }
 
     @Override

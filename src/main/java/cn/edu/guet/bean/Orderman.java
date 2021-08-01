@@ -11,6 +11,7 @@ public class Orderman {
     private int rmId;
     private String roleId;
     private String rmName;
+    private String rmPwd;
     private String rmPhone;
 
     public int getRmId() {
@@ -45,6 +46,15 @@ public class Orderman {
         this.rmPhone = rmPhone;
     }
 
+    public String getRmPwd() {
+        return rmPwd;
+    }
+
+    public void setRmPwd(String rmPwd) {
+        this.rmPwd = rmPwd;
+    }
+
+
     @Override
     public String toString() {
         return "Orderman{" +
@@ -52,6 +62,7 @@ public class Orderman {
                 ", roleId='" + roleId + '\'' +
                 ", rmName='" + rmName + '\'' +
                 ", rmPhone='" + rmPhone + '\'' +
+                ", emPwd='" + rmPwd + '\''+
                 '}';
     }
 }

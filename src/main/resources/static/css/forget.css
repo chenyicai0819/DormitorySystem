@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    width:100%;
+    min-width:1200px;
+    overflow:hidden;
+}
+
+h3{
+    font-family: 华文楷体;
+    font-size: 25px;
+    text-align: center;
+    color: black;
+    letter-spacing: 30px;
+    margin: 10px auto;
+}
+
+.main{
+    width:100%;
+    background:white;
+    background-size:100% 100%;
+    overflow:hidden;
+}
+
+.main0{
+    width:980px;
+    height:520px;
+    margin: 10px auto;
+    margin-top:140px;
+    border-radius:10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4);
+    border:1px solid;
+    text-align:center;
+}
+
+.main0::before{
+    content:"";
+    background:rgb(176,224,230);
+    opacity:0.5;//透明度设置
+    background-size:980px 520px;
+    width:980px;
+    height:520px;
+    border-radius:10px;
+}
+
+.formBox{
+    margin: auto;
+    font-size: 14px;
+    color: black;
+    width: 623px;
+    margin: 10px auto;
+    text-align: center;
+    align-items: center;
+}
+
+.mainCol {
+    color: #1200ff;
+}
+
+.itembox{
+    top: 100px;
+    margin-top: 80px;
+    overflow:hidden;
+}
+
+.itembox label{
+    display: block;
+    width: 90px;
+    font-weight: 900;
+    line-height: 40px;
+    margin: 25px;
+    margin-left: 13px;
+    float: left;
+    text-align: right;
+    font-size:14px;
+    color:#333;
+}
+
+.itembox input{
+    display:block;
+    float:left;
+    height: 30px;
+    line-height: 30px;
+    color:black;
+    border: 1px solid #ccc;
+    width: 280px;
+    margin: 25px;
+    padding-left: 5px;
+    margin-left: 15px;
+    background-color: #f4f4f4;
+}
+
+.itembox_2{
+    margin-top:10px
+}
+
+.itembox input.yzm{
+    width: 178px;
+    color: black;
+}
+
+.btnBox_1{
+    padding-top:30px;
+    margin-left: 300px;
+    width: 160px;
+}
+
+.btnBox_1 button{
+    width: 100%;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #30adfa;
+    border: none;
+    border-radius: 5px;
+    cursor:pointer;
+}

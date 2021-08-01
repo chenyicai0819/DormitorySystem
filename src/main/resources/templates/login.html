@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>用户登录</title>
+    <link type="text/css" rel="stylesheet" href="../css/login.css" th:href="@{../css/login.css}"/>
+
+</head>
+
+<body>
+<div id="h1"><img src="image/logimg.png" th:src="@{/image/logimg.png}" alt="桂林电子科技大学宿舍管理系统"></div>
+<form action="/login" method="POST">
+    <div class="login">
+        <h1>用户登录</h1>
+        <div class="login_box">
+            <!-- required就是不能为空  必须在css效果中有很大的作用 -->
+            <input type="text" name="username" id="username" required/>
+            <label for="username">用户ID</label>
+        </div>
+        <div class="login_box">
+            <input type="password" name="password" id="password" required/>
+            <label for="password">密码</label>
+        </div>
+        <div>
+            <a class="forget" href="/toUpdatePassword">Forget?</a>
+            <span>选择登录角色：</span>
+            <select class="selected" id="selected" name="selected">
+                <option id="admin" name="admin" value="ro101">管理员</option>
+                <option id="dormitory" name="dormitory" value="ro102">宿管</option>
+                <option id="orderman" name="orderman" value="ro104">工作人员</option>
+                <option id="student" name="student" value="ro103">学生</option>
+            </select>
+        </div>
+        <button onclick="login()">登录</button>
+    </div>
+</form>
+
+<div id="tzl">
+  <p th:text="${board.getBoName()}" id="tzId"></p>
+  <div id="tzlZW">
+    <p th:text="${board.getBoContent()}"></p>
+  </div>
+  <p th:text="${board.getBoTime()}" id="tzlTime"></p>
+  <p th:text="${board.getBoUser()}" id="tzlUser"></p>
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+function login() {
+
+    var aa = $('#selected').val();
+    console.log(aa);
+
+    $('.selected').on("change", function () {
+        // console.log(this.value);
+        var abc = $(this).find(':selected').val();
+        console.log($(this).find(':selected').val());
+    });
+}
+
+</script>
+
+</body>
+</html>

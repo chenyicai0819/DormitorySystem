@@ -18,20 +18,17 @@ public class TreeController {
     private ITreeService treeService;
 
     @GetMapping("getAllTree.do")
-    public String viewIndex(HttpServletRequest request, Model model, HttpServletResponse response){
-        request.setAttribute("tree",treeService.getAllTree());
-        //model.addAttribute("username","陈益财");
-        HttpSession session=request.getSession();
-        session.setAttribute("userId","1800710318");
-        session.setAttribute("roleeId","ro103");
-        session.setAttribute("username","陈益财");
+    public String viewIndex(HttpServletRequest request, Model model, HttpServletResponse response,HttpSession session){
+        String roId= (String) session.getAttribute("roleId");
+        request.setAttribute("tree",treeService.getAllTree(roId));
         return "index";
     }
 
     @RequestMapping("login.do")
-    public String login(HttpServletRequest request,Model model){
+    public String login(HttpServletRequest request,Model model,HttpSession session){
         request.setAttribute("board",treeService.seeBoard());
         model.addAttribute("board",treeService.seeBoard());
-        return "logintest";
+        session.invalidate();
+        return "login";
     }
 }

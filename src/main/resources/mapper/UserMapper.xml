@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--xmlns="http://mybatis.org/schema/mybatis-mapper"-->
+<mapper namespace="cn.edu.guet.mapper.UserMapper">
+
+    <select id="Alogin" resultType="cn.edu.guet.bean.Admin" parameterType="string">
+		SELECT * FROM admin WHERE aId=#{aName}
+	</select>
+    <select id="Dlogin" resultType="cn.edu.guet.bean.Dormitory" parameterType="string">
+		SELECT * FROM dormitory WHERE dId=#{dName}
+	</select>
+    <select id="Rmlogin" resultType="cn.edu.guet.bean.Orderman" parameterType="string">
+		SELECT * FROM orderman WHERE rmId=#{rmName}
+	</select>
+    <select id="Slogin" resultType="cn.edu.guet.bean.Student" parameterType="string">
+		SELECT * FROM student WHERE sId=#{sName}
+	</select>
+
+
+
+    <select id="searchdPhone"  resultType="string" parameterType="string">
+		SELECT dPhone FROM dormitory WHERE dPhone=#{dPhone}
+	</select>
+
+    <select id="searchsPhone"  resultType="string" parameterType="string">
+		SELECT sPhone FROM student WHERE sPhone=#{sPhone}
+	</select>
+
+    <select id="searchrmPhone"  resultType="string" parameterType="string">
+		SELECT rmPhone FROM orderman WHERE rmPhone=#{rmPhone}
+	</select>
+
+
+
+    <update id="updatedPhone" parameterType="string">
+        UPDATE dormitory SET dPwd=#{dPwd} WHERE dPhone=#{dPhone}
+    </update>
+
+    <update id="updatesPhone" parameterType="string">
+        UPDATE student SET sPwd=#{sPwd} WHERE sPhone=#{sPhone}
+    </update>
+
+    <update id="updatermPhone" parameterType="string">
+        UPDATE orderman SET rmPwd=#{rmPwd} WHERE rmPhone=#{rmPhone}
+    </update>
+
+
+</mapper>

@@ -64,7 +64,7 @@
             <input type="button" value="退出登录" id="logout">
         </div>
         <div id="dateTime"></div>
-        <div id="headimg"><img src="http://localhost:8080/getimage?id=1800710318"></div>
+        <div id="headimg"><img src="http://localhost:8080/getimage?id=1800710318" th:src="'http://localhost:8080/getimage?id='+${#session.getAttribute('userId')}"></div>
 
     </div>
     <div class="main">
@@ -87,7 +87,7 @@
         <div class="lq-popup">
             <span style="border: #000000 1px solid"> 查看头像</span>
             <div id="twoImage">
-                <div id="oldImage"><img src="http://localhost:8080/getimage?id=1800710318"></div>
+                <div id="oldImage"><img src="http://localhost:8080/getimage?id=1800710318" th:src="'http://localhost:8080/getimage?id='+${#session.getAttribute('userId')}"></div>
                 <div id="newImage"><img src="" id="newImageShow" alt="上传您的新头像"></div>
             </div>
             <form action="#" th:action="@{/addimage}" enctype="multipart/form-data" method="post">

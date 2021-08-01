@@ -12,6 +12,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author George
@@ -30,7 +31,7 @@ public class HeadController {
     private ITreeService treeService;
 
     @PostMapping("/addimage")
-    public String addImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id, HttpServletRequest request, Model model) throws Exception{
+    public String addImage(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id, HttpServletRequest request, Model model, HttpSession session) throws Exception{
         if(!file.isEmpty()){
             BASE64Encoder encoder = new BASE64Encoder();
             String image = encoder.encode(file.getBytes());
@@ -38,7 +39,8 @@ public class HeadController {
             photo.setId(id);
             photo.setImage(image);
             headService.addImage(photo,id);
-            request.setAttribute("tree",treeService.getAllTree());
+            String roId= (String) session.getAttribute("roleId");
+            request.setAttribute("tree",treeService.getAllTree(roId));
         }
         return "index";
     }
