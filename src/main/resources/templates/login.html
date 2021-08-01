@@ -28,14 +28,15 @@
             <select class="selected" id="selected" name="selected">
                 <option id="admin" name="admin" value="ro101">管理员</option>
                 <option id="dormitory" name="dormitory" value="ro102">宿管</option>
-                <option id="orderman" name="orderman" value="ro104">工作人员</option>
                 <option id="student" name="student" value="ro103">学生</option>
+                <option id="orderman" name="orderman" value="ro104">工作人员</option>
             </select>
         </div>
         <button onclick="login()">登录</button>
+
     </div>
 </form>
-
+<div id="msg"><p th:text="${#session.getAttribute('msg')}"></p></div>
 <div id="tzl">
   <p th:text="${board.getBoName()}" id="tzId"></p>
   <div id="tzlZW">

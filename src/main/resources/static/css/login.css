@@ -10,6 +10,10 @@
   left: 10px;
   top: 10px;
 }
+#h1>img{
+  width: 1176px;
+  height: 55.2px;
+}
 body {
     /*弹性布局 让页面元素垂直+水平居中*/
     font-family: 楷体;
@@ -137,7 +141,19 @@ span{
     letter-spacing: 30px;
     color: black;
 }
-
+#msg{
+  width: 150px;
+  height: 20px;
+  position: absolute;
+  left: 1180px;
+  top: 520px;
+  z-index: 100;
+}
+#msg>p{
+  color: red;
+  font-family: 黑体;
+  float: right;
+}
 #tzl{
   width: 500px;
   height: 400px;

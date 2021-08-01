@@ -51,7 +51,7 @@ public class RepairController {
     }
 
     @GetMapping("RepairForUs.do")
-    public String repairForUs(String reUser, HttpServletRequest request,Model model){
+    public String repairForUs(String reUser, HttpServletRequest request,Model model,HttpSession session){
         int count=repairService.repairSele();
         int allPage;
         if (count%5==0){
@@ -61,7 +61,8 @@ public class RepairController {
         }
         model.addAttribute("allPage",allPage);
         int cur=1;
-        request.setAttribute("repair",repairService.repairForUs("陈益财",cur));
+        String username= (String) session.getAttribute("username");
+        request.setAttribute("repair",repairService.repairForUs(username,cur));
         return "RepairForUs";
     }
 

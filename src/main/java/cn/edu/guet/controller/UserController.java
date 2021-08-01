@@ -99,12 +99,11 @@ public class UserController {
             return "redirect:getAllTree.do";
         } catch (UnknownAccountException e) {
             System.out.println("用户名不存在");
-            model.addAttribute("msg","用户名不存在");
+            session.setAttribute("msg","用户名不存在");
             return "redirect:toLogin";
         }catch (IncorrectCredentialsException e) {
-
             System.out.println("密码错误");
-            model.addAttribute("msg","密码错误");
+            session.setAttribute("msg","密码错误");
             return "redirect:toLogin";
         }
 
@@ -112,9 +111,16 @@ public class UserController {
 
     @GetMapping("/toLogin")
     public String login(HttpServletRequest request,Model model) {
+        request.setAttribute("board",treeService.seeBoard());
+        model.addAttribute("board",treeService.seeBoard());
+
+        return "login";
+    }
+    @GetMapping("/")
+    public String firstLogin(HttpServletRequest request,Model model) {
       request.setAttribute("board",treeService.seeBoard());
       model.addAttribute("board",treeService.seeBoard());
-        return "login";
+      return "login";
     }
 
     //修改密码

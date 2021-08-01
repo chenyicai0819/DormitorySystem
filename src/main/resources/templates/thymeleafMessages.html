@@ -233,10 +233,10 @@
 
     <div class="mask">
       <div id="message" class="message" th:fragment="viewMessage">
-        <span th:text="${message.title}"></span>
-        <span th:text="${message.sendId}"></span>
-        <span th:text="${message.sendTime}"></span>
-        <p th:text="${message.content}"></p>
+        <span th:text="${message.title}" text="null"></span>
+        <span th:text="${message.sendId}" text="null"></span>
+        <span th:text="${message.sendTime}" text="null"></span>
+        <p th:text="${message.content}" text="null"></p>
         <br>
         <hr>
         <form action="outputMessage" method="post">

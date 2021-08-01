@@ -66,7 +66,7 @@ public class MyRealm extends AuthorizingRealm {
         password=student.getsPwd();
       }
     }else if (roId.equals("ro104")){
-      Orderman orderman=userService.Rmlogin(roId);
+      Orderman orderman=userService.Rmlogin(userId);
       if (orderman!=null){
         name= String.valueOf(orderman.getRmId());
         password=orderman.getRmPwd();

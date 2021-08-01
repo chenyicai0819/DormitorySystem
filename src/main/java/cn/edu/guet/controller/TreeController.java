@@ -28,7 +28,6 @@ public class TreeController {
     public String login(HttpServletRequest request,Model model,HttpSession session){
         request.setAttribute("board",treeService.seeBoard());
         model.addAttribute("board",treeService.seeBoard());
-        session.invalidate();
         return "login";
     }
 }
