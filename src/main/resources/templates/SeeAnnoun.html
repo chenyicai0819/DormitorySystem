@@ -17,8 +17,7 @@
                 $(this).parent().css("background-color","#f2f2f2");
             })
             $("#tb").on("click","#see",function(){
-                // 如何拿到userId，当前元素（超链接）的父元素的父元素的第一个td的内容就是userId
-                var boId=$(this).parent().parent().find("td:nth-child(3)").text();//如果让你使用原生的JavaScript去实现这个功能会怎样？
+                var boId=$(this).parent().parent().find("td:nth-child(3)").text();
                 console.log(boId);
                 $.ajax({
                     success: function (data) {

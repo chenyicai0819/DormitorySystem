@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface IApplyService {
-    public List<Apply> addApply(String applyId, String message,String reply);
+    public List<Apply> addApply(String applyId, String message,String reply,String sqlMessage);
     public List<Apply> lookApply();
     public List<Student> updateApply(String sql, String sId);
     public List<Apply> updateState(String reply,String sqlMessage);

@@ -88,7 +88,7 @@ public class UserController {
               if (student!=null){
                 name= String.valueOf(student.getsName());
               }
-            }else if (selected.equals("ro104")){
+            }else if (selected.equals("ro104")||selected.equals("ro105")){
               Orderman orderman=userService.Rmlogin(username);
               if (orderman!=null){
                 name= String.valueOf(orderman.getRmName());

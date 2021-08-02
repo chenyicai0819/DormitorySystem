@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.ApplyMapper">
     <select id="addApply" resultType="cn.edu.guet.bean.Apply">
-        insert into apply values(#{applyId},#{message},#{reply})
+        insert into apply values(#{applyId},#{message},#{reply},#{sqlMessage})
     </select>
     <select id="lookApply" resultType="cn.edu.guet.bean.Apply">
       select * from apply where reply='审批中'

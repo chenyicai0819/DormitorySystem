@@ -29,9 +29,14 @@ public class RepairServiceImpl implements IRepairService {
         }
     }
 
-    @Override
-    public int repairSele() {
-        return repairMapper.repairSele();
+  @Override
+  public int repairSele() {
+    return repairMapper.repairSeleAll();
+  }
+
+  @Override
+    public int repairSele(String repairname) {
+        return repairMapper.repairSele(repairname);
     }
 
     @Override

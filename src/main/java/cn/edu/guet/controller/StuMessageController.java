@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,8 @@ public class StuMessageController {
 
 
     @GetMapping("MyManage.do")
-    public String xsxx(Model model){
-        model.addAttribute("stu",iSMM.getStuMessage());
+    public String xsxx(Model model, HttpSession session){
+        model.addAttribute("stu",iSMM.getStuMessage((String) session.getAttribute("userId")));
         model.addAttribute("dorm",iSMM.getDormBuid());
         return "xsxx";
     }
@@ -44,8 +45,8 @@ public class StuMessageController {
     }
     @GetMapping("ApplyRecode.do")
     @ResponseBody
-    public List<Apply> getRecode(Model model){
-        List<Apply> list = iSMM.ApplyRecode();
+    public List<Apply> getRecode(Model model,HttpSession session){
+        List<Apply> list = iSMM.ApplyRecode((String) session.getAttribute("userId"));
         return list;
     }
 }

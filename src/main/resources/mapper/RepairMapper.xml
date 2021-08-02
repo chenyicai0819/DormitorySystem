@@ -5,8 +5,8 @@
         INSERT INTO repair VALUES(#{reId},#{reNames},#{reText},#{reClass},#{reRoom},#{rePhone},#{reTime},#{reStatus},#{reUser})
     </insert>
 
-    <select id="repairSele" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM repair
+    <select id="repairSele" resultType="java.lang.Integer" parameterType="string">
+        SELECT COUNT(*) FROM repair WHERE reUser=#{repairname}
     </select>
 
     <select id="repairForUs" resultType="cn.edu.guet.bean.Repair" parameterType="java.util.HashMap">
@@ -19,7 +19,10 @@
     <select id="repairStatSele" resultType="java.lang.Integer" parameterType="string">
         SELECT count(*) from repair WHERE reStatus=#{value}
     </select>
-    <update id="upRepair" parameterType="string">
+  <select id="repairSeleAll" resultType="java.lang.Integer">
+    SELECT count(*) from repair
+  </select>
+  <update id="upRepair" parameterType="string">
         UPDATE repair SET reStatus='正在处理' WHERE reId=#{value}
     </update>
     <update id="overRepair" parameterType="string">

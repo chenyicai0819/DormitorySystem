@@ -15,8 +15,8 @@ public class ApplyService implements IApplyService {
     private ApplyMapper applyMapper;
 
     @Override
-    public List<Apply> addApply(String applyId, String message,String reply) {
-        return applyMapper.addApply(applyId,message,reply);
+    public List<Apply> addApply(String applyId, String message,String reply,String sqlMessage) {
+        return applyMapper.addApply(applyId,message,reply,sqlMessage);
     }
 
     @Override

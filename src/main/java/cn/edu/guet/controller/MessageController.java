@@ -39,7 +39,7 @@ public class MessageController {
     }
 
     @PostMapping("viewMessage")
-    public String viewMessage(int messageId, Model model){
+    public String viewMessage(String messageId, Model model){
       Message message = messageService.getMessage(messageId);
       model.addAttribute("message", message);
       return "thymeleafMessages::viewMessage";
@@ -72,7 +72,7 @@ public class MessageController {
 
     @PostMapping("readMessage")
     @ResponseBody
-    public void readMessage(int messageId){
+    public void readMessage(String messageId){
         messageService.readMessage(messageId);
     }
 

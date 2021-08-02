@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.guet.mapper.StuMessageMapper">
-    <select id="getStuMessage" resultType="cn.edu.guet.bean.Student">
-         select * from student where sId = 1800710318
+    <select id="getStuMessage" resultType="cn.edu.guet.bean.Student" parameterType="string">
+         select * from student where sId = #{userId}
     </select>
     <select id="getDormBuid" resultType="cn.edu.guet.bean.Room">
         select distinct buid from room
@@ -14,7 +14,7 @@
     <select id="getDormBed" resultType="cn.edu.guet.bean.Room">
         select rBed from room where buid=#{buid} and rId = #{rId} and hpeople = 'false';
     </select>
-    <select id="ApplyRecode" resultType="cn.edu.guet.bean.Apply">
-        select * from apply where applyId = 18001
+    <select id="ApplyRecode" resultType="cn.edu.guet.bean.Apply" parameterType="string">
+        select * from apply where applyId = #{userId}
     </select>
 </mapper>

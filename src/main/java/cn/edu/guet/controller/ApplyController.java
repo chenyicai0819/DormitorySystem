@@ -16,8 +16,8 @@ public class ApplyController {
     private ApplyService applyService;
 
     @GetMapping("commitApply.do")
-    public List<Apply> commitApply(String applyId,String message,String reply){
-        return applyService.addApply(applyId,message,reply);
+    public List<Apply> commitApply(String applyId,String message,String reply,String sqlMessage){
+        return applyService.addApply(applyId,message,reply,sqlMessage);
     }
   @GetMapping("yhsq.do")
   public String stuManage(Model model){

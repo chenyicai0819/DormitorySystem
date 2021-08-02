@@ -20,7 +20,7 @@ public class MessageServiceImpl implements IMessageService {
 
 
     @Override
-    public Message getMessage(int messageId) {
+    public Message getMessage(String messageId) {
     return messageMapper.getMessage(messageId);
   }
     @Override
@@ -50,7 +50,7 @@ public class MessageServiceImpl implements IMessageService {
     }
 
     @Override
-    public void readMessage(int messageId) {
+    public void readMessage(String messageId) {
         messageMapper.readMessage(messageId);
     }
 

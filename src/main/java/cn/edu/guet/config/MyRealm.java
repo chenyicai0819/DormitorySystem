@@ -65,7 +65,7 @@ public class MyRealm extends AuthorizingRealm {
         name= String.valueOf(student.getsId());
         password=student.getsPwd();
       }
-    }else if (roId.equals("ro104")){
+    }else if (roId.equals("ro104")||roId.equals("ro105")){
       Orderman orderman=userService.Rmlogin(userId);
       if (orderman!=null){
         name= String.valueOf(orderman.getRmId());
@@ -80,7 +80,7 @@ public class MyRealm extends AuthorizingRealm {
     //如果返回的值与数据库中是用户名不匹配
 
     if (!token.getUsername().equals(name)) {
-      //shiro底层会抛出一个异常
+      //如果发生错误底层会抛出一个异常
       return null;
     }
     //判断密码

@@ -18,8 +18,8 @@ public class StuMessageService implements IStuMessageService {
     @Autowired
     private StuMessageMapper stuMM;
     @Override
-    public List<Student> getStuMessage() {
-        return stuMM.getStuMessage();
+    public List<Student> getStuMessage(String userId) {
+        return stuMM.getStuMessage(userId);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class StuMessageService implements IStuMessageService {
     }
 
     @Override
-    public List<Apply> ApplyRecode() {
-        return stuMM.ApplyRecode();
+    public List<Apply> ApplyRecode(String userId) {
+        return stuMM.ApplyRecode(userId);
     }
 }

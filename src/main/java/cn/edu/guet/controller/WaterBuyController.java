@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,7 +20,7 @@ public class WaterBuyController {
     @Autowired
     private WaterBuyService waterService;
     @GetMapping("WaterOnline.do")
-    public String getWater(Model model,@RequestParam(defaultValue = "0", value = "pageNum") Integer pageNum) {
+    public String getWater(Model model, @RequestParam(defaultValue = "0", value = "pageNum") Integer pageNum, HttpSession session) {
         model.addAttribute("stud",waterService.getStudent());
         String returnValue;
         if(pageNum == 0){
@@ -33,6 +34,7 @@ public class WaterBuyController {
         List<Water> waterList = waterService.getWater();
         PageInfo<Water> pageInfo = new PageInfo<>(waterList);
         model.addAttribute("pageInfo", pageInfo);
+        session.setAttribute("wprice",waterList.get(0).getWprice());
         System.out.println(returnValue);
         return returnValue;
     }

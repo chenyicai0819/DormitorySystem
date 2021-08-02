@@ -91,7 +91,7 @@
             sessionStorage.setItem('2222',$("#pBuid").val());
             sessionStorage.setItem('3333',$("#count").find("option:selected").text());
             sessionStorage.setItem('4444',$("#pRoom").val());
-            sessionStorage.setItem('5555',9*$("#count").find("option:selected").text());
+            sessionStorage.setItem('5555',$("#price").val()*$("#count").find("option:selected").text());
             sessionStorage.setItem('6666',$("#byWman").val());
         })
 
@@ -180,7 +180,7 @@
     </tr>
     <tr id="fenye"  th:each="water:${pageInfo.list}" >
         <td class="nowBuid" th:text="${water.buid}"></td>
-        <td>9</td>
+        <td th:text="${water.wprice}"></td>
         <td th:text="${water.wnum}"></td>
         <td th:if="${water.wnum}>0"><a href="#" th:onclick="zhezhao([[${water.buid}]])">订水</a> </td>
     </tr>
@@ -205,7 +205,7 @@
                     <option>1</option>
                     <option>2</option>>
                 </select></td>
-                <td><input type="text" id="price" value="9" disabled="true" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
+                <td><input type="text" id="price" th:value="${#session.getAttribute('wprice')}" disabled="true" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
                 <td><input id="byWman" type="text" style="height: 20px;width:100px;text-align: center;font-size: 20px; border: 0;"></td>
             </tr>
         </table>

@@ -11,12 +11,12 @@ import java.util.List;
 @Mapper
 @Component
 public interface MessageMapper {
-  Message getMessage(int messageId);
+  Message getMessage(String messageId);
     List<Message> getSendMessages(String sendId);
     List<Message> getReceiveMessages(String receiveId);
     void sendMessage(Message message);
     void deleteMessage(String messageId);
-    void readMessage(int messageId);
+    void readMessage(String messageId);
     List<Dormitory> seleAunt();
     List<Message> myMess(String id);
     List<Message> myMessIn(String id);

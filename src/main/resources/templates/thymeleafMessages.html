@@ -131,6 +131,11 @@
           // 显示详细内容
           $("#body").on('click', '#seeMessage', function (){
             var messageId = $(this).parent().parent().find("input").attr("value");
+            var title=$(this).parent().parent().find("td:nth-child(5)").text();
+            var sendId=$(this).parent().parent().find("td:nth-child(3)").text();
+            var sendTime=$(this).parent().parent().find("td:nth-child(7)").text();
+            var content=$(this).parent().parent().find("td:nth-child(6)").text();
+            console.log(title);
             $.ajax({
               url : 'viewMessage?messageId=' + messageId,
               async : false,
@@ -138,6 +143,12 @@
               success : function(data) {
                 $(".mask").show();
                 $(".mask").html(data);
+                $("#title2").text(title);
+                $("#sendId2").text(sendId);
+                $("#sendTime2").text(sendTime);
+                $("#content2").text(content);
+                $("#outputUser").val(sendId);
+                readMessage(messageId);
               }
             })
           })
@@ -216,14 +227,14 @@
             </thead>
             <tbody>
             <tr class="messageTr" th:each="message,messagesStat:${messages}">
-                <td><input type="checkbox" name="messageCheckbox" th:value="${message.messageId}"></td>
+                <td><input type="checkbox" name="messageCheckbox" id="messageId1" th:value="${message.messageId}"></td>
                 <td class='ckeckRead' th:value='${message.messageId}' type='0' th:if="${message.isRead} eq '0'"><div class='cir Ru'></div></td>
                 <td class='ckeckRead' th:value='${message.messageId}' type='1' th:if="${message.isRead} eq '1'"><div class='cir Rr'></div></td>
                 <td><span class='sendId' id="sendId1" th:text="${message.sendId}"></span></td>
-                <td><span class='receiveId' th:text="${message.receiveId}"></span></td>
-                <td><span class='title' th:text="${message.title}"></span></td>
-                <td><p class='content' th:text="${message.content}"></p></td>
-                <td><span class='sendTimea' th:text="${message.sendTime}"></span></td>
+                <td><span class='receiveId' id="receiveId1" th:text="${message.receiveId}"></span></td>
+                <td><span class='title' id="title1" th:text="${message.title}"></span></td>
+                <td><p class='content' id="content1" th:text="${message.content}"></p></td>
+                <td><span class='sendTimea' id="sendTime1" th:text="${message.sendTime}"></span></td>
                 <td><a href="javascript:void(0)" id="seeMessage" >查看详情</a></td>
             </tr>
             </tbody>
@@ -233,15 +244,19 @@
 
     <div class="mask">
       <div id="message" class="message" th:fragment="viewMessage">
-        <span th:text="${message.title}" text="null"></span>
+        <!--<span th:text="${message.title}" text="null"></span>
         <span th:text="${message.sendId}" text="null"></span>
         <span th:text="${message.sendTime}" text="null"></span>
-        <p th:text="${message.content}" text="null"></p>
+        <p th:text="${message.content}" text="null"></p>-->
+        <span id="title2" text="null"></span>
+        <span id="sendId2" text="null"></span>
+        <span id="sendTime2" text="null"></span>
+        <p id="content2" text="null"></p>
         <br>
         <hr>
         <form action="outputMessage" method="post">
           <input type="hidden" name="sendId" value="">
-          回复发给:<input name="receiveId" type="text" id="outputUser" readonly class="outPutClass" th:value="${message.sendId}"><br>
+          回复发给:<input name="receiveId" type="text" id="outputUser" readonly class="outPutClass" ><br>
           回复标题:<input type="text" name="title" class="outPutClass" value="回复消息" readonly><br>
           回复内容:<textarea name="content" id="outputText" class="outPutClass" placeholder="这是回复给对方的内容"></textarea><br>
           <input type="submit" class="reSubmit">

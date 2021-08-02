@@ -15,10 +15,11 @@ import java.util.Map;
 @Mapper
 public interface RepairMapper {
     void repairUp(Repair repair) throws SQLException;
-    int repairSele();
+    int repairSele(String repairname);
     int repairStatSele(String stat);
     List<Repair> repairForUs(Map<String, Object> map);
     List<Repair> seeAllRepair(Map<String, Object> map);
     void upRepair(String reId);
     void overRepair(String reId);
+    int repairSeleAll();
 }

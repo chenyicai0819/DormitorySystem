@@ -7,9 +7,9 @@ import cn.edu.guet.bean.Student;
 import java.util.List;
 
 public interface IStuMessageService {
-    public List<Student> getStuMessage();
+    public List<Student> getStuMessage(String userId);
     public List<Room> getDormBuid();
     public List<Room> getDormRoom(String buid);
     public List<Room> getDormBed(String buid,String rId);
-    public List<Apply> ApplyRecode();
+    public List<Apply> ApplyRecode(String userId);
 }

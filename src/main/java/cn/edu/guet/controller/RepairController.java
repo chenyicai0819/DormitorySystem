@@ -30,6 +30,7 @@ public class RepairController {
     @GetMapping("RepairUp.do")
     public String repairUp(Repair repair, HttpServletRequest request, HttpSession session){
         try {
+
             int RepairNum= repairService.repairSele()+1;
             repair.setReId(String.valueOf(RepairNum));
             Timestamp time=new Timestamp(System.currentTimeMillis());
@@ -52,7 +53,8 @@ public class RepairController {
 
     @GetMapping("RepairForUs.do")
     public String repairForUs(String reUser, HttpServletRequest request,Model model,HttpSession session){
-        int count=repairService.repairSele();
+        String repairname= (String) session.getAttribute("username");
+        int count=repairService.repairSele(repairname);
         int allPage;
         if (count%5==0){
             allPage=count/5;
@@ -67,8 +69,9 @@ public class RepairController {
     }
 
     @GetMapping("upPageForUs.do")
-    public String upPageForUs(String reUser, HttpServletRequest request,Model model,int curPage){
-        int count=repairService.repairSele();
+    public String upPageForUs(String reUser, HttpServletRequest request,HttpSession session,Model model,int curPage){
+        String repairname= (String) session.getAttribute("username");
+        int count=repairService.repairSele(repairname);
         int allPage;
         if (count%5==0){
             allPage=count/5;
@@ -77,7 +80,8 @@ public class RepairController {
         }
         model.addAttribute("allPage",allPage);
         System.out.println(curPage);
-        request.setAttribute("repair",repairService.repairForUs("陈益财",curPage));
+        String username= (String) session.getAttribute("username");
+        request.setAttribute("repair",repairService.repairForUs(username,curPage));
         return "RepairForUs::table1";
     }
     @GetMapping("upPageForSee.do")

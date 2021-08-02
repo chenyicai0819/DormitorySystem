@@ -12,9 +12,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface StuMessageMapper {
-    public List<Student> getStuMessage();
+    public List<Student> getStuMessage(String userId);
     public List<Room> getDormBuid();
     public List<Room> getDormRoom(String buid);
     public List<Room> getDormBed(String buid,String rId);
-    public List<Apply> ApplyRecode();
+    public List<Apply> ApplyRecode(String userId);
 }
