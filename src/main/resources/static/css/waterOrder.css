@@ -1,0 +1,20 @@
+.waterOrderinfo {
+  border-collapse: collapse;
+  width: 100%;
+  border-top: none;
+  border-bottom: none;
+}
+.waterOrderinfo th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+.waterOrderinfo tr{background-color: #f2f2f2}
+
+.waterOrderinfo th {
+  background-color: #2f3640	;
+  color: white;
+}
+.waterOrderinfo a{
+  display: block;
+}

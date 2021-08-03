@@ -50,8 +50,8 @@ public class WaterOrderController {
 
     @GetMapping("thymeleafWaterOrder")
     public String thymeleafWaterOrder(Model model){
-        List<Waterorder> waterorders = waterOrderService.getAllWaterOrder(1,3).getList();
-        model.addAttribute("waterOrders", waterorders);
+        List<Waterorder> waterorders = waterOrderService.getAllWaterOrder(1,10).getList();
+      model.addAttribute("waterOrders", waterorders);
         return "thymeleafWaterOrder";
     }
 

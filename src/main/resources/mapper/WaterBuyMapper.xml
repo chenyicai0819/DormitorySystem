@@ -9,7 +9,7 @@
         select count(*) count from water
     </select>
   <select id="countWaterbuid" resultType="int" parameterType="string">
-    select count(*) count from water WHERE buid=#{value}
+    select wnum from water WHERE buid=#{value}
   </select>
     <select id="getStudent" resultType="cn.edu.guet.bean.Student">
          select * from student where sId = 1800710318
@@ -20,7 +20,7 @@
     <select id="insertOrder" resultType="cn.edu.guet.bean.Waterorder">
        insert into waterorder values(#{woId},#{buid},#{woNum},#{woRoom},#{woMoney},now(),#{woUser})
     </select>
-    <select id="getAllOrder" resultType="cn.edu.guet.bean.Waterorder">
+    <select id="getAllOrder" resultType="cn.edu.guet.bean.Waterorder" parameterType="string">
        select * from waterOrder where woUser = #{value}
     </select>
   <update id="upWaterNum" parameterType="map">

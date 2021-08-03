@@ -5,10 +5,11 @@
     <title>Title</title>
     <link rel="stylesheet"  th:href="@{css/pages.css}">
     <script src="http://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/waterOrder.css" th:href="@{/css/waterOrder.css}">
     <script th:inline="javascript">
         $(function (){
             var pageNum = 1;
-            var pageSize = 3;
+            var pageSize = 10;
             var lastPage;
             var buildingId;
             var roomId;
@@ -113,25 +114,25 @@
 <div id="waterOrder">
 <!--    <input type="button" id="test111" value="显示">-->
     <div id="waterOrderMain" class="waterOrderinfo" th:fragment="waterOrderinfo">
-        <table id="waterOrderTable">
+        <table id="waterOrderTable" border="1">
             <thead>
                 <tr>
-                    <td>楼栋</td>
-                    <td>宿舍号</td>
-                    <td>姓名</td>
-                    <td>数量</td>
-                    <td>金额</td>
-                    <td>时间</td>
+                    <th>楼栋</th>
+                    <th>宿舍号</th>
+                    <th>姓名</th>
+                    <th>数量</th>
+                    <th>金额</th>
+                    <th>时间</th>
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="waterOrder,treeStat:${waterorders}">
-                <td th:text="${waterOrder.buildingId}"></td>
-                <td th:text="${waterOrder.roomId}"></td>
-                <td th:text="${waterOrder.username}"></td>
-                <td th:text="${waterOrder.number}"></td>
-                <td th:text="${waterOrder.amount}"></td>
-                <td th:text="${waterOrder.orderTime}"></td>
+            <tr th:each="waterOrder,treeStat:${waterOrders}">
+                <td th:text="${waterOrder.buid}"></td>
+                <td th:text="${waterOrder.woRoom}"></td>
+                <td th:text="${waterOrder.woUser}"></td>
+                <td th:text="${waterOrder.woNum}"></td>
+                <td th:text="${waterOrder.woMoney}"></td>
+                <td th:text="${waterOrder.woTime}"></td>
             </tr>
             </tbody>
         </table>

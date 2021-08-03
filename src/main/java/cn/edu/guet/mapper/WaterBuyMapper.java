@@ -19,7 +19,7 @@ public interface WaterBuyMapper {
     public int countWaterbuid(String buid);
     public List<Student> getStudent();
     public List<Room> getAllRoom(String buid);
-    public List<Waterorder> insertOrder(String woId, String buid, int woNum, String woRoom, int woMoney,String woUser);
+    public List<Waterorder> insertOrder(String woId, String buid, int woNum, String woRoom, double woMoney,String woUser);
     public List<Waterorder> getAllOrder(String woUser);
     public void upWaterNum(Map<String,Object> map);
 }

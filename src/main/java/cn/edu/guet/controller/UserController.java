@@ -6,6 +6,7 @@ import cn.edu.guet.bean.Orderman;
 import cn.edu.guet.bean.Student;
 import cn.edu.guet.service.ITreeService;
 import cn.edu.guet.service.IUserService;
+import cn.edu.guet.util.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -47,8 +48,8 @@ public class UserController {
 
         HttpSession session = request.getSession();
         //MD5加密
-//        String password1 = MD5Util.encoderByMd5(password);
-        String password1=password;
+        String password1 = MD5Util.encoderByMd5(password);
+//        String password1=password;
         String aaa="";
         //将数据存到session里，方便myRealm取到
         session.setAttribute("roId",selected);
@@ -125,7 +126,7 @@ public class UserController {
 
     //修改密码
     @PostMapping("/updatePassword")
-    public String update(String phone, String password, String repeat) throws
+    public String update(String phone, String password, String repeat,HttpServletRequest request,Model model,HttpSession session) throws
             UnsupportedEncodingException, NoSuchAlgorithmException {
 
         //检验手机号是否存在
@@ -136,6 +137,9 @@ public class UserController {
         String user1=userService.updatesPhone(phone, password, repeat);
         String user2=userService.updatermPhone(phone,password,repeat);
         if (user!=null&&phone.equals(dPhone)||user1!=null&&phone.equals(sPhone)||user2!=null&&phone.equals(rmPhone)) {
+          request.setAttribute("board",treeService.seeBoard());
+          model.addAttribute("board",treeService.seeBoard());
+          session.setAttribute("msg","");
             return "login";
         } else {
             return "updatePassword";

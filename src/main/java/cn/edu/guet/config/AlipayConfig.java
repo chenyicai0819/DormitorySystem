@@ -21,7 +21,7 @@ public class AlipayConfig {
     // 支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh62NdTyXLsYFdU87WwBjPPR1NQvlncZrTctTGzfoXD+ZIgejcSz7Jl5c6GdIz/31/YlLdXimdwih0J1qfTQ08oqScUbhIGqDmeXAzRO+TQihDv84frCYRPs3TzJ7XO1PxzJsgWbT8BeZNcTkZXV5+8U/NohHrWO1AcFkA9RN22A6iDLSvqtoE+eR9h2n9JwknHHw3IXXDrluDaAQvPqH9WDe8oGaFW3Z3UWOuY3MwhFkRfcHmF+hnXLYMlmzJ+Wc23K5Ubl9NF/txpu8MeAv76EUT4SjqqRYaJTfpl+Sxyuw3XZKZblwV32LyMpujF1Ew1NjDQwan+xzE5JHG6BUPQIDAQAB";
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://localhost:8080/getAllTree.do";
+    public static String notify_url = "http://localhost:8080/WaterOnline.do";
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
     public static String return_url = "http://localhost:8080/WaterOnline.do";
     // 签名方式

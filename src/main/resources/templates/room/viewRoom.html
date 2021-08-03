@@ -13,7 +13,7 @@
 <div class="wrapper">
     <h3 class="title">查看宿舍信息</h3>
     <form>
-        <label>宿舍楼:</label>
+        <label>宿舍:</label>
         <select name="buId">
             <option th:each="build,buildStat:${builds}" th:selected="${buId eq build.buid}" th:text="${build.buid}"></option>
         </select>

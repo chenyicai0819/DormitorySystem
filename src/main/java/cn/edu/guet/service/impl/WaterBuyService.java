@@ -38,8 +38,11 @@ public class WaterBuyService implements IWaterBuyService {
     }
 
     @Override
-    public List<Waterorder> insertOrder(String woId, String buid, int woNum, String woRoom, int woMoney, String woUser) {
-      int num= waterBuyMapper.countWaterbuid(buid)-woNum;
+    public List<Waterorder> insertOrder(String woId, String buid, int woNum, String woRoom, double woMoney, String woUser) {
+      int n=waterBuyMapper.countWaterbuid(buid);
+      System.out.println(n);
+      System.out.println(woNum);
+      int num= n-woNum;
       Map<String,Object> map=new HashMap<>();
       map.put("buid",buid);
       map.put("num",num);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -185,7 +185,7 @@
         <td th:if="${water.wnum}>0"><a href="#" th:onclick="zhezhao([[${water.buid}]])">订水</a> </td>
     </tr>
 </table>
-<p id="pageM">当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+<p id="pageM">总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
 <input type="button" id="Orecode" value="购买记录" style="width:150px;height: 28px">
 <div id="back">
     <div id="order">
@@ -259,7 +259,7 @@
                 <td th:text="${order.woRoom}"></td>
                 <td th:text="${order.woNum}"></td>
                 <td th:text="${order.woMoney}"></td>
-                <td th:text="${#dates.format(order.woTime,'yyyy-mm-dd hh:mm:ss')}"></td>
+                <td th:text="${#dates.format(order.woTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td th:text="${order.woUser}"></td>
             </tr>
         </table>

@@ -73,12 +73,13 @@
 .footer{
     width: 100%;
     height: 100px;
-    background-color:darkcyan;
 }
 .footer>img{
     width: 100%;
     height: 100%;
+  filter:brightness(0.8)
 }
+
 #divforName{
 
     position: absolute;

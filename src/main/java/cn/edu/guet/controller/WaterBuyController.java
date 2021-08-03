@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.TimeZone;
 
 @Controller
 public class WaterBuyController {
+  final TimeZone timeZone = TimeZone.getTimeZone("GTM+8");
     @Autowired
     private WaterBuyService waterService;
     @GetMapping("WaterOnline.do")
@@ -47,13 +49,14 @@ public class WaterBuyController {
     }
     @GetMapping("AddOrder.do")
     @ResponseBody
-    public int AddOrder(String woId, String buid, int woNum, String woRoom, int woMoney, String woUser){
+    public int AddOrder(String woId, String buid, int woNum, String woRoom, double woMoney, String woUser){
         waterService.insertOrder(woId,buid,woNum,woRoom,woMoney,woUser);
         return 1;
     }
     @GetMapping("ShowOrder.do")
     public String ShowOrder(Model model,String woUser){
         model.addAttribute("order",waterService.getAllOrder(woUser));
-        return "Water::table4";
+      System.out.println(model.getAttribute("order"));
+      return "Water::table4";
     }
 }

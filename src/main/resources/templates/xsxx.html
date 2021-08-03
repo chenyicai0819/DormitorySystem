@@ -8,6 +8,7 @@
     <script th:inline="javascript">
         var allBuid=[[${dorm}]];
         var message = '';
+        var sqlMessage= '';
         function closeR(){
             $("#rBack").hide();
             $("#updateRecode").hide();
@@ -32,9 +33,6 @@
                 $("#confirm").attr("style", "width:150px;height: 28px;display:block");
                 $("#cancal").attr("style", "width:150px;height: 28px;display:block");
                 $("#selDorm").attr("style", "width:150px;height: 28px;margin-left:-90px;display:block");
-                $(".stumm").change(function () {
-                    message=message+("您将"+ $(this).parent().text().substring(0,2)+"修改为"+$(this).val())+";";
-                })
             })
             $("#cancal").click(function () {
                 $("body").load("MyManage.do");
@@ -50,8 +48,18 @@
                 else if([[${stu[0].rBed}]] != $("#bed").val()){
                     message = message+"您将床位号修改为"+$("#bed").val()+";";
                 }
+                $(".stumm").each(function (index,value) {
+                    nowId = $(this).attr("id");
+                    if($('#' + nowId).val() != [[${stu}]][0][nowId]){
+                        message=message+("您将"+ $(this).parent().text().substring(0,2)+"修改为"+$(this).val())+";";
+                        if(sqlMessage != ''){
+                            sqlMessage += ',';
+                        }
+                        sqlMessage += nowId+"='"+$('#' + nowId).val()+"'";
+                    }
+                })
                 if(message != '') {
-                    $("body").load("commitApply.do?applyId=" + $("#sId").val() + "&message=" + message + "&reply=" + "审批中");
+                    $("body").load("commitApply.do?applyId=" + $("#sId").val() + "&message=" + message + "&reply=" + "审批中" +"&sqlMessage="+sqlMessage);
                     alert("已发送申请，等待审批");
                 }
                 else{
@@ -69,8 +77,18 @@
                     async:false,
                     success:function (data) {
                         $.each(data, function (index, apply) {
-                            $("#table3").append("<tr>").append("<td>"+apply.message+"</td>")
-                                .append("<td style='color: red'>"+apply.reply+"</td>").append("<tr>")
+                            if(apply.reply == '未通过') {
+                                $("#table3").append("<tr>").append("<td>" + apply.message + "</td>")
+                                    .append("<td style='color: red'>" + apply.reply + "</td>").append("<tr>")
+                            }
+                            else if(apply.reply == '审批成功') {
+                                $("#table3").append("<tr>").append("<td>" + apply.message + "</td>")
+                                    .append("<td style='color: greenyellow'>" + apply.reply + "</td>").append("<tr>")
+                            }
+                            else{
+                                $("#table3").append("<tr>").append("<td>" + apply.message + "</td>")
+                                    .append("<td>" + apply.reply + "</td>").append("<tr>")
+                            }
                         });
                     }
                 })
@@ -129,7 +147,7 @@
             <option th:selected="${stu.sSex} eq '女'">女</option>
         </select></td>
         <td>职位:
-            <input class="stumm" th:if="${stu.roleId} eq 'ro103'" th:value="学生" type="text" disabled="true" style="margin-left: 9px;width:160px;height: 25px">
+            <input  id="role" th:if="${stu.roleId} eq 'ro103'" th:value="学生" type="text" disabled="true" style="margin-left: 0px;width:157px;height: 21px">
         </td>
     </tr>
     <tr>
