@@ -42,14 +42,14 @@ public class UserController {
 
 
         String selected=request.getParameter("selected");
-        System.out.println(selected);
-        System.out.println(username);
-        System.out.println(password);
+        System.out.println("登陆的"+selected);
+        System.out.println("登陆的"+username);
+        System.out.println("登陆的"+password);
 
         HttpSession session = request.getSession();
         //MD5加密
-        String password1 = MD5Util.encoderByMd5(password);
-//        String password1=password;
+        // String password1 = MD5Util.encoderByMd5(password);
+       String password1=password;
         String aaa="";
         //将数据存到session里，方便myRealm取到
         session.setAttribute("roId",selected);
@@ -112,15 +112,22 @@ public class UserController {
 
     @GetMapping("/toLogin")
     public String login(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("msg")==null){
+            session.setAttribute("msg","");
+        }
         request.setAttribute("board",treeService.seeBoard());
         model.addAttribute("board",treeService.seeBoard());
-
         return "login";
     }
     @GetMapping("/")
     public String firstLogin(HttpServletRequest request,Model model) {
-      request.setAttribute("board",treeService.seeBoard());
-      model.addAttribute("board",treeService.seeBoard());
+        HttpSession session = request.getSession();
+        if (session.getAttribute("msg")==null){
+            session.setAttribute("msg","");
+        }
+        request.setAttribute("board",treeService.seeBoard());
+        model.addAttribute("board",treeService.seeBoard());
       return "login";
     }
 
